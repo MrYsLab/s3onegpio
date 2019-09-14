@@ -1,0 +1,2 @@
+command_string,spawn,topic,append_bp_address,auto_restart,wait
+python3 ws_gateway.py,no,local,no,no,0
