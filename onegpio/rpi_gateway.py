@@ -187,6 +187,9 @@ class RpiGateway(GatewayBase):
         # give the i2c device some time to process the write request
         time.sleep(.4)
 
+    def set_mode_tone(self, topic, payload):
+        pass
+
     def play_tone(self, topic, payload):
         """
         This method plays a tone on a piezo device connected to the selected

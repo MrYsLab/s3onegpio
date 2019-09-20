@@ -300,12 +300,15 @@ class ArduinoGateway(GatewayBaseAIO):
         :param payload: {"command": "set_mode_sonar", "trigger_pin": “PIN”, "tag":”TAG”
                          "echo_pin": “PIN”"tag":”TAG” }
         """
+
         trigger = payload["trigger_pin"]
         echo = payload["echo_pin"]
         self.pins_dictionary[trigger][GatewayBaseAIO.PIN_MODE] = GatewayBaseAIO.SONAR_MODE
         self.pins_dictionary[echo][GatewayBaseAIO.PIN_MODE] = GatewayBaseAIO.SONAR_MODE
 
         await self.arduino.set_pin_mode_sonar(trigger, echo, cb=self.sonar_callback)
+
+
 
     async def set_mode_stepper(self, topic, payload):
         """
