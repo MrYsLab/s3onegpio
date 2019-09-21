@@ -73,6 +73,29 @@ var connected = false;
 var digital_inputs = new Array(32);
 var analog_inputs = new Array(8);
 
+// this array is used to indicate if a pin alert message
+// was issued for a block. This prevents an endless loop
+// of alerts.
+var block_pin_alerts = [0, 0, 0, 0, 0, 0, 0, 0];
+
+// this array is used to indicate if connected alert message
+// was issued for a block. This prevents an endless loop
+// of alerts.
+var connected_alerts = [0, 0, 0, 0, 0, 0, 0];
+
+// was a connect ever attempted?
+var connect_attempt = false;
+
+
+// indices into block_pin_alerts and connected_alerts
+const B_DIGITAL_WRITE = 0;
+const B_PWM_WRITE = 1;
+const B_TONE = 2;
+const B_SERVO = 3;
+const B_ANALOG_READ = 4;
+const B_DIGITAL_READ = 5;
+const B_SONAR_READ = 6;
+
 // the current board in use
 var the_board = null;
 
@@ -132,7 +155,7 @@ class Scratch3OneGPIO {
                     }
                 },
                 {
-                    opcode: 'analog_write',
+                    opcode: 'pwm_write',
                     blockType: BlockType.COMMAND,
                     text: 'PWM Write: Set Pin [PIN] to [VALUE] %',
                     arguments: {
@@ -252,7 +275,7 @@ class Scratch3OneGPIO {
             // ignore additional connection attempts
             return;
         }
-
+        connect_attempt = true;
         this.socket = new WebSocket("ws://127.0.0.1:9000");
         window.socket = this.socket;
 
@@ -286,6 +309,7 @@ class Scratch3OneGPIO {
             analog_inputs.fill('0');
             // connection complete
             connected = true;
+            connect_attempt = true;
             // the message is built above
             window.socket.send(msg);
         };
@@ -322,6 +346,13 @@ class Scratch3OneGPIO {
 
 
     digital_write(args) {
+        if (!connect_attempt) {
+            if (!connected_alerts[B_DIGITAL_WRITE]) {
+                connected_alerts[B_DIGITAL_WRITE] = 1;
+                alert('Please connect using the "Connect" block.');
+                return false;
+            }
+        }
         if (!connected) {
             // save this for the reentry
             my_this = this;
@@ -333,7 +364,7 @@ class Scratch3OneGPIO {
         }
         var pin = args['PIN'];
         pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_digital_pins);
+        valid = my_this.isValidPin(pin, the_digital_pins, B_DIGITAL_WRITE);
         if (valid) {
             if (pin_modes[pin] !== DIGITAL_OUTPUT) {
                 pin_modes[pin] = DIGITAL_OUTPUT;
@@ -350,12 +381,19 @@ class Scratch3OneGPIO {
     }
 
     //pwm
-    analog_write(args) {
+    pwm_write(args) {
+        if (!connect_attempt) {
+            if (!connected_alerts[B_PWM_WRITE]) {
+                connected_alerts[B_PWM_WRITE] = 1;
+                alert('Please connect using the "Connect" block.');
+                return false;
+            }
+        }
         if (!connected) {
             // save this for the reentry
             my_this = this;
 
-            waiter = this.analog_write;
+            waiter = this.pwm_write;
             waiter_args = args;
             setTimeout(this.check_connected, 250);
             return;
@@ -365,7 +403,7 @@ class Scratch3OneGPIO {
         var the_max = 255;
         pin = parseInt(pin, 10);
 
-        valid = my_this.isValidPin(pin, the_digital_pins);
+        valid = my_this.isValidPin(pin, the_digital_pins, B_PWM_WRITE);
 
         if (valid) {
             var value = args['VALUE'];
@@ -392,6 +430,13 @@ class Scratch3OneGPIO {
     }
 
     tone_on(args) {
+        if (!connect_attempt) {
+            if (!connected_alerts[B_TONE]) {
+                connected_alerts[B_TONE] = 1;
+                alert('Please connect using the "Connect" block.');
+                return false;
+            }
+        }
         if (!connected) {
             // save this for the reentry
             my_this = this;
@@ -403,7 +448,7 @@ class Scratch3OneGPIO {
         }
         var pin = args['PIN'];
         pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_digital_pins);
+        valid = my_this.isValidPin(pin, the_digital_pins, B_TONE);
         if (valid) {
             if (pin_modes[pin] !== TONE) {
                 pin_modes[pin] = TONE;
@@ -427,6 +472,13 @@ class Scratch3OneGPIO {
 
     // move servo
     servo(args) {
+        if (!connect_attempt) {
+            if (!connected_alerts[B_SERVO]) {
+                connected_alerts[B_SERVO] = 1;
+                alert('Please connect using the "Connect" block.');
+                return false;
+            }
+        }
         if (!connected) {
             // save this for the reentry
             my_this = this;
@@ -439,7 +491,7 @@ class Scratch3OneGPIO {
 
         var pin = args['PIN'];
         pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_digital_pins);
+        valid = my_this.isValidPin(pin, the_digital_pins, B_SERVO);
         if (valid) {
             if (valid) {
                 if (pin_modes[pin] !== SERVO) {
@@ -462,6 +514,13 @@ class Scratch3OneGPIO {
 
     // reporter blocks
     analog_read(args) {
+        if (!connect_attempt) {
+            if (!connected_alerts[B_ANALOG_READ]) {
+                connected_alerts[B_ANALOG_READ] = 1;
+                alert('Please connect using the "Connect" block.');
+                return false;
+            }
+        }
         if (the_board === RPI) {
             alert('The Raspberry Pi Does Not Support Analog Input.');
             return;
@@ -477,7 +536,7 @@ class Scratch3OneGPIO {
         }
         var pin = args['PIN'];
         pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_analog_pins);
+        valid = my_this.isValidPin(pin, the_analog_pins, B_ANALOG_READ);
         if (valid) {
             if (pin_modes[pin] !== ANALOG_INPUT) {
                 pin_modes[pin] = ANALOG_INPUT;
@@ -490,6 +549,13 @@ class Scratch3OneGPIO {
     }
 
     digital_read(args) {
+        if (!connect_attempt) {
+            if (!connected_alerts[B_DIGITAL_READ]) {
+                connected_alerts[B_DIGITAL_READ] = 1;
+                alert('Please connect using the "Connect" block.');
+                return false;
+            }
+        }
         if (!connected) {
             // save this for the reentry
             my_this = this;
@@ -501,7 +567,7 @@ class Scratch3OneGPIO {
         }
         var pin = args['PIN'];
         pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_digital_pins);
+        valid = my_this.isValidPin(pin, the_digital_pins, B_DIGITAL_READ);
         if (valid) {
             if (pin_modes[pin] !== DIGITAL_INPUT) {
                 pin_modes[pin] = DIGITAL_INPUT;
@@ -515,7 +581,13 @@ class Scratch3OneGPIO {
 
 
     sonar_read(args) {
-
+        if (!connect_attempt) {
+            if (!connected_alerts[B_SONAR_READ]) {
+                connected_alerts[B_SONAR_READ] = 1;
+                alert('Please connect using the "Connect" block.');
+                return false;
+            }
+        }
         if (!connected) {
             // save this for the reentry
             my_this = this;
@@ -530,7 +602,7 @@ class Scratch3OneGPIO {
         var echo_pin = args['ECHO_PIN'];
         echo_pin = parseInt(echo_pin, 10);
 
-        valid = my_this.isValidPin(trigger_pin, the_digital_pins);
+        valid = my_this.isValidPin(trigger_pin, the_digital_pins, B_SONAR_READ);
         if (valid) {
             if (pin_modes[trigger_pin] !== SONAR) {
                 pin_modes[trigger_pin] = SONAR;
@@ -547,6 +619,11 @@ class Scratch3OneGPIO {
 
     // end of block handlers
 
+    // it takes time for the "onopen" message to be received
+    // when the connect block is executed. This timer
+    // allows the onopen to be received before proceeding with
+    // processing any blocks.
+
     // on timeout waiting for WS onopen, if connected
     // call the waiting block
     check_connected() {
@@ -556,13 +633,25 @@ class Scratch3OneGPIO {
     }
 
     // helpers
-    isValidPin(pinNumber, list) {
-        //if (!connected) {
-        //    setTimeout(this.check_connected, 2000);
-        //    return;
-        //}
+    isValidPin(pinNumber, list, blockId) {
 
-        return list.indexOf(pinNumber) >= 0;
+        // is this a valid pin number?
+        if (list.indexOf(pinNumber) >= 0) {
+            return true;
+        }
+        // if not, issue an alert with a list of valid pins for this
+        // block. Only do this once for the block to prevent an endless loop
+        // of alerts.
+        else {
+            if (!block_pin_alerts[blockId]) {
+                var a = 'Invalid Pin Number. Valid pins: ';
+                var b = list.join(", ");
+                block_pin_alerts[blockId] = 1;
+                a = a + b;
+                alert(a);
+                return false;
+            }
+        }
     }
 }
 
