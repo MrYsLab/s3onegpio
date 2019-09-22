@@ -369,7 +369,6 @@ class Scratch3OneGPIO {
             var pin = args['PIN'];
             pin = parseInt(pin, 10);
             valid = self.isValidPin(pin, the_digital_pins, B_DIGITAL_WRITE);
-            valid = true;
             if (valid) {
                 if (pin_modes[pin] !== DIGITAL_OUTPUT) {
                     pin_modes[pin] = DIGITAL_OUTPUT;
