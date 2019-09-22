@@ -358,17 +358,13 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            // save this for the reentry
-            self = this;
-
-            var callbackEntry = [this.digital_write, args];
+            var callbackEntry = [this.digital_write.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            self = this;
             var pin = args['PIN'];
             pin = parseInt(pin, 10);
-            valid = self.isValidPin(pin, the_digital_pins, B_DIGITAL_WRITE);
+            valid = this.isValidPin(pin, the_digital_pins, B_DIGITAL_WRITE);
             if (valid) {
                 if (pin_modes[pin] !== DIGITAL_OUTPUT) {
                     pin_modes[pin] = DIGITAL_OUTPUT;
@@ -395,19 +391,16 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            // save this for the reentry
-            self = this;
-            var callbackEntry = [this.pwm_write, args];
+            var callbackEntry = [this.pwm_write.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            self = this;
             var pin = args['PIN'];
             // maximum value for RPi and Arduino
             var the_max = 255;
             pin = parseInt(pin, 10);
 
-            valid = self.isValidPin(pin, the_digital_pins, B_PWM_WRITE);
+            valid = this.isValidPin(pin, the_digital_pins, B_PWM_WRITE);
 
             if (valid) {
                 var value = args['VALUE'];
@@ -443,14 +436,10 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            // save this for the reentry
-            self = this;
-
-            var callbackEntry = [this.digital_write, args];
+            var callbackEntry = [this.tone_on.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            self = this;
             var pin = args['PIN'];
             pin = parseInt(pin, 10);
             var freq = args['FREQ'];
@@ -458,8 +447,7 @@ class Scratch3OneGPIO {
             var duration = args['DURATION'];
             duration = parseInt(duration, 10);
 
-            valid = self.isValidPin(pin, the_digital_pins, B_TONE);
-            valid = true;
+            valid = this.isValidPin(pin, the_digital_pins, B_TONE);
             if (valid) {
                 if (pin_modes[pin] !== TONE) {
                     pin_modes[pin] = TONE;
@@ -484,21 +472,16 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            // save this for the reentry
-            self = this;
-
-            var callbackEntry = [this.digital_write, args];
+            var callbackEntry = [this.servo.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            self = this;
             var pin = args['PIN'];
             pin = parseInt(pin, 10);
             var angle = args['ANGLE'];
             angle = parseInt(angle, 10);
 
-            valid = self.isValidPin(pin, the_digital_pins, B_SERVO);
-            valid = true;
+            valid = this.isValidPin(pin, the_digital_pins, B_SERVO);
             if (valid) {
                 if (pin_modes[pin] !== SERVO) {
                     pin_modes[pin] = SERVO;
@@ -527,18 +510,13 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            // save this for the reentry
-            self = this;
-
-            var callbackEntry = [this.digital_write, args];
+            var callbackEntry = [this.analog_write.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            self = this;
             var pin = args['PIN'];
             pin = parseInt(pin, 10);
-            valid = self.isValidPin(pin, the_digital_pins, B_ANALOG_READ);
-            valid = true;
+            valid = this.isValidPin(pin, the_digital_pins, B_ANALOG_READ);
             if (valid) {
                 if (pin_modes[pin] !== ANALOG_INPUT) {
                     pin_modes[pin] = ANALOG_INPUT;
@@ -561,18 +539,13 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            // save this for the reentry
-            self = this;
-
-            var callbackEntry = [this.digital_write, args];
+            var callbackEntry = [this.digital_read.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            self = this;
             var pin = args['PIN'];
             pin = parseInt(pin, 10);
-            valid = self.isValidPin(pin, the_digital_pins, B_DIGITAL_READ);
-            valid = true;
+            valid = this.isValidPin(pin, the_digital_pins, B_DIGITAL_READ);
             if (valid) {
                 if (pin_modes[pin] !== DIGITAL_INPUT) {
                     pin_modes[pin] = DIGITAL_INPUT;
@@ -580,7 +553,7 @@ class Scratch3OneGPIO {
                     msg = JSON.stringify(msg);
                     this.socket.send(msg);
                 }
-                return analog_inputs[pin];
+                return digital_inputs[pin];
             }
         }
     }
@@ -594,21 +567,17 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            // save this for the reentry
-            self = this;
-
-            var callbackEntry = [this.digital_write, args];
+            var callbackEntry = [this.sonar_read.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            self = this;
             var trigger_pin = args['TRIGGER_PIN'];
             trigger_pin = parseInt(trigger_pin, 10);
             sonar_report_pin = trigger_pin;
             var echo_pin = args['ECHO_PIN'];
             echo_pin = parseInt(echo_pin, 10);
 
-            valid = self.isValidPin(trigger_pin, the_digital_pins, B_SONAR_READ);
+            valid = this.isValidPin(trigger_pin, the_digital_pins, B_SONAR_READ);
             if (valid) {
                 if (pin_modes[trigger_pin] !== SONAR) {
                     pin_modes[trigger_pin] = SONAR;
