@@ -104,9 +104,8 @@ var ARDUINO = 1;
 var ESP_8266 = 2;
 var RPI = 3;
 
-var waiter = null;
-var waiter_args = null;
-var my_this = null;
+// an array to buffer operations until socket is opened
+var wait_open = [];
 
 class Scratch3OneGPIO {
     constructor(runtime) {
@@ -312,6 +311,10 @@ class Scratch3OneGPIO {
             connect_attempt = true;
             // the message is built above
             window.socket.send(msg);
+            for (var index = 0; index < wait_open.length; index++) {
+                var data = wait_open[index];
+                data[0](data[1]);
+            }
         };
 
         window.socket.onclose = function () {
@@ -345,6 +348,7 @@ class Scratch3OneGPIO {
     }
 
 
+
     digital_write(args) {
         if (!connect_attempt) {
             if (!connected_alerts[B_DIGITAL_WRITE]) {
@@ -355,28 +359,30 @@ class Scratch3OneGPIO {
         }
         if (!connected) {
             // save this for the reentry
-            my_this = this;
+            self = this;
 
-            waiter = this.digital_write;
-            waiter_args = args;
-            setTimeout(this.check_connected, 250);
-            return;
+            var callbackEntry = [this.digital_write, args];
+            wait_open.push(callbackEntry);
         }
-        var pin = args['PIN'];
-        pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_digital_pins, B_DIGITAL_WRITE);
-        if (valid) {
-            if (pin_modes[pin] !== DIGITAL_OUTPUT) {
-                pin_modes[pin] = DIGITAL_OUTPUT;
-                msg = {"command": "set_mode_digital_output", "pin": pin};
+        else {
+            self = this;
+            var pin = args['PIN'];
+            pin = parseInt(pin, 10);
+            valid = self.isValidPin(pin, the_digital_pins, B_DIGITAL_WRITE);
+            valid = true;
+            if (valid) {
+                if (pin_modes[pin] !== DIGITAL_OUTPUT) {
+                    pin_modes[pin] = DIGITAL_OUTPUT;
+                    msg = {"command": "set_mode_digital_output", "pin": pin};
+                    msg = JSON.stringify(msg);
+                    window.socket.send(msg);
+                }
+                var value = args['ON_OFF'];
+                value = parseInt(value, 10);
+                msg = {"command": "digital_write", "pin": pin, "value": value};
                 msg = JSON.stringify(msg);
-                this.socket.send(msg);
+                window.socket.send(msg);
             }
-            var value = args['ON_OFF'];
-            value = parseInt(value, 10);
-            msg = {"command": "digital_write", "pin": pin, "value": value};
-            msg = JSON.stringify(msg);
-            this.socket.send(msg);
         }
     }
 
@@ -391,41 +397,41 @@ class Scratch3OneGPIO {
         }
         if (!connected) {
             // save this for the reentry
-            my_this = this;
-
-            waiter = this.pwm_write;
-            waiter_args = args;
-            setTimeout(this.check_connected, 250);
-            return;
+            self = this;
+            var callbackEntry = [this.pwm_write, args];
+            wait_open.push(callbackEntry);
         }
-        var pin = args['PIN'];
-        // maximum value for RPi and Arduino
-        var the_max = 255;
-        pin = parseInt(pin, 10);
+        else {
+            self = this;
+            var pin = args['PIN'];
+            // maximum value for RPi and Arduino
+            var the_max = 255;
+            pin = parseInt(pin, 10);
 
-        valid = my_this.isValidPin(pin, the_digital_pins, B_PWM_WRITE);
+            valid = self.isValidPin(pin, the_digital_pins, B_PWM_WRITE);
 
-        if (valid) {
-            var value = args['VALUE'];
-            value = parseInt(value, 10);
+            if (valid) {
+                var value = args['VALUE'];
+                value = parseInt(value, 10);
 
-            // adjust maximum if esp8266
-            if (the_board === ESP_8266) {
-                the_max = 1023;
-            }
+                // adjust maximum if esp8266
+                if (the_board === ESP_8266) {
+                    the_max = 1023;
+                }
 
-            // calculate the value based on percentage
-            value = the_max * (value / 100);
-            value = Math.round(value);
-            if (pin_modes[pin] !== PWM) {
-                pin_modes[pin] = PWM;
-                msg = {"command": "set_mode_pwm", "pin": pin};
+                // calculate the value based on percentage
+                value = the_max * (value / 100);
+                value = Math.round(value);
+                if (pin_modes[pin] !== PWM) {
+                    pin_modes[pin] = PWM;
+                    msg = {"command": "set_mode_pwm", "pin": pin};
+                    msg = JSON.stringify(msg);
+                    window.socket.send(msg);
+                }
+                msg = {"command": "pwm_write", "pin": pin, "value": value};
                 msg = JSON.stringify(msg);
-                this.socket.send(msg);
+                window.socket.send(msg);
             }
-            msg = {"command": "pwm_write", "pin": pin, "value": value};
-            msg = JSON.stringify(msg);
-            this.socket.send(msg);
         }
     }
 
@@ -439,34 +445,33 @@ class Scratch3OneGPIO {
         }
         if (!connected) {
             // save this for the reentry
-            my_this = this;
+            self = this;
 
-            waiter = this.tone_on;
-            waiter_args = args;
-            setTimeout(this.check_connected, 250);
-            return;
+            var callbackEntry = [this.digital_write, args];
+            wait_open.push(callbackEntry);
         }
-        var pin = args['PIN'];
-        pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_digital_pins, B_TONE);
-        if (valid) {
-            if (pin_modes[pin] !== TONE) {
-                pin_modes[pin] = TONE;
-                msg = {"command": "set_mode_tone", "pin": pin};
-                msg = JSON.stringify(msg);
-                this.socket.send(msg);
-            }
+        else {
+            self = this;
+            var pin = args['PIN'];
+            pin = parseInt(pin, 10);
             var freq = args['FREQ'];
             freq = parseInt(freq, 10);
             var duration = args['DURATION'];
             duration = parseInt(duration, 10);
-            //make sure duration is not for continuous tone
-            if (duration <= 0) {
-                duration = 100;
+
+            valid = self.isValidPin(pin, the_digital_pins, B_TONE);
+            valid = true;
+            if (valid) {
+                if (pin_modes[pin] !== TONE) {
+                    pin_modes[pin] = TONE;
+                    msg = {"command": "set_mode_tone", "pin": pin};
+                    msg = JSON.stringify(msg);
+                    window.socket.send(msg);
+                }
+                msg = {"command": "play_tone", "pin": pin, 'freq': freq, 'duration': duration};
+                msg = JSON.stringify(msg);
+                window.socket.send(msg);
             }
-            msg = {"command": "play_tone", "pin": pin, 'freq': freq, 'duration': duration};
-            msg = JSON.stringify(msg);
-            this.socket.send(msg);
         }
     }
 
@@ -481,36 +486,37 @@ class Scratch3OneGPIO {
         }
         if (!connected) {
             // save this for the reentry
-            my_this = this;
+            self = this;
 
-            waiter = this.servo;
-            waiter_args = args;
-            setTimeout(this.check_connected, 250);
-            return;
+            var callbackEntry = [this.digital_write, args];
+            wait_open.push(callbackEntry);
         }
+        else {
+            self = this;
+            var pin = args['PIN'];
+            pin = parseInt(pin, 10);
+            var angle = args['ANGLE'];
+            angle = parseInt(angle, 10);
 
-        var pin = args['PIN'];
-        pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_digital_pins, B_SERVO);
-        if (valid) {
+            valid = self.isValidPin(pin, the_digital_pins, B_SERVO);
+            valid = true;
             if (valid) {
                 if (pin_modes[pin] !== SERVO) {
                     pin_modes[pin] = SERVO;
                     msg = {"command": "set_mode_servo", "pin": pin};
                     msg = JSON.stringify(msg);
-                    this.socket.send(msg);
+                    window.socket.send(msg);
                 }
-                var angle = args['ANGLE'];
-                angle = parseInt(angle, 10);
                 msg = {
                     'command': 'servo_position', "pin": pin,
                     'position': angle
                 };
                 msg = JSON.stringify(msg);
-                this.socket.send(msg);
+                window.socket.send(msg);
             }
         }
     }
+
 
     // reporter blocks
     analog_read(args) {
@@ -521,34 +527,33 @@ class Scratch3OneGPIO {
                 return false;
             }
         }
-        if (the_board === RPI) {
-            alert('The Raspberry Pi Does Not Support Analog Input.');
-            return;
-        }
         if (!connected) {
             // save this for the reentry
-            my_this = this;
+            self = this;
 
-            waiter = this.analog_read;
-            waiter_args = args;
-            setTimeout(this.check_connected, 250);
-            return;
+            var callbackEntry = [this.digital_write, args];
+            wait_open.push(callbackEntry);
         }
-        var pin = args['PIN'];
-        pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_analog_pins, B_ANALOG_READ);
-        if (valid) {
-            if (pin_modes[pin] !== ANALOG_INPUT) {
-                pin_modes[pin] = ANALOG_INPUT;
-                msg = {"command": "set_mode_analog_input", "pin": pin};
-                msg = JSON.stringify(msg);
-                this.socket.send(msg);
+        else {
+            self = this;
+            var pin = args['PIN'];
+            pin = parseInt(pin, 10);
+            valid = self.isValidPin(pin, the_digital_pins, B_ANALOG_READ);
+            valid = true;
+            if (valid) {
+                if (pin_modes[pin] !== ANALOG_INPUT) {
+                    pin_modes[pin] = ANALOG_INPUT;
+                    msg = {"command": "set_mode_analog_input", "pin": pin};
+                    msg = JSON.stringify(msg);
+                    this.socket.send(msg);
+                }
+                return analog_inputs[pin];
             }
-            return analog_inputs[pin];
         }
     }
 
     digital_read(args) {
+
         if (!connect_attempt) {
             if (!connected_alerts[B_DIGITAL_READ]) {
                 connected_alerts[B_DIGITAL_READ] = 1;
@@ -558,27 +563,28 @@ class Scratch3OneGPIO {
         }
         if (!connected) {
             // save this for the reentry
-            my_this = this;
+            self = this;
 
-            waiter = this.digital_read;
-            waiter_args = args;
-            setTimeout(this.check_connected, 250);
-            return;
+            var callbackEntry = [this.digital_write, args];
+            wait_open.push(callbackEntry);
         }
-        var pin = args['PIN'];
-        pin = parseInt(pin, 10);
-        valid = my_this.isValidPin(pin, the_digital_pins, B_DIGITAL_READ);
-        if (valid) {
-            if (pin_modes[pin] !== DIGITAL_INPUT) {
-                pin_modes[pin] = DIGITAL_INPUT;
-                msg = {"command": "set_mode_digital_input", "pin": pin};
-                msg = JSON.stringify(msg);
-                this.socket.send(msg);
+        else {
+            self = this;
+            var pin = args['PIN'];
+            pin = parseInt(pin, 10);
+            valid = self.isValidPin(pin, the_digital_pins, B_DIGITAL_READ);
+            valid = true;
+            if (valid) {
+                if (pin_modes[pin] !== DIGITAL_INPUT) {
+                    pin_modes[pin] = DIGITAL_INPUT;
+                    msg = {"command": "set_mode_digital_input", "pin": pin};
+                    msg = JSON.stringify(msg);
+                    this.socket.send(msg);
+                }
+                return analog_inputs[pin];
             }
-            return digital_inputs[pin];
         }
     }
-
 
     sonar_read(args) {
         if (!connect_attempt) {
@@ -590,47 +596,32 @@ class Scratch3OneGPIO {
         }
         if (!connected) {
             // save this for the reentry
-            my_this = this;
-            waiter = this.sonar_read;
-            waiter_args = args;
-            setTimeout(this.check_connected, 250);
-            return;
-        }
-        var trigger_pin = args['TRIGGER_PIN'];
-        trigger_pin = parseInt(trigger_pin, 10);
-        sonar_report_pin = trigger_pin;
-        var echo_pin = args['ECHO_PIN'];
-        echo_pin = parseInt(echo_pin, 10);
+            self = this;
 
-        valid = my_this.isValidPin(trigger_pin, the_digital_pins, B_SONAR_READ);
-        if (valid) {
-            if (pin_modes[trigger_pin] !== SONAR) {
-                pin_modes[trigger_pin] = SONAR;
-                msg = {"command": "set_mode_sonar", "trigger_pin": trigger_pin, "echo_pin": echo_pin};
-                msg = JSON.stringify(msg);
-                this.socket.send(msg);
+            var callbackEntry = [this.digital_write, args];
+            wait_open.push(callbackEntry);
+        }
+        else {
+            self = this;
+            var trigger_pin = args['TRIGGER_PIN'];
+            trigger_pin = parseInt(trigger_pin, 10);
+            sonar_report_pin = trigger_pin;
+            var echo_pin = args['ECHO_PIN'];
+            echo_pin = parseInt(echo_pin, 10);
+
+            valid = self.isValidPin(trigger_pin, the_digital_pins, B_SONAR_READ);
+            if (valid) {
+                if (pin_modes[trigger_pin] !== SONAR) {
+                    pin_modes[trigger_pin] = SONAR;
+                    msg = {"command": "set_mode_sonar", "trigger_pin": trigger_pin, "echo_pin": echo_pin};
+                    msg = JSON.stringify(msg);
+                    window.socket.send(msg);
+                }
+                return digital_inputs[sonar_report_pin];
             }
-            return digital_inputs[sonar_report_pin];
-
         }
-
-
     }
-
     // end of block handlers
-
-    // it takes time for the "onopen" message to be received
-    // when the connect block is executed. This timer
-    // allows the onopen to be received before proceeding with
-    // processing any blocks.
-
-    // on timeout waiting for WS onopen, if connected
-    // call the waiting block
-    check_connected() {
-        if (connected) {
-            waiter(waiter_args);
-        }
-    }
 
     // helpers
     isValidPin(pinNumber, list, blockId) {
