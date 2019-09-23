@@ -299,8 +299,12 @@ class Scratch3OneGPIO {
 
         // websocket event handlers
         window.socket.onopen = function () {
-            digital_inputs.fill('0');
-            analog_inputs.fill('0');
+            if( the_board === ESP_8266) {
+                digital_inputs.fill(1);
+            }
+            else {  digital_inputs.fill(0);
+            }
+            analog_inputs.fill(0);
             // connection complete
             connected = true;
             connect_attempt = true;
@@ -512,7 +516,7 @@ class Scratch3OneGPIO {
         else {
             let pin = args['PIN'];
             pin = parseInt(pin, 10);
-            valid = this.isValidPin(pin, the_digital_pins, B_ANALOG_READ);
+            valid = this.isValidPin(pin, the_analog_pins, B_ANALOG_READ);
             if (valid) {
                 if (pin_modes[pin] !== ANALOG_INPUT) {
                     pin_modes[pin] = ANALOG_INPUT;
