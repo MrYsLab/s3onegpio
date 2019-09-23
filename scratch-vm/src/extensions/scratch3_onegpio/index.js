@@ -19,7 +19,7 @@ Arduino Uno, ESP-8666, or Raspberry Pi
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-// Boiler plate from the Scratch
+// Boiler plate from the Scratch Team
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
 //const formatMessage = require('format-message');
@@ -36,6 +36,11 @@ const TONE = 5;
 const SONAR = 6;
 const ANALOG_INPUT = 7;
 
+// an array to save the current pin mode
+// this is common to all board types since it contains enough
+// entries for all the boards.
+// Modes are listed above - initialize to invalid mode of -1
+let pin_modes = new Array(30).fill(-1);
 
 // valid pins for the supported boards
 const arduino_digital_pins = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19];
@@ -46,46 +51,30 @@ const esp_8266_analog_pins = [0];
 const rpi_digital_pins = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
     21, 22, 23, 24, 25, 26, 27];
 
-// an array to save the current pin mode
-// this is common to all board types since it contains enough
-// entries for all the boards.
-// Modes are listed above - initialize to invalid mode of -1
-var pin_modes = new Array(30).fill(-1);
+// a variable that will be set to one of the arrary above
+// in order to test for valid pins being selected
+let the_digital_pins = null;
+let the_analog_pins = null;
+let the_pwm_pins = null;
+let valid = null;
 
-
-// a pointer to pin types - used for all board tyhpes
-var the_digital_pins = null;
-var the_analog_pins = null;
-var the_pwm_pins = null;
-var valid = null;
-
-// general message holder
-var msg = null;
+// general outgoing websocket message holder
+let msg = null;
 
 // the pin assigned to the sonar trigger
 // initially set to -1, an illegal value
-var sonar_report_pin = -1;
+let sonar_report_pin = -1;
 
 // flag to indicate if the user connected to a board
-var connected = false;
+let connected = false;
 
 // arrays to hold input values
-var digital_inputs = new Array(32);
-var analog_inputs = new Array(8);
+let digital_inputs = new Array(32);
+let analog_inputs = new Array(8);
 
-// this array is used to indicate if a pin alert message
-// was issued for a block. This prevents an endless loop
-// of alerts.
-var block_pin_alerts = [0, 0, 0, 0, 0, 0, 0, 0];
-
-// this array is used to indicate if connected alert message
-// was issued for a block. This prevents an endless loop
-// of alerts.
-var connected_alerts = [0, 0, 0, 0, 0, 0, 0];
-
-// was a connect ever attempted?
-var connect_attempt = false;
-
+// flag to indicate if a websocket connect was
+// ever attempted.
+let connect_attempt = false;
 
 // indices into block_pin_alerts and connected_alerts
 const B_DIGITAL_WRITE = 0;
@@ -96,24 +85,31 @@ const B_ANALOG_READ = 4;
 const B_DIGITAL_READ = 5;
 const B_SONAR_READ = 6;
 
-// the current board in use
-var the_board = null;
+// this array is used to indicate if a pin alert message
+// was issued for a block. This prevents an endless loop
+// of alerts. There is an entry for each block type
+// defined above.
+let block_pin_alerts = [0, 0, 0, 0, 0, 0, 0, 0];
+
+// this array is used to indicate if connected alert message
+// was issued for a block. This prevents an endless loop
+// of alerts.
+let connected_alerts = [0, 0, 0, 0, 0, 0, 0];
 
 // board ids
-var ARDUINO = 1;
-var ESP_8266 = 2;
-var RPI = 3;
+let ARDUINO = 1;
+let ESP_8266 = 2;
+let RPI = 3;
+
+// the current board id in use
+let the_board = null;
 
 // an array to buffer operations until socket is opened
-var wait_open = [];
+let wait_open = [];
 
 class Scratch3OneGPIO {
     constructor(runtime) {
         this.runtime = runtime;
-        //this.text = "abcde";
-        //this.changed = 0;
-        //this.lasthat = false;
-        this.socket = null;
     }
 
     getInfo() {
@@ -275,8 +271,7 @@ class Scratch3OneGPIO {
             return;
         }
         connect_attempt = true;
-        this.socket = new WebSocket("ws://127.0.0.1:9000");
-        window.socket = this.socket;
+        window.socket = new WebSocket("ws://127.0.0.1:9000");
 
         // set up the id string to the WebSocket gateway and assign
         // the pin arrays for each board
@@ -311,8 +306,8 @@ class Scratch3OneGPIO {
             connect_attempt = true;
             // the message is built above
             window.socket.send(msg);
-            for (var index = 0; index < wait_open.length; index++) {
-                var data = wait_open[index];
+            for (let index = 0; index < wait_open.length; index++) {
+                let data = wait_open[index];
                 data[0](data[1]);
             }
         };
@@ -325,9 +320,9 @@ class Scratch3OneGPIO {
         // reporter messages from the board
         window.socket.onmessage = function (message) {
             msg = JSON.parse(message.data);
-            var report_type = msg["report"];
-            var pin = null;
-            var value = null;
+            let report_type = msg["report"];
+            let pin = null;
+            let value = null;
 
             // types - digital, analog, sonar
             if (report_type === 'digital_input') {
@@ -347,8 +342,6 @@ class Scratch3OneGPIO {
         };
     }
 
-
-
     digital_write(args) {
         if (!connect_attempt) {
             if (!connected_alerts[B_DIGITAL_WRITE]) {
@@ -358,11 +351,11 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            var callbackEntry = [this.digital_write.bind(this), args];
+            let callbackEntry = [this.digital_write.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            var pin = args['PIN'];
+            let pin = args['PIN'];
             pin = parseInt(pin, 10);
             valid = this.isValidPin(pin, the_digital_pins, B_DIGITAL_WRITE);
             if (valid) {
@@ -372,7 +365,7 @@ class Scratch3OneGPIO {
                     msg = JSON.stringify(msg);
                     window.socket.send(msg);
                 }
-                var value = args['ON_OFF'];
+                let value = args['ON_OFF'];
                 value = parseInt(value, 10);
                 msg = {"command": "digital_write", "pin": pin, "value": value};
                 msg = JSON.stringify(msg);
@@ -391,19 +384,19 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            var callbackEntry = [this.pwm_write.bind(this), args];
+            let callbackEntry = [this.pwm_write.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            var pin = args['PIN'];
+            let pin = args['PIN'];
             // maximum value for RPi and Arduino
-            var the_max = 255;
+            let the_max = 255;
             pin = parseInt(pin, 10);
 
             valid = this.isValidPin(pin, the_digital_pins, B_PWM_WRITE);
 
             if (valid) {
-                var value = args['VALUE'];
+                let value = args['VALUE'];
                 value = parseInt(value, 10);
 
                 // adjust maximum if esp8266
@@ -436,16 +429,20 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            var callbackEntry = [this.tone_on.bind(this), args];
+            let callbackEntry = [this.tone_on.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            var pin = args['PIN'];
+            let pin = args['PIN'];
             pin = parseInt(pin, 10);
-            var freq = args['FREQ'];
+            let freq = args['FREQ'];
             freq = parseInt(freq, 10);
-            var duration = args['DURATION'];
+            let duration = args['DURATION'];
             duration = parseInt(duration, 10);
+            // make sure duration maximum is 5 seconds
+            if( duration > 5000){
+                duration = 5000;
+            }
 
             valid = this.isValidPin(pin, the_digital_pins, B_TONE);
             if (valid) {
@@ -472,13 +469,13 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            var callbackEntry = [this.servo.bind(this), args];
+            let callbackEntry = [this.servo.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            var pin = args['PIN'];
+            let pin = args['PIN'];
             pin = parseInt(pin, 10);
-            var angle = args['ANGLE'];
+            let angle = args['ANGLE'];
             angle = parseInt(angle, 10);
 
             valid = this.isValidPin(pin, the_digital_pins, B_SERVO);
@@ -499,7 +496,6 @@ class Scratch3OneGPIO {
         }
     }
 
-
     // reporter blocks
     analog_read(args) {
         if (!connect_attempt) {
@@ -510,11 +506,11 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            var callbackEntry = [this.analog_write.bind(this), args];
+            let callbackEntry = [this.analog_read.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            var pin = args['PIN'];
+            let pin = args['PIN'];
             pin = parseInt(pin, 10);
             valid = this.isValidPin(pin, the_digital_pins, B_ANALOG_READ);
             if (valid) {
@@ -522,7 +518,7 @@ class Scratch3OneGPIO {
                     pin_modes[pin] = ANALOG_INPUT;
                     msg = {"command": "set_mode_analog_input", "pin": pin};
                     msg = JSON.stringify(msg);
-                    this.socket.send(msg);
+                    window.socket.send(msg);
                 }
                 return analog_inputs[pin];
             }
@@ -539,11 +535,11 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            var callbackEntry = [this.digital_read.bind(this), args];
+            let callbackEntry = [this.digital_read.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            var pin = args['PIN'];
+            let pin = args['PIN'];
             pin = parseInt(pin, 10);
             valid = this.isValidPin(pin, the_digital_pins, B_DIGITAL_READ);
             if (valid) {
@@ -551,7 +547,7 @@ class Scratch3OneGPIO {
                     pin_modes[pin] = DIGITAL_INPUT;
                     msg = {"command": "set_mode_digital_input", "pin": pin};
                     msg = JSON.stringify(msg);
-                    this.socket.send(msg);
+                    window.socket.send(msg);
                 }
                 return digital_inputs[pin];
             }
@@ -567,14 +563,14 @@ class Scratch3OneGPIO {
             }
         }
         if (!connected) {
-            var callbackEntry = [this.sonar_read.bind(this), args];
+            let callbackEntry = [this.sonar_read.bind(this), args];
             wait_open.push(callbackEntry);
         }
         else {
-            var trigger_pin = args['TRIGGER_PIN'];
+            let trigger_pin = args['TRIGGER_PIN'];
             trigger_pin = parseInt(trigger_pin, 10);
             sonar_report_pin = trigger_pin;
-            var echo_pin = args['ECHO_PIN'];
+            let echo_pin = args['ECHO_PIN'];
             echo_pin = parseInt(echo_pin, 10);
 
             valid = this.isValidPin(trigger_pin, the_digital_pins, B_SONAR_READ);
@@ -603,8 +599,8 @@ class Scratch3OneGPIO {
         // of alerts.
         else {
             if (!block_pin_alerts[blockId]) {
-                var a = 'Invalid Pin Number. Valid pins: ';
-                var b = list.join(", ");
+                let a = 'Invalid Pin Number. Valid pins: ';
+                let b = list.join(", ");
                 block_pin_alerts[blockId] = 1;
                 a = a + b;
                 alert(a);
