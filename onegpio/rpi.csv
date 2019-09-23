@@ -1,3 +1,3 @@
 command_string,spawn,topic,append_bp_address,auto_restart,wait
-python3 /home/pi/python_banyan-master/projects/OneGPIO/raspberry_pi/rpi_gateway.py,no,rpi_launch,yes,no,1
+python3 /home/pi/rpi_gateway.py,no,rpi_launch,yes,no,1
 python3 ws_gateway.py,no,local,no,no,0
