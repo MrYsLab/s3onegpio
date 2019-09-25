@@ -318,8 +318,8 @@ class RpiGateway(GatewayBase):
         :param payload: {"command": "set_mode_sonar", "trigger_pin": “PIN”, "tag":”TAG”
                          "echo_pin": “PIN”"tag":”TAG” }
         """
-        trigger = payload['trigger']
-        echo = payload['echo']
+        trigger = payload['trigger_pin']
+        echo = payload['echo_pin']
         self.sonar = Sonar(self.pi, trigger, echo)
         self.receive_loop_idle_addition = self.read_sonar
 
