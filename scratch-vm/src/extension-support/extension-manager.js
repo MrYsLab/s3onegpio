@@ -24,7 +24,10 @@ const builtinExtensions = {
     makeymakey: () => require('../extensions/scratch3_makeymakey'),
     boost: () => require('../extensions/scratch3_boost'),
     gdxfor: () => require('../extensions/scratch3_gdx_for'),
-    onegpio: () => require('../extensions/scratch3_onegpio'),
+    onegpioArduino: () => require('../extensions/scratch3_onegpioArduino'),
+    onegpioRpi: () => require('../extensions/scratch3_onegpioRpi'),
+    onegpioEsp: () => require('../extensions/scratch3_onegpioEsp'),
+
 };
 
 /**

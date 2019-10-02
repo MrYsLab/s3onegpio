@@ -46,8 +46,14 @@ import gdxforInsetIconURL from './gdxfor/gdxfor-small.svg';
 import gdxforConnectionIconURL from './gdxfor/gdxfor-illustration.svg';
 import gdxforConnectionSmallIconURL from './gdxfor/gdxfor-small.svg';
 
-import onegpioImage from './onegpio/onegpio.png';
-import onegpioInsetIconURL from './onegpio/onegpio-small.svg';
+import onegpioArduinoImage from './onegpioArduino/onegpioArduino.png';
+import onegpioArduinoInsetIconURL from './onegpioArduino/onegpioArduino-small.png';
+
+import onegpioRpiImage from './onegpioRpi/onegpioRpi.png';
+import onegpioRpiInsetIconURL from './onegpioRpi/onegpioRpi-small.png';
+
+import onegpioEspImage from './onegpioEsp/onegpioEsp.png';
+import onegpioEspInsetIconURL from './onegpioEsp/onegpioEsp-small.png';
 
 
 export default [
@@ -324,17 +330,58 @@ export default [
     }
 ,
     {
-        name: 'OneGpio',
-        extensionId: 'onegpio',
+        name: 'OneGpio Arduino',
+        extensionId: 'onegpioArduino',
         collaborator: "Mr. Y's Lab",
-        iconURL: onegpioImage,
-        insetIconURL: onegpioInsetIconURL,
+        iconURL: onegpioArduinoImage,
+        insetIconURL: onegpioArduinoInsetIconURL,
         description: (
             <FormattedMessage
-                defaultMessage="Control GPIO for Arduino, Raspberry Pi, or ESP-8266"
+                defaultMessage="Arduino GPIO Control"
+                description="Use Scratch to control Arduino GPIO pins."
+                id="gui.extension.onegpioArduino.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        helpLink: 'https://scratch.mit.edu/wedo'
 
-                description="Block type sample for developing original block"
-                id="gui.extension.onegpio.description"
+    }
+,
+    {
+        name: 'OneGpio Raspberry Pi',
+        extensionId: 'onegpioRpi',
+        collaborator: "Mr. Y's Lab",
+        iconURL: onegpioRpiImage,
+        insetIconURL: onegpioRpiInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="Raspberry Pi GPIO Control"
+                description="Use Scratch to control the Raspberry Pi GPIO pins."
+                id="gui.extension.onegpioRpi.description"
+            />
+        ),
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        helpLink: 'https://scratch.mit.edu/wedo'
+
+    }
+,
+    {
+        name: 'OneGpio ESP-8266',
+        extensionId: 'onegpioEsp',
+        collaborator: "Mr. Y's Lab",
+        iconURL: onegpioEspImage,
+        insetIconURL: onegpioEspInsetIconURL,
+        description: (
+            <FormattedMessage
+                defaultMessage="ESP-8266 GPIO Control"
+                description="Use Scratch to control an ESP-8266."
+                id="gui.extension.onegpioEsp.description"
             />
         ),
         featured: true,
