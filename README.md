@@ -1,2 +1,5 @@
 # This is a work in progress!
-![](./images/extension.png)
+![](./images/extensions.png)
+
+## Arduino Blocks
+![](./images/blocks_10-1.png)
