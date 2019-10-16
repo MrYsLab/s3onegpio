@@ -1,6 +1,14 @@
 const Color = require('../util/color');
 
 /**
+ * Store and possibly polyfill Number.isNaN. Number.isNaN can save time over
+ * self.isNaN by not coercing its input. We need to polyfill it to support
+ * Internet Explorer.
+ * @const
+ */
+const _NumberIsNaN = Number.isNaN || isNaN;
+
+/**
  * @fileoverview
  * Utilities for casting and comparing Scratch data-types.
  * Scratch behaves slightly differently from JavaScript in many respects,
@@ -25,13 +33,13 @@ class Cast {
         if (typeof value === 'number') {
             // Scratch treats NaN as 0, when needed as a number.
             // E.g., 0 + NaN -> 0.
-            if (Number.isNaN(value)) {
+            if (_NumberIsNaN(value)) {
                 return 0;
             }
             return value;
         }
         const n = Number(value);
-        if (Number.isNaN(n)) {
+        if (_NumberIsNaN(n)) {
             // Scratch treats NaN as 0, when needed as a number.
             // E.g., 0 + NaN -> 0.
             return 0;
@@ -184,13 +192,12 @@ class Cast {
      * LIST_INVALID: if the index was invalid in any way.
      * @param {*} index Scratch arg, including 1-based numbers or special cases.
      * @param {number} length Length of the list.
-     * @param {boolean} acceptAll Whether it should accept "all" or not.
      * @return {(number|string)} 1-based index for list, LIST_ALL, or LIST_INVALID.
      */
-    static toListIndex (index, length, acceptAll) {
+    static toListIndex (index, length) {
         if (typeof index !== 'number') {
             if (index === 'all') {
-                return acceptAll ? Cast.LIST_ALL : Cast.LIST_INVALID;
+                return Cast.LIST_ALL;
             }
             if (index === 'last') {
                 if (length > 0) {

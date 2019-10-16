@@ -171,7 +171,8 @@ const fetchBitmapCanvas_ = function (costume, runtime, rotationCenter) {
                 assetMatchesBase: scale === 1 && !textImageElement
             };
         })
-        .catch(() => {
+        .catch(error => {
+            log.warn(`${error.name}: ${error.message}`);
             // Clean up the text layer properties if it fails to load
             delete costume.textLayerMD5;
             delete costume.textLayerAsset;
@@ -260,8 +261,7 @@ const loadCostumeFromAsset = function (costume, runtime, optVersion) {
     }
     if (costume.asset.assetType.runtimeFormat === AssetType.ImageVector.runtimeFormat) {
         return loadVector_(costume, runtime, rotationCenter, optVersion)
-            .catch(error => {
-                log.warn(`Error loading vector image: ${error.name}: ${error.message}`);
+            .catch(() => {
                 // Use default asset if original fails to load
                 costume.assetId = runtime.storage.defaultAssetId.ImageVector;
                 costume.asset = runtime.storage.get(costume.assetId);

@@ -135,7 +135,7 @@ class Scratch3DataBlocks {
     deleteOfList (args, util) {
         const list = util.target.lookupOrCreateList(
             args.LIST.id, args.LIST.name);
-        const index = Cast.toListIndex(args.INDEX, list.value.length, true);
+        const index = Cast.toListIndex(args.INDEX, list.value.length);
         if (index === Cast.LIST_INVALID) {
             return;
         } else if (index === Cast.LIST_ALL) {
@@ -157,7 +157,7 @@ class Scratch3DataBlocks {
         const item = args.ITEM;
         const list = util.target.lookupOrCreateList(
             args.LIST.id, args.LIST.name);
-        const index = Cast.toListIndex(args.INDEX, list.value.length + 1, false);
+        const index = Cast.toListIndex(args.INDEX, list.value.length + 1);
         if (index === Cast.LIST_INVALID) {
             return;
         }
@@ -176,7 +176,7 @@ class Scratch3DataBlocks {
         const item = args.ITEM;
         const list = util.target.lookupOrCreateList(
             args.LIST.id, args.LIST.name);
-        const index = Cast.toListIndex(args.INDEX, list.value.length, false);
+        const index = Cast.toListIndex(args.INDEX, list.value.length);
         if (index === Cast.LIST_INVALID) {
             return;
         }
@@ -187,7 +187,7 @@ class Scratch3DataBlocks {
     getItemOfList (args, util) {
         const list = util.target.lookupOrCreateList(
             args.LIST.id, args.LIST.name);
-        const index = Cast.toListIndex(args.INDEX, list.value.length, false);
+        const index = Cast.toListIndex(args.INDEX, list.value.length);
         if (index === Cast.LIST_INVALID) {
             return '';
         }

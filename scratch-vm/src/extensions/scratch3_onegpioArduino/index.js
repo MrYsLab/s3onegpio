@@ -22,7 +22,7 @@ Arduino Uno, ESP-8666, or Raspberry Pi
 // Boiler plate from the Scratch Team
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
-//const formatMessage = require('format-message');
+const formatMessage = require('format-message');
 
 
 // The following are constants used within the extension
@@ -35,6 +35,8 @@ const SERVO = 4;
 const TONE = 5;
 const SONAR = 6;
 const ANALOG_INPUT = 7;
+
+require('sweetalert');
 
 // an array to save the current pin mode
 // this is common to all board types since it contains enough
@@ -65,12 +67,106 @@ let connect_attempt = false;
 // an array to buffer operations until socket is opened
 let wait_open = [];
 
+let the_locale = null;
+
+// common blocks
+
+// common blocks
+
+const FormDigitalWrite = {
+    'pt-br': 'Definir Pino Digital[PIN]como[ON_OFF]',
+    'pt': 'Definir Pino Digital[PIN]como[ON_OFF]',
+    'en': 'Write Digital Pin [PIN] [ON_OFF]'
+};
+
+const FormPwmWrite = {
+    'pt-br': 'Definir Pino PWM[PIN]com[VALUE]%',
+    'pt': 'Definir Pino PWM[PIN]com[VALUE]%',
+    'en': 'Write PWM Pin [PIN] [VALUE]%',
+};
+
+const FormTone = {
+    'pt-br': 'Definir Buzzer no Pino[PIN]com[FREQ]Hz e[DURATION]ms',
+    'pt': 'Definir Buzzer no Pino[PIN]com[FREQ]Hz  e[DURATION]ms',
+    'en': 'Tone Pin [PIN] [FREQ] Hz [DURATION] ms',
+};
+
+const FormServo = {
+    'pt-br': 'Mover Servo Motor no[PIN]para[ANGLE]°',
+    'pt': 'Mover Servo Motor no[PIN]para[ANGLE]°',
+    'en': 'Write Servo Pin [PIN] [ANGLE] Deg.',
+};
+
+const FormAnalogRead = {
+    'pt-br': 'Ler Pino Analógico [PIN]',
+    'pt': 'Ler Pino Analógico [PIN]',
+    'en': 'Read Analog Pin [PIN]',
+};
+
+const FormDigitalRead = {
+    'pt-br': 'Ler Pino Digital [PIN]',
+    'pt': 'Ler Pino Digital [PIN]',
+    'en': 'Read Digital Pin [PIN]',
+};
+
+const FormSonarRead = {
+    'pt-br': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
+    'pt': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
+    'en': 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]'
+};
+
+// ESP-8266 specific
+
+const FormIPBlockE = {
+    'pt-br': 'Endereço IP da placa ESP-8266 [IP_ADDR]',
+    'pt': 'Endereço IP da placa ESP-8266 [IP_ADDR]',
+    'en': 'ESP-8266 IP Address [IP_ADDR]'
+};
+
+
+// Raspbery Pi Specific
+const FormIPBlockR = {
+    'pt-br': 'Endereço IP do RPi [IP_ADDR]',
+    'pt': 'Endereço IP do RPi [IP_ADDR]',
+    'en': 'Remote IP Address [IP_ADDR]'
+};
+
+// General Alert
+const FormWSClosed = {
+    'pt-br': "A Conexão do WebSocket está Fechada",
+    'pt': "A Conexão do WebSocket está Fechada",
+    'en': "WebSocket Connection Is Closed."
+};
+
+// ESP-8266 Alert
+const FormAlrt = {
+    'pt-br': {
+        title: "Atenção",
+        text: "Informe o endereço IP da placa ESP-8266 no bloco apropriado",
+        icon: "info",
+    },
+    'pt': {
+        title: "Atenção",
+        text: "Informe o endereço IP da placa ESP-8266 no bloco apropriado",
+        icon: "info",
+    },
+    'en': {
+        title: "Reminder",
+        text: "Enter the IP Address of the ESP-8266 Into The IP Address Block",
+        icon: "info",
+    }
+};
+
+
 class Scratch3ArduinoOneGPIO {
     constructor(runtime) {
+        the_locale = this._setLocale();
         this.runtime = runtime;
     }
 
     getInfo() {
+        the_locale = this._setLocale();
+
         return {
             id: 'onegpioArduino',
             color1: '#0C5986',
@@ -81,7 +177,9 @@ class Scratch3ArduinoOneGPIO {
                 {
                     opcode: 'digital_write',
                     blockType: BlockType.COMMAND,
-                    text: 'Write Digital Pin [PIN] [ON_OFF]',
+                    //text: 'Write Digital Pin [PIN] [ON_OFF]',
+                    text: FormDigitalWrite[the_locale],
+
                     arguments: {
                         PIN: {
                             type: ArgumentType.NUMBER,
@@ -98,7 +196,7 @@ class Scratch3ArduinoOneGPIO {
                 {
                     opcode: 'pwm_write',
                     blockType: BlockType.COMMAND,
-                    text: 'Write PWM Pin [PIN] [VALUE]%',
+                    text: FormPwmWrite[the_locale],
                     arguments: {
                         PIN: {
                             type: ArgumentType.NUMBER,
@@ -115,7 +213,7 @@ class Scratch3ArduinoOneGPIO {
                 {
                     opcode: 'tone_on',
                     blockType: BlockType.COMMAND,
-                    text: 'Tone Pin [PIN] [FREQ] Hz [DURATION] ms',
+                    text: FormTone[the_locale],
                     arguments: {
                         PIN: {
                             type: ArgumentType.NUMBER,
@@ -137,7 +235,7 @@ class Scratch3ArduinoOneGPIO {
                 {
                     opcode: 'servo',
                     blockType: BlockType.COMMAND,
-                    text: 'Write Servo Pin [PIN] [ANGLE] Deg.',
+                    text: FormServo[the_locale],
                     arguments: {
                         PIN: {
                             type: ArgumentType.NUMBER,
@@ -155,7 +253,7 @@ class Scratch3ArduinoOneGPIO {
                 {
                     opcode: 'analog_read',
                     blockType: BlockType.REPORTER,
-                    text: 'Read Analog Pin [PIN]',
+                    text: FormAnalogRead[the_locale],
                     arguments: {
                         PIN: {
                             type: ArgumentType.NUMBER,
@@ -168,7 +266,7 @@ class Scratch3ArduinoOneGPIO {
                 {
                     opcode: 'digital_read',
                     blockType: BlockType.REPORTER,
-                    text: 'Read Digital Pin [PIN]',
+                    text: FormDigitalRead[the_locale],
                     arguments: {
                         PIN: {
                             type: ArgumentType.NUMBER,
@@ -181,8 +279,9 @@ class Scratch3ArduinoOneGPIO {
                 {
                     opcode: 'sonar_read',
                     blockType: BlockType.REPORTER,
-                    text: 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]',
-                    arguments: {
+                    text: FormSonarRead[the_locale],
+
+            arguments: {
                         TRIGGER_PIN: {
                             type: ArgumentType.NUMBER,
                             defaultValue: '7',
@@ -447,6 +546,22 @@ class Scratch3ArduinoOneGPIO {
 
     // end of block handlers
 
+    _setLocale () {
+        let now_locale = '';
+        switch (formatMessage.setup().locale){
+            case 'pt-br':
+                now_locale='pt-br';
+                break;
+            case 'en':
+                now_locale='en';
+                break;
+            default:
+                now_locale='en';
+                break;
+        }
+        return now_locale;
+    }
+
     // helpers
     connect() {
         if (connected) {
@@ -477,7 +592,7 @@ class Scratch3ArduinoOneGPIO {
         };
 
         window.socket.onclose = function () {
-            alert("WebSocket Connection Is Closed.");
+            alert(FormWSClosed[the_locale]);
             connected = false;
         };
 

@@ -335,18 +335,12 @@ export default [
         collaborator: "Mr. Y's Lab",
         iconURL: onegpioArduinoImage,
         insetIconURL: onegpioArduinoInsetIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Arduino GPIO Control"
-                description="Use Scratch to control Arduino GPIO pins."
-                id="gui.extension.onegpioArduino.description"
-            />
-        ),
+        description: 'OneGPIOArduino',
         featured: true,
         disabled: false,
         internetConnectionRequired: true,
         bluetoothRequired: false,
-        helpLink: 'https://scratch.mit.edu/wedo'
+        helpLink: 'https://mryslab.github.io/s3-extend/'
 
     }
 ,
@@ -356,18 +350,12 @@ export default [
         collaborator: "Mr. Y's Lab",
         iconURL: onegpioRpiImage,
         insetIconURL: onegpioRpiInsetIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="Raspberry Pi GPIO Control"
-                description="Use Scratch to control the Raspberry Pi GPIO pins."
-                id="gui.extension.onegpioRpi.description"
-            />
-        ),
+        description: 'OneGPIORpi',
         featured: true,
         disabled: false,
         internetConnectionRequired: true,
         bluetoothRequired: false,
-        helpLink: 'https://scratch.mit.edu/wedo'
+        helpLink: 'https://mryslab.github.io/s3-extend/'
 
     }
 ,
@@ -377,18 +365,12 @@ export default [
         collaborator: "Mr. Y's Lab",
         iconURL: onegpioEspImage,
         insetIconURL: onegpioEspInsetIconURL,
-        description: (
-            <FormattedMessage
-                defaultMessage="ESP-8266 GPIO Control"
-                description="Use Scratch to control an ESP-8266."
-                id="gui.extension.onegpioEsp.description"
-            />
-        ),
+        description: 'OneGPIOEsp',
         featured: true,
         disabled: false,
         internetConnectionRequired: true,
         bluetoothRequired: false,
-        helpLink: 'https://scratch.mit.edu/wedo'
+        helpLink: 'https://mryslab.github.io/s3-extend/'
 
     }
 ];

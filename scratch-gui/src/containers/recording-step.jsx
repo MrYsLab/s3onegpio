@@ -44,10 +44,10 @@ class RecordingStep extends React.Component {
         alert(this.props.intl.formatMessage(messages.alertMsg)); // eslint-disable-line no-alert
     }
     handleLevelUpdate (level) {
-        this.setState({
-            level: level,
-            levels: this.props.recording ? (this.state.levels || []).concat([level]) : this.state.levels
-        });
+        this.setState({level});
+        if (this.props.recording) {
+            this.setState({levels: (this.state.levels || []).concat([level])});
+        }
     }
     handleRecord () {
         this.audioRecorder.startRecording();
