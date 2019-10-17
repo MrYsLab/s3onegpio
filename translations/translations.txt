@@ -1,0 +1,85 @@
+// common
+
+const FormDigitalWrite = {
+    'pt-br': 'Definir Pino Digital[PIN]como[ON_OFF]',
+    'pt': 'Definir Pino Digital[PIN]como[ON_OFF]',
+    'en': 'Write Digital Pin [PIN] [ON_OFF]'
+};
+
+const FormPwmWrite = {
+    'pt-br': 'Definir Pino PWM[PIN]com[VALUE]%',
+    'pt': 'Definir Pino PWM[PIN]com[VALUE]%',
+    'en': 'Write PWM Pin [PIN] [VALUE]%',
+};
+
+const FormTone = {
+    'pt-br': 'Definir Buzzer no Pino[PIN]com[FREQ]Hz e[DURATION]ms',
+    'pt': 'Definir Buzzer no Pino[PIN]com[FREQ]Hz  e[DURATION]ms',
+    'en': 'Tone Pin [PIN] [FREQ] Hz [DURATION] ms',
+};
+
+const FormServo = {
+    'pt-br': 'Mover Servo Motor no[PIN]para[ANGLE]°',
+    'pt': 'Mover Servo Motor no[PIN]para[ANGLE]°',
+    'en': 'Write Servo Pin [PIN] [ANGLE] Deg.',
+};
+
+const FormAnalogRead = {
+    'pt-br': 'Ler Pino Analógico [PIN]',
+    'pt': 'Ler Pino Analógico [PIN]',
+    'en': 'Read Analog Pin [PIN]',
+};
+
+const FormDigitalRead = {
+    'pt-br': 'Ler Pino Digital [PIN]',
+    'pt': 'Ler Pino Digital [PIN]',
+    'en': 'Read Digital Pin [PIN]',
+};
+
+const FormSonarRead = {
+    'pt-br': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
+    'pt': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
+    'en': 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]'
+};
+
+// ESP-8266 specific
+
+const FormIPBlockE = {
+    'pt-br': 'Endereço IP da placa ESP-8266 [IP_ADDR]',
+    'pt': 'Endereço IP da placa ESP-8266 [IP_ADDR]',
+    'en': 'ESP-8266 IP Address [IP_ADDR]'
+};
+
+
+// Raspbery Pi Specific
+const FormIPBlockR = {
+    'pt-br': 'Endereço IP do RPi [IP_ADDR]',
+    'pt': 'Endereço IP do RPi [IP_ADDR]',
+    'en': 'Remote IP Address [IP_ADDR]'
+};
+
+// General Alert
+const FormWSClosed = {
+    'pt-br': "A Conexão do WebSocket está Fechada",
+    'pt': "A Conexão do WebSocket está Fechada",
+    'en': "WebSocket Connection Is Closed."
+};
+
+// ESP-8266 Alert
+const FormAlrt = {
+    'pt-br': {
+        title: "Atenção",
+        text: "Informe o endereço IP da placa ESP-8266 no bloco apropriado",
+        icon: "info",
+    },
+    'pt': {
+        title: "Atenção",
+        text: "Informe o endereço IP da placa ESP-8266 no bloco apropriado",
+        icon: "info",
+    },
+    'en': {
+        title: "Reminder",
+        text: "Enter the IP Address of the ESP-8266 Into The IP Address Block",
+        icon: "info",
+    }
+};

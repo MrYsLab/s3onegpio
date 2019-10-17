@@ -71,8 +71,6 @@ let the_locale = null;
 
 // common blocks
 
-// common blocks
-
 const FormDigitalWrite = {
     'pt-br': 'Definir Pino Digital[PIN]como[ON_OFF]',
     'pt': 'Definir Pino Digital[PIN]como[ON_OFF]',
