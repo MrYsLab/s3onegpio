@@ -68,6 +68,8 @@ let wait_open = [];
 
 let the_locale = null;
 
+let ws_ip_address = '127.0.0.1';
+
 // common blocks
 
 const FormDigitalWrite = {
@@ -323,6 +325,20 @@ class Scratch3RpiOneGPIO {
 
     // command blocks
 
+    ip_address(args) {
+        if (args['IP_ADDR']) {
+            ws_ip_address = args['IP_ADDR'];
+            if (!connected) {
+                if (!connection_pending) {
+                    this.connect();
+                    connection_pending = true;
+                }
+            }
+
+        }
+
+    }
+
     digital_write(args) {
         if (!connected) {
             if (!connection_pending) {
@@ -543,7 +559,10 @@ class Scratch3RpiOneGPIO {
             return;
         } else {
             connect_attempt = true;
-            window.socketr = new WebSocket("ws://127.0.0.1:9001");
+            let url = "ws://" + ws_ip_address + ":9001";
+            console.log(url);
+            //window.socketr = new WebSocket("ws://127.0.0.1:9001");
+            window.socketr = new WebSocket(url);
             msg = JSON.stringify({"id": "to_rpi_gateway"});
         }
 
