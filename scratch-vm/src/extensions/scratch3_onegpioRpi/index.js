@@ -70,48 +70,55 @@ let the_locale = null;
 
 let ws_ip_address = '127.0.0.1';
 
-// common blocks
+// common
 
 const FormDigitalWrite = {
     'pt-br': 'Definir Pino Digital[PIN]como[ON_OFF]',
     'pt': 'Definir Pino Digital[PIN]como[ON_OFF]',
-    'en': 'Write Digital Pin [PIN] [ON_OFF]'
+    'en': 'Write Digital Pin [PIN] [ON_OFF]',
+    'fr': 'Mettre la pin numérique[PIN]à[ON_OFF]'
 };
 
 const FormPwmWrite = {
     'pt-br': 'Definir Pino PWM[PIN]com[VALUE]%',
     'pt': 'Definir Pino PWM[PIN]com[VALUE]%',
     'en': 'Write PWM Pin [PIN] [VALUE]%',
+    'fr': 'Mettre la pin PWM[PIN]à[VALUE]%',
 };
 
 const FormTone = {
     'pt-br': 'Definir Buzzer no Pino[PIN]com[FREQ]Hz e[DURATION]ms',
     'pt': 'Definir Buzzer no Pino[PIN]com[FREQ]Hz  e[DURATION]ms',
     'en': 'Tone Pin [PIN] [FREQ] Hz [DURATION] ms',
+    'fr': 'Définir le buzzer sur la pin[PIN]à[FREQ]Hz pendant[DURATION] ms',
 };
 
 const FormServo = {
     'pt-br': 'Mover Servo Motor no[PIN]para[ANGLE]°',
     'pt': 'Mover Servo Motor no[PIN]para[ANGLE]°',
     'en': 'Write Servo Pin [PIN] [ANGLE] Deg.',
+    'fr': 'Mettre le servo[PIN]à[ANGLE] Deg.',
 };
 
 const FormAnalogRead = {
     'pt-br': 'Ler Pino Analógico [PIN]',
     'pt': 'Ler Pino Analógico [PIN]',
     'en': 'Read Analog Pin [PIN]',
+    'fr': 'Lecture analogique [PIN]',
 };
 
 const FormDigitalRead = {
     'pt-br': 'Ler Pino Digital [PIN]',
     'pt': 'Ler Pino Digital [PIN]',
     'en': 'Read Digital Pin [PIN]',
+    'fr': 'Lecture numérique [PIN]',
 };
 
 const FormSonarRead = {
     'pt-br': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
     'pt': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
-    'en': 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]'
+    'en': 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]',
+    'fr': 'Distance de lecture : Sonar T [TRIGGER_PIN] E [ECHO_PIN]'
 };
 
 // ESP-8266 specific
@@ -119,7 +126,8 @@ const FormSonarRead = {
 const FormIPBlockE = {
     'pt-br': 'Endereço IP da placa ESP-8266 [IP_ADDR]',
     'pt': 'Endereço IP da placa ESP-8266 [IP_ADDR]',
-    'en': 'ESP-8266 IP Address [IP_ADDR]'
+    'en': 'ESP-8266 IP Address [IP_ADDR]',
+    'fr': "Adresse IP de l'ESP-8266 [IP_ADDR]"
 };
 
 
@@ -127,14 +135,16 @@ const FormIPBlockE = {
 const FormIPBlockR = {
     'pt-br': 'Endereço IP do RPi [IP_ADDR]',
     'pt': 'Endereço IP do RPi [IP_ADDR]',
-    'en': 'Remote IP Address [IP_ADDR]'
+    'en': 'Remote IP Address [IP_ADDR]',
+    'fr': 'Adresse IP du RPi [IP_ADDR]'
 };
 
 // General Alert
 const FormWSClosed = {
     'pt-br': "A Conexão do WebSocket está Fechada",
     'pt': "A Conexão do WebSocket está Fechada",
-    'en': "WebSocket Connection Is Closed."
+    'en': "WebSocket Connection Is Closed.",
+    'fr': "La connexion WebSocket est fermée."
 };
 
 // ESP-8266 Alert
@@ -152,6 +162,11 @@ const FormAlrt = {
     'en': {
         title: "Reminder",
         text: "Enter the IP Address of the ESP-8266 Into The IP Address Block",
+        icon: "info",
+    },
+    'fr': {
+        title: "Attention",
+        text: "Entrez l'adresse IP de l'ESP-8266 dans le bloc approprié.",
         icon: "info",
     }
 };
@@ -538,10 +553,14 @@ class Scratch3RpiOneGPIO {
         let now_locale = '';
         switch (formatMessage.setup().locale){
             case 'pt-br':
+            case 'pt':
                 now_locale='pt-br';
                 break;
             case 'en':
                 now_locale='en';
+                break;
+            case 'fr':
+                now_locale='fr';
                 break;
             default:
                 now_locale='en';
