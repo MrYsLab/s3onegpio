@@ -60,7 +60,7 @@ const FormSonarRead = {
     'en': 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]',
     'fr': 'Distance de lecture : Sonar T [TRIGGER_PIN] E [ECHO_PIN]'
     'zh-tw': 'HCSR超音波感測器，Echo在腳位[ECHO_PIN]Trig在腳位[TRIGGER_PIN]',
-    'zh-cn': 'HCSR超音波感测器，Echo在脚位[ECHO_PIN] Trig在脚位[TRIGGER_PIN]',
+    'zh-cn': 'HCSR超音波感测器，Echo在脚位[ECHO_PIN]Trig在脚位[TRIGGER_PIN]',
 };
 
 // ESP-8266 specific
@@ -71,7 +71,7 @@ const FormIPBlockE = {
     'en': 'ESP-8266 IP Address [IP_ADDR]',
     'fr': "Adresse IP de l'ESP-8266 [IP_ADDR]",
     'zh-tw': 'ESP-8266 IP 位址[IP_ADDR]',
-    'zh-cn': 'ESP-8266 IP 位址[IP_ADDR]',
+    'zh-cn': 'ESP-8266 IP 地址[IP_ADDR]',
 };
 
 
@@ -82,7 +82,7 @@ const FormIPBlockR = {
     'en': 'Remote IP Address [IP_ADDR]',
     'fr': 'Adresse IP du RPi [IP_ADDR]',
     'zh-tw': '遠端 IP 位址[IP_ADDR]',
-    'zh-cn': '初期IP位址[IP_ADDR]',
+    'zh-cn': '远程 IP 地址[IP_ADDR]',
 };
 
 // General Alert
@@ -92,7 +92,7 @@ const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
     'fr': "La connexion WebSocket est fermée.",
     'zh-tw': "網路連線中斷",
-    'zh-cn': "网路连线中断",
+    'zh-cn': "网絡连线中断",
 };
 
 // ESP-8266 Alert
@@ -119,12 +119,12 @@ const FormAlrt = {
     },
     'zh-tw': {
         title: "提醒",
-        text: "請於IP位址積木中輸入ESP-8266的IP位址",
+        text: "請於 IP 位址積木中輸入 ESP-8266 的 IP 位址",
         icon: "資訊",
     },
     'zh-cn': {
         title: "提醒",
-        text: "请于IP位址积木中输入ESP-8266的IP位址",
+        text: "请于 IP 位址积木中输入 ESP-8266 的 IP 地址",
         icon: "资讯",
     },
 };
