@@ -369,7 +369,7 @@ class Scratch3EspOneGPIO {
                 },
                 on_off: {
                     acceptReporters: true,
-                    items: [{text: "0", value: 0}, {text: "1", value: 1}]
+                    items: ['0', '1']
                 }
             }
         };
