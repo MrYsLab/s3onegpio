@@ -1,7 +1,10 @@
 /*
 This is the Scratch 3 extension to remotely control an
 Arduino Uno, ESP-8666, or Raspberry Pi
+
+
  Copyright (c) 2019 Alan Yorinks All rights reserved.
+
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
  Version 3 as published by the Free Software Foundation; either
@@ -10,6 +13,7 @@ Arduino Uno, ESP-8666, or Raspberry Pi
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  General Public License for more details.
+
  You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
  along with this library; if not, write to the Free Software
  Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
@@ -19,19 +23,6 @@ Arduino Uno, ESP-8666, or Raspberry Pi
 const ArgumentType = require('../../extension-support/argument-type');
 const BlockType = require('../../extension-support/block-type');
 const formatMessage = require('format-message');
-
-
-// let connection_pending = false and connect_attempt set to false, this variable is needed to avoid several alert message in case of green flag is clicked
-let show_alert = true;	
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-	if ((new Date().getTime() - start) > milliseconds){
-	  break;
-	}
-  }
-}
 
 
 // The following are constants used within the extension
@@ -630,20 +621,17 @@ class Scratch3ArduinoOneGPIO {
     connect() {
         if (connected) {
             // ignore additional connection attempts
-			console.log('already conected')
             return;
         } else {
             connect_attempt = true;
             window.socket = new WebSocket("ws://127.0.0.1:9000");
             msg = JSON.stringify({"id": "to_arduino_gateway"});
-			console.log('Opened, first time - ' + 'connect_attempt = ' + connect_attempt)
         }
 
 
         // websocket event handlers
         window.socket.onopen = function () {
-			show_alert = true
-			
+
             digital_inputs.fill(0);
 
             analog_inputs.fill(0);
@@ -659,19 +647,8 @@ class Scratch3ArduinoOneGPIO {
         };
 
         window.socket.onclose = function () {
-			window.socket = null
-			if (show_alert) {
-				alert(FormWSClosed[the_locale]);
-				show_alert = false;
-			}
-			sleep(3000)	
-			
-            // alert(FormWSClosed[the_locale]);
+            alert(FormWSClosed[the_locale]);
             connected = false;
-			connection_pending = false; // <<--- Added Websocket will be recreated without browser refresh
-			connect_attempt = false;    // <<--- Added Websocket will be recreated without browser refresh
-			console.log('closed - ' + 'connected = ' + connected)
-			
         };
 
         // reporter messages from the board
@@ -680,6 +657,7 @@ class Scratch3ArduinoOneGPIO {
             let report_type = msg["report"];
             let pin = null;
             let value = null;
+
             // types - digital, analog, sonar
             if (report_type === 'digital_input') {
                 pin = msg['pin'];
@@ -696,8 +674,7 @@ class Scratch3ArduinoOneGPIO {
                 digital_inputs[sonar_report_pin] = value;
             }
         };
-    };
-
+    }
 
 
 }
