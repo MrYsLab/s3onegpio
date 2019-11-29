@@ -75,8 +75,6 @@ let show_alert = true
 //Try to setup first connection only to select the correct icon
 window.socket = new WebSocket("ws://127.0.0.1:9000");
 msg = JSON.stringify({"id": "to_arduino_gateway"});
-window.socket.send(msg);	
-
 
 //Variable to inform if this is the first connection
 let first_con = true
@@ -768,6 +766,7 @@ class Scratch3ArduinoOneGPIO {
 				show_alert = false;
 			}
 			
+			window.socket = null
             connected = false;
 			connection_pending = false; // <<--- Added Websocket will be recreated without browser refresh
 			connect_attempt = false; // <<--- Added Websocket will be recreated without browser refresh
@@ -814,7 +813,7 @@ class Scratch3ArduinoOneGPIO {
 				img.setAttribute("id", Icon_ID);
 				img.setAttribute("src", DisconnectedIcon);
 				hdrdiv.appendChild(img);
-				// If language is changes, icon the following fix to not place icon again
+				// If language change, icon will be placed at same place
 				if(initial) setInterval(() => this.addButton(false), 1000);
 			}else {
 				alert("S3oneGpio: Container was not found!! - check right place and change variable");
