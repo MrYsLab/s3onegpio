@@ -1,0 +1,65 @@
+// General Alert
+const FormWSClosed = {
+    'en': "WebSocket Connection Is Closed.",
+    'zh-tw': "網路連線中斷",
+    'zh-cn': "网絡连线中断",
+};
+
+const MENU_NON_BUTTON_SENSORS = {
+    'en': ["Slider", "Light", "Sound", "A", "B", "C", "D"],
+
+};
+
+const MENU_ALL_SENSORS = {
+
+    'en': ["Slider", "Light", "Sound", "Button", "A", "B", "C", "D"],
+
+};
+
+const MENU_COMPARISONS = {
+    'en': ['>', '<'],
+
+};
+
+const MENU_BUTTON_STATES = {
+    'en': ["pressed", "released"],
+};
+
+const FormBetween = {
+    'en': 'When [SENSOR] value is between [LOW] and [HIGH]',
+
+};
+
+const FormComparison = {
+    'en': 'When [SENSOR] [COMP] [VALUE].',
+
+};
+
+const FormButton = {
+    'en': 'When Button [STATE].',
+
+};
+
+const FormChanged = {
+    'en': 'Convert [SENSOR] value.',
+
+};
+
+const FormIsButtonPressed = {
+    'en': 'Is Button Pressed?',
+};
+
+const FormIsSensorComparison = {
+    'en': 'Is [SENSOR] [COMP] [VALUE] ?',
+
+};
+
+const FormCurrentSensorValue = {
+    'en': '[SENSOR] current value.',
+
+};
+
+const FormRangeConverter = {
+    'en': 'Convert [SENSOR] value to a range of [RANGE1] to [RANGE2]',
+
+};
