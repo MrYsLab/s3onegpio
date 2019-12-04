@@ -55,6 +55,9 @@ import onegpioRpiInsetIconURL from './onegpioRpi/onegpioRpi-small.png';
 import onegpioEspImage from './onegpioEsp/onegpioEsp.png';
 import onegpioEspInsetIconURL from './onegpioEsp/onegpioEsp-small.png';
 
+import onegpioPicoboardImage from './onegpioPicoboard/onegpioPicoboard.jpg';
+import onegpioPicoboardInsetIconURL from './onegpioPicoboard/onegpioPicoboard-small.png';
+
 
 export default [
     {
@@ -366,6 +369,22 @@ export default [
         iconURL: onegpioEspImage,
         insetIconURL: onegpioEspInsetIconURL,
         description: 'OneGPIOEsp',
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        helpLink: 'https://mryslab.github.io/s3-extend/'
+
+    }
+,
+
+    {
+        name: 'OneGpio Picoboard',
+        extensionId: 'onegpioPicoboard',
+        collaborator: "Mr. Y's Lab",
+        iconURL: onegpioPicoboardImage,
+        insetIconURL: onegpioPicoboardInsetIconURL,
+        description: 'OneGPIOPicoboard',
         featured: true,
         disabled: false,
         internetConnectionRequired: true,

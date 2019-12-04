@@ -27,7 +27,7 @@ const builtinExtensions = {
     onegpioArduino: () => require('../extensions/scratch3_onegpioArduino'),
     onegpioRpi: () => require('../extensions/scratch3_onegpioRpi'),
     onegpioEsp: () => require('../extensions/scratch3_onegpioEsp'),
-
+    onegpioPicoboard: () => require('../extensions/scratch3_onegpioPicoboard'),
 };
 
 /**
