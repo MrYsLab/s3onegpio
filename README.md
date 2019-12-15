@@ -6,6 +6,7 @@
 
 ## Read the [Installation And Usage Guide.](https://mryslab.github.io/s3-extend/)
 
+
 ## Arduino Blocks
 ![](./images/arduino_blocks.png)
 
@@ -14,3 +15,7 @@
 
 ## Raspberry Pi Blocks
 ![](./images/rpi_blocks.png)
+
+## Picoboard Blocks
+![](./images/pico_blocks.png)
+
