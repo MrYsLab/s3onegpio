@@ -88,24 +88,32 @@ const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
     'zh-tw': "硬體連線中斷",
     'zh-cn': "硬件联机中断",
+    'pt-br': "A Conexão do WebSocket está Fechada",
+    'pt': "A Conexão do WebSocket está Fechada",	
 };
 
 const MENU_NON_BUTTON_SENSORS = {
     'en': ["Slider", "Light", "Sound", "A", "B", "C", "D"],
     'zh-tw': ["滑桿", "光線", "聲音", "A", "B", "C", "D"],
     'zh-cn': ["滑杆", "光线", "声音", "A", "B", "C", "D"],
+    'pt-br': ["Controle deslizante", "Luz", "Som", "A", "B", "C", "D"],
+    'pt': ["Controle deslizante", "Luz", "Som", "A", "B", "C", "D"],	
 };
 
 const MENU_ALL_SENSORS = {
     'en': ["Slider", "Light", "Sound", "Button", "A", "B", "C", "D"],
     'zh-tw': ["滑桿", "光線", "聲音", "按鈕", "A", "B", "C", "D"],
     'zh-cn': ["滑杆", "光线", "声音", "按钮", "A", "B", "C", "D"],
+    'pt-br': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],
+    'pt': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],		
 };
 
 const MENU_COMPARISONS = {
     'en': ['>', '<'],
     'zh-tw': ['>', '<'],
     'zh-cn': ['>', '<'],
+    'pt-br': ['>', '<'],
+    'pt': ['>', '<'],   
 
 };
 
@@ -113,12 +121,16 @@ const MENU_BUTTON_STATES = {
     'en': ["pressed", "released"],
     'zh-tw': ["被按下", "被放開"],
     'zh-cn': ["被按下", "被放开"],
+    'pt-br': ["pressionado", "liberado"],
+    'pt': ["pressionado", "liberado"],	
 };
 
 const FormBetween = {
     'en': 'When [SENSOR] value is between [LOW] and [HIGH]',
     'zh-tw': '當 [SENSOR] 的偵測值介於 [LOW] 與 [HIGH] 之間',
     'zh-cn': '当 [SENSOR] 的侦测值介于 [LOW] 与 [HIGH] 之间',
+    'pt-br': 'Quando [SENSOR] value is between [LOW] and [HIGH]',
+    'pt': 'When [SENSOR] value is between [LOW] and [HIGH]',	
 };
 
 const FormComparison = {
