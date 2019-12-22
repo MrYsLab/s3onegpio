@@ -91,55 +91,72 @@ const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
     'zh-tw': "硬體連線中斷",
     'zh-cn': "硬件联机中断",
+    'pt-br': "A Conexão do WebSocket está Fechada",
+    'pt': "A Conexão do WebSocket está Fechada",		
 };
 
 const MENU_NON_BUTTON_SENSORS = {
     'en': ["Slider", "Light", "Sound", "A", "B", "C", "D"],
     'zh-tw': ["滑桿", "光線", "聲音", "A", "B", "C", "D"],
     'zh-cn': ["滑杆", "光线", "声音", "A", "B", "C", "D"],
+    'pt-br': ["Controle deslizante", "Luz", "Som", "A", "B", "C", "D"],
+    'pt': ["Controle deslizante", "Luz", "Som", "A", "B", "C", "D"],
 };
 
 const MENU_ALL_SENSORS = {
     'en': ["Slider", "Light", "Sound", "Button", "A", "B", "C", "D"],
     'zh-tw': ["滑桿", "光線", "聲音", "按鈕", "A", "B", "C", "D"],
     'zh-cn': ["滑杆", "光线", "声音", "按钮", "A", "B", "C", "D"],
+    'pt-br': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],
+    'pt': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],	
 };
 
 const MENU_COMPARISONS = {
     'en': ['>', '<'],
     'zh-tw': ['>', '<'],
     'zh-cn': ['>', '<'],
-
+    'pt-br': ['>', '<'],	
+    'pt': ['>', '<'],	
 };
 
 const MENU_BUTTON_STATES = {
     'en': ["pressed", "released"],
     'zh-tw': ["被按下", "被放開"],
     'zh-cn': ["被按下", "被放开"],
+    'pt-br': ["pressionado", "liberado"],
+    'pt': ["pressionado", "liberado"],	
 };
 
 const FormBetween = {
     'en': 'When [SENSOR] value is between [LOW] and [HIGH]',
     'zh-tw': '當 [SENSOR] 的偵測值介於 [LOW] 與 [HIGH] 之間',
     'zh-cn': '当 [SENSOR] 的侦测值介于 [LOW] 与 [HIGH] 之间',
+    'pt-br': 'Quando [SENSOR] estiver entre [LOW] e [HIGH]',
+    'pt': 'Quando [SENSOR] estiver entre [LOW] e [HIGH]',
 };
 
 const FormComparison = {
     'en': 'When [SENSOR] [COMP] [VALUE].',
     'zh-tw': '當 [SENSOR] 的偵測值 [COMP] [VALUE]',
     'zh-cn': '当 [SENSOR] 的侦测值 [COMP] [VALUE]',
+    'pt-br': 'Quando [SENSOR] for [COMP] que [VALUE]',
+    'pt': 'Quando [SENSOR] for [COMP] que [VALUE]',	
 };
 
 const FormButton = {
     'en': 'When Button [STATE].',
     'zh-tw': '當按鈕 [STATE]',
     'zh-cn': '当按钮 [STATE]',
+    'pt-br': 'Quando o botão estiver [STATE].',
+    'pt': 'Quando o botão estiver [STATE].',	
 };
 
 const FormIsButtonPressed = {
     'en': 'Is Button Pressed?',
     'zh-tw': '按鈕被按下？',
     'zh-cn': '按钮被按下？',
+    'pt-br': 'O botão está pressionado?',
+    'pt': 'O botão está pressionado?',
 };
 
 
@@ -147,18 +164,24 @@ const FormIsSensorComparison = {
     'en': 'Is [SENSOR] [COMP] [VALUE] ?',
     'zh-tw': '[SENSOR] 的偵測值 [COMP] [VALUE] ？',
     'zh-cn': '[SENSOR] 的侦测值 [COMP] [VALUE] ？',
+    'pt-br': '[SENSOR] está [COMP] [VALUE] ?',	
+    'pt': '[SENSOR] está [COMP] [VALUE] ?',	
 };
 
 const FormCurrentSensorValue = {
     'en': '[SENSOR] current value.',
     'zh-tw': '[SENSOR] 的偵測值',
     'zh-cn': '[SENSOR] 的侦测值',
+    'pt': 'Ler valor atual: [SENSOR]',
+    'pt-br': 'Ler valor atual: [SENSOR]',
 };
 
 const FormRangeConverter = {
     'en': 'Convert [SENSOR] value to a range of [RANGE1] to [RANGE2]',
     'zh-tw': '轉換 [SENSOR] 的偵測值到 [RANGE1] 與 [RANGE2] 之間',
     'zh-cn': '转换 [SENSOR] 的侦测值到 [RANGE1] 与 [RANGE2] 之间',
+    'pt-br': 'Converte valor: [SENSOR] para que fique entre [RANGE1] e [RANGE2]',
+    'pt': 'Converte valor: [SENSOR] para que fique entre [RANGE1] e [RANGE2]',
 };
 
 
@@ -541,6 +564,12 @@ class Scratch3PicoboardOneGPIO {
             case 'en':
                 now_locale = 'en';
                 break;
+            case 'pt-br':
+                now_locale = 'pt-br';
+                break;
+            case 'pt':
+                now_locale = 'pt';
+                break;				
             default:
                 now_locale = 'en';
                 break;
