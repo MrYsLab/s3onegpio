@@ -44,6 +44,9 @@ require('sweetalert');
 // Modes are listed above - initialize to invalid mode of -1
 let pin_modes = new Array(30).fill(-1);
 
+// has an websocket message already been received
+let alerted = false;
+
 let connection_pending = false;
 
 // general outgoing websocket message holder
@@ -211,6 +214,7 @@ class Scratch3ArduinoOneGPIO {
 
     getInfo() {
         the_locale = this._setLocale();
+        this.connect();
 
         return {
             id: 'onegpioArduino',
@@ -639,7 +643,13 @@ class Scratch3ArduinoOneGPIO {
             connected = true;
             connect_attempt = true;
             // the message is built above
-            window.socket.send(msg);
+            try {
+                //ws.send(msg);
+                window.socket.send(msg);
+
+            } catch (err) {
+                // ignore this exception
+            }
             for (let index = 0; index < wait_open.length; index++) {
                 let data = wait_open[index];
                 data[0](data[1]);
@@ -647,7 +657,9 @@ class Scratch3ArduinoOneGPIO {
         };
 
         window.socket.onclose = function () {
-            alert(FormWSClosed[the_locale]);
+            if (alerted === false) {
+                alerted = true;
+                alert(FormWSClosed[the_locale]);}
             connected = false;
         };
 

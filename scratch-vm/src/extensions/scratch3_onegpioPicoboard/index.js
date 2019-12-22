@@ -83,6 +83,9 @@ let theNonButtonSensorMap =
     //
     {0: 7, 1: 5, 2: 6, 3: 4, 4: 2, 5: 1, 6: 0};
 
+// flag to indicate alert already generated
+let alerted = false;
+
 // General Alert
 const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
@@ -361,8 +364,6 @@ class Scratch3PicoboardOneGPIO {
             let value = lastDataSample[map_key];
             let low = parseInt(args['LOW'], 10);
             let high = parseInt(args['HIGH'], 10);
-            // console.log(value, low, high);
-
             return value >= low && value <= high;
         }
     }
@@ -389,7 +390,6 @@ class Scratch3PicoboardOneGPIO {
             let value = lastDataSample[map_key];
             let comp_type = args['COMP'];
             let comp_value = parseInt(args['VALUE'], 10);
-            // console.log(value, comp_type, comp_value);
             if (comp_type === '<') {
                 return value < comp_value;
             } else {
@@ -584,7 +584,9 @@ class Scratch3PicoboardOneGPIO {
         };
 
         window.socket.onclose = function () {
-            alert(FormWSClosed[the_locale]);
+            if (alerted === false) {
+                alerted = true;
+                alert(FormWSClosed[the_locale]);}
             connected = false;
         };
 

@@ -43,6 +43,9 @@ const ANALOG_INPUT = 7;
 // Modes are listed above - initialize to invalid mode of -1
 let pin_modes = new Array(30).fill(-1);
 
+// has an websocket message already been received
+let alerted = false;
+
 let connection_pending = false;
 
 // general outgoing websocket message holder
@@ -212,6 +215,7 @@ class Scratch3RpiOneGPIO {
 
     getInfo() {
         the_locale = this._setLocale();
+        this.connect();
 
         return {
             id: 'onegpioRpi',
@@ -634,7 +638,13 @@ class Scratch3RpiOneGPIO {
             connected = true;
             connect_attempt = true;
             // the message is built above
-            window.socketr.send(msg);
+            try {
+                //ws.send(msg);
+                window.socketr.send(msg);
+
+            } catch (err) {
+                // ignore this exception
+            }
             for (let index = 0; index < wait_open.length; index++) {
                 let data = wait_open[index];
                 data[0](data[1]);
@@ -642,7 +652,9 @@ class Scratch3RpiOneGPIO {
         };
 
         window.socketr.onclose = function () {
-            alert(FormWSClosed[the_locale]);
+            if (alerted === false) {
+                alerted = true;
+                alert(FormWSClosed[the_locale]);}
             connected = false;
         };
 
