@@ -584,6 +584,8 @@ class Scratch3PicoboardOneGPIO {
         };
 
         window.socket.onclose = function () {
+            digital_inputs.fill(0);
+            analog_inputs.fill(0);
             if (alerted === false) {
                 alerted = true;
                 alert(FormWSClosed[the_locale]);}

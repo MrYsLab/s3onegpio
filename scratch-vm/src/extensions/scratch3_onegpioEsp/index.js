@@ -681,6 +681,11 @@ class Scratch3EspOneGPIO {
         };
 
         window.sockete.onclose = function () {
+            digital_inputs.fill(1);
+            analog_inputs.fill(0);
+            sonar_report_pin = -1;
+            pin_modes.fill(-1);
+
             if (alerted === false) {
                 alerted = true;
                 alert(FormWSClosed[the_locale]);

@@ -657,6 +657,9 @@ class Scratch3ArduinoOneGPIO {
         };
 
         window.socket.onclose = function () {
+            digital_inputs.fill(0);
+            analog_inputs.fill(0);
+            pin_modes.fill(-1);
             if (alerted === false) {
                 alerted = true;
                 alert(FormWSClosed[the_locale]);}
