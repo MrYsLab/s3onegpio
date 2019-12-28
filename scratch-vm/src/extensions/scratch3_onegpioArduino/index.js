@@ -637,8 +637,8 @@ class Scratch3ArduinoOneGPIO {
         window.socket.onopen = function () {
 
             digital_inputs.fill(0);
-
             analog_inputs.fill(0);
+            pin_modes.fill(-1);
             // connection complete
             connected = true;
             connect_attempt = true;

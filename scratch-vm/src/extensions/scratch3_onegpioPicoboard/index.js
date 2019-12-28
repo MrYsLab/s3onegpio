@@ -92,7 +92,7 @@ const FormWSClosed = {
     'zh-tw': "硬體連線中斷",
     'zh-cn': "硬件联机中断",
     'pt-br': "A Conexão do WebSocket está Fechada",
-    'pt': "A Conexão do WebSocket está Fechada",		
+    'pt': "A Conexão do WebSocket está Fechada",
 };
 
 const MENU_NON_BUTTON_SENSORS = {
@@ -108,15 +108,15 @@ const MENU_ALL_SENSORS = {
     'zh-tw': ["滑桿", "光線", "聲音", "按鈕", "A", "B", "C", "D"],
     'zh-cn': ["滑杆", "光线", "声音", "按钮", "A", "B", "C", "D"],
     'pt-br': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],
-    'pt': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],	
+    'pt': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],
 };
 
 const MENU_COMPARISONS = {
     'en': ['>', '<'],
     'zh-tw': ['>', '<'],
     'zh-cn': ['>', '<'],
-    'pt-br': ['>', '<'],	
-    'pt': ['>', '<'],	
+    'pt-br': ['>', '<'],
+    'pt': ['>', '<'],
 };
 
 const MENU_BUTTON_STATES = {
@@ -124,7 +124,7 @@ const MENU_BUTTON_STATES = {
     'zh-tw': ["被按下", "被放開"],
     'zh-cn': ["被按下", "被放开"],
     'pt-br': ["pressionado", "liberado"],
-    'pt': ["pressionado", "liberado"],	
+    'pt': ["pressionado", "liberado"],
 };
 
 const FormBetween = {
@@ -140,7 +140,7 @@ const FormComparison = {
     'zh-tw': '當 [SENSOR] 的偵測值 [COMP] [VALUE]',
     'zh-cn': '当 [SENSOR] 的侦测值 [COMP] [VALUE]',
     'pt-br': 'Quando [SENSOR] for [COMP] que [VALUE]',
-    'pt': 'Quando [SENSOR] for [COMP] que [VALUE]',	
+    'pt': 'Quando [SENSOR] for [COMP] que [VALUE]',
 };
 
 const FormButton = {
@@ -148,7 +148,7 @@ const FormButton = {
     'zh-tw': '當按鈕 [STATE]',
     'zh-cn': '当按钮 [STATE]',
     'pt-br': 'Quando o botão estiver [STATE].',
-    'pt': 'Quando o botão estiver [STATE].',	
+    'pt': 'Quando o botão estiver [STATE].',
 };
 
 const FormIsButtonPressed = {
@@ -164,8 +164,8 @@ const FormIsSensorComparison = {
     'en': 'Is [SENSOR] [COMP] [VALUE] ?',
     'zh-tw': '[SENSOR] 的偵測值 [COMP] [VALUE] ？',
     'zh-cn': '[SENSOR] 的侦测值 [COMP] [VALUE] ？',
-    'pt-br': '[SENSOR] está [COMP] [VALUE] ?',	
-    'pt': '[SENSOR] está [COMP] [VALUE] ?',	
+    'pt-br': '[SENSOR] está [COMP] [VALUE] ?',
+    'pt': '[SENSOR] está [COMP] [VALUE] ?',
 };
 
 const FormCurrentSensorValue = {
@@ -569,7 +569,7 @@ class Scratch3PicoboardOneGPIO {
                 break;
             case 'pt':
                 now_locale = 'pt';
-                break;				
+                break;
             default:
                 now_locale = 'en';
                 break;
@@ -593,7 +593,7 @@ class Scratch3PicoboardOneGPIO {
         window.socket.onopen = function () {
 
             digital_inputs.fill(0);
-
+            pin_modes.fill(-1);
             analog_inputs.fill(0);
             // connection complete
             connected = true;

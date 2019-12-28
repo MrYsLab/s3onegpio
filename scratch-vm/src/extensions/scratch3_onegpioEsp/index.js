@@ -661,7 +661,7 @@ class Scratch3EspOneGPIO {
         window.sockete.onopen = function () {
 
             digital_inputs.fill(1);
-
+            pin_modes.fill(-1);
             analog_inputs.fill(0);
             // connection complete
             connected = true;
