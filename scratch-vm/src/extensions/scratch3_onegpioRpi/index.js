@@ -215,7 +215,7 @@ class Scratch3RpiOneGPIO {
 
     getInfo() {
         the_locale = this._setLocale();
-        this.connect();
+        //this.connect();
 
         return {
             id: 'onegpioRpi',
