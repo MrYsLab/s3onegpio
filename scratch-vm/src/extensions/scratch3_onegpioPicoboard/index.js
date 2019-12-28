@@ -36,10 +36,6 @@ let msg = null;
 // flag to indicate if the user connected to a board
 let connected = false;
 
-// arrays to hold input values
-let digital_inputs = new Array(32);
-let analog_inputs = new Array(8);
-
 // flag to indicate if a websocket connect was
 // ever attempted.
 let connect_attempt = false;
@@ -591,10 +587,6 @@ class Scratch3PicoboardOneGPIO {
 
         // websocket event handlers
         window.socket.onopen = function () {
-
-            digital_inputs.fill(0);
-
-            analog_inputs.fill(0);
             // connection complete
             connected = true;
             connect_attempt = true;
@@ -613,8 +605,6 @@ class Scratch3PicoboardOneGPIO {
         };
 
         window.socket.onclose = function () {
-            digital_inputs.fill(0);
-            analog_inputs.fill(0);
             if (alerted === false) {
                 alerted = true;
                 alert(FormWSClosed[the_locale]);}
