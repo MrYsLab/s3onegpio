@@ -632,7 +632,6 @@ class Scratch3RpiOneGPIO {
         window.socketr.onopen = function () {
 
             digital_inputs.fill(0);
-            pin_modes.fill(-1);
             analog_inputs.fill(0);
             // connection complete
             connected = true;
