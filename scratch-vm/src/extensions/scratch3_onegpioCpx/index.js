@@ -154,10 +154,6 @@ const COMMAND_TONE = {
 
 const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
-    'zh-tw': "硬體連線中斷",
-    'zh-cn': "硬件联机中断",
-    'pt-br': "A Conexão do WebSocket está Fechada",
-    'pt': "A Conexão do WebSocket está Fechada",
 };
 
 let data_store = {'a': false, 'b': false, 'light': 0, 'temperature': 0,
@@ -846,9 +842,6 @@ class Scratch3CpxOneGPIO {
     _setLocale () {
         let now_locale = '';
         switch (formatMessage.setup().locale){
-            case 'pt-br':
-                now_locale='pt-br';
-                break;
             case 'en':
                 now_locale='en';
                 break;

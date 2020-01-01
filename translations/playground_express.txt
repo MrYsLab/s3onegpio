@@ -1,0 +1,108 @@
+const MENU_LIGHT_TEMPERATURE = {
+    'en': ['light', 'temperature'],
+};
+
+const MENU_PUSH_BUTTONS = {
+    'en': ['A', 'B'],
+};
+
+const MENU_PUSH_BUTTON_STATE = {
+    'en': ['pressed', 'released'],
+};
+
+const MENU_SLIDE_SWITCH_POSITION = {
+    'en': ['left', 'right'],
+};
+
+const MENU_TOUCH_PAD_STATES = {
+    'en': ['touched', 'released'],
+};
+
+const MENU_TILT_POSITION = {
+    'en': ['flat', 'up', 'down', 'left', 'right'],
+};
+
+const MENU_BOARD_LED = {
+    'en': ['on', 'off']
+};
+
+// HAT BLOCK DESCRIPTORS
+
+const HAT_BUTTONS = {
+    'en': 'When [BUTTON] is [PRESSED_RELEASED]',
+};
+
+const HAT_SLIDE_SWITCH = {
+    'en': 'When slide switch is moved [LEFT_RIGHT]',
+};
+
+const HAT_LIGHT_TEMPERATURE = {
+    'en': 'When [SENSOR] is [COMPARISON] [VALUE]',
+};
+
+const HAT_TILTED = {
+    'en': 'When CPX position is [TILT_POSITION]',
+};
+
+const HAT_LOUD_SOUND = {
+    'en': 'When a loud sound is detected',
+};
+
+const HAT_TOUCHPAD = {
+    'en': 'When touchpad [TOUCHPAD] is [TOUCH_STATE]',
+};
+
+// boolean blocks
+
+const BOOL_AB_SWITCH = {
+    'en': '[BUTTON] [PRESSED_RELEASED]',
+};
+
+const BOOL_SLIDE_SWITCH = {
+    'en': 'slide switch on the [LEFT_RIGHT]',
+};
+
+const BOOL_LIGHT_TEMP = {
+    'en': '[SENSOR] is [COMPARISON] [VALUE]',
+};
+
+const BOOL_TILTED = {
+    'en': 'CPX position is [TILT_POSITION]',
+};
+
+const BOOL_TOUCH_PAD = {
+    'en': 'touchpad [TOUCHPAD] is [TOUCH_STATE]',
+};
+
+const REPORTER_AB_SWITCH = {
+    'en': 'Button[BUTTON] ',
+};
+
+const REPORTER_SLIDE_SWITCH = {
+    'en': 'Slide switch',
+};
+
+const REPORTER_LIGHT_TEMP = {
+    'en': '[SENSOR]',
+};
+
+const REPORTER_TILT = {
+    'en': 'CPX position is [TILT_POSITION]',
+};
+
+const REPORTER_TOUCHPAD = {
+    'en': 'touchpad [TOUCHPAD]'
+};
+
+// command blocks
+const COMMAND_SET_PIXEL = {
+    'en': 'Pixel [NEOPIXEL] R [RED] G [GREEN] B [BLUE]',
+};
+
+const COMMAND_TONE = {
+    'en': 'Tone[FREQ] Hz [DURATION] ms',
+};
+
+const FormWSClosed = {
+    'en': "WebSocket Connection Is Closed.",
+};
