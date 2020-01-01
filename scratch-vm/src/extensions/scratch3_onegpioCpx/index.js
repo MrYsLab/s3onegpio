@@ -123,24 +123,8 @@ const BOOL_TOUCH_PAD = {
     'en': 'touchpad [TOUCHPAD] is [TOUCH_STATE]',
 };
 
-const REPORTER_AB_SWITCH = {
-    'en': 'Button[BUTTON] ',
-};
-
-const REPORTER_SLIDE_SWITCH = {
-    'en': 'Slide switch',
-};
-
 const REPORTER_LIGHT_TEMP = {
     'en': '[SENSOR]',
-};
-
-const REPORTER_TILT = {
-    'en': 'CPX position is [TILT_POSITION]',
-};
-
-const REPORTER_TOUCHPAD = {
-    'en': 'touchpad [TOUCHPAD]'
 };
 
 // command blocks
@@ -160,10 +144,11 @@ const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
 };
 
-let data_store = {'a': false, 'b': false, 'light': 0, 'temperature': 0,
-                   'slide': 'right', 'tilted': 'flat',
-                    'touch1': false, 'touch2': false, 'touch3': false, 'touch4': false,
-                    'touch5': false, 'touch6': false, 'touch7': false
+let data_store = {
+    'a': false, 'b': false, 'light': 0, 'temperature': 0,
+    'slide': 'right', 'tilted': 'flat',
+    'touch1': 1, 'touch2': 0, 'touch3': 0, 'touch4': 0,
+    'touch5': 0, 'touch6': 0, 'touch7': 0
 };
 
 class Scratch3CpxOneGPIO {
@@ -185,19 +170,19 @@ class Scratch3CpxOneGPIO {
             blockIconURI: 'data:image/png;base64,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',
             blocks: [
                 {
-                opcode: 'hat_button_pressed',
-                blockType: BlockType.HAT,
-                text: HAT_BUTTONS[the_locale],
-                arguments: {
-                BUTTON: {
-                    type: ArgumentType.STRING,
-                        defaultValue: MENU_PUSH_BUTTONS[the_locale][0],
-                        menu: 'pushButtons'
-                },
-                PRESSED_RELEASED: {
-                    type: ArgumentType.STRING,
-                        defaultValue: MENU_PUSH_BUTTON_STATE[the_locale][0],
-                        menu: 'pushButtonStates'
+                    opcode: 'hat_button_pressed',
+                    blockType: BlockType.HAT,
+                    text: HAT_BUTTONS[the_locale],
+                    arguments: {
+                        BUTTON: {
+                            type: ArgumentType.STRING,
+                            defaultValue: MENU_PUSH_BUTTONS[the_locale][0],
+                            menu: 'pushButtons'
+                        },
+                        PRESSED_RELEASED: {
+                            type: ArgumentType.STRING,
+                            defaultValue: MENU_PUSH_BUTTON_STATE[the_locale][0],
+                            menu: 'pushButtonStates'
                         },
                     }
                 },
@@ -349,25 +334,9 @@ class Scratch3CpxOneGPIO {
                     }
                 },
                 '---',
+
                 {
-                    opcode: 'reporter_ab_switch',
-                    blockType: BlockType.REPORTER,
-                    text: REPORTER_AB_SWITCH[the_locale],
-                    arguments: {
-                        BUTTON: {
-                            type: ArgumentType.STRING,
-                            defaultValue: MENU_PUSH_BUTTONS[the_locale][0],
-                            menu: 'pushButtons'
-                        }
-                    }
-                },
-                {
-                    opcode: 'reporter_slide_switch',
-                    blockType: BlockType.REPORTER,
-                    text: REPORTER_SLIDE_SWITCH[the_locale],
-                },
-                {
-                    opcode: 'reporter_light_switch',
+                    opcode: 'reporter_light_temp',
                     blockType: BlockType.REPORTER,
                     text: REPORTER_LIGHT_TEMP[the_locale],
                     arguments: {
@@ -378,38 +347,10 @@ class Scratch3CpxOneGPIO {
                         }
                     }
                 },
-                {
-                    opcode: 'reporter_tilt',
-                    blockType: BlockType.REPORTER,
-                    text: REPORTER_TILT[the_locale],
-                    arguments: {
-                        TILT_POSITION: {
-                            type: ArgumentType.STRING,
-                            defaultValue: MENU_TILT_POSITION[the_locale][0],
-                            menu: 'tiltPositions'
-                        }
-                    }
-                },
-                {
-                    opcode: 'report_touch_pad',
-                    blockType: BlockType.REPORTER,
-                    text: REPORTER_TOUCHPAD[the_locale],
-                    arguments: {
-                        TOUCHPAD: {
-                            type: ArgumentType.NUMBER,
-                            defaultValue: '1',
-                            menu: 'touchpads'
-                        },
-                        TOUCH_STATE: {
-                            type: ArgumentType.STRING,
-                            defaultValue: MENU_TOUCH_PAD_STATES[the_locale][0],
-                            menu: 'touchPadStates'
-                        },
-                    }
-                },
+
                 '---',
                 {
-                    opcode: 'pixel_write',
+                    opcode: 'command_pixel_write',
                     blockType: BlockType.COMMAND,
                     text: COMMAND_SET_PIXEL[the_locale],
 
@@ -458,7 +399,7 @@ class Scratch3CpxOneGPIO {
                     }
                 },
                 {
-                    opcode: 'command_board_led_',
+                    opcode: 'command_board_led',
                     blockType: BlockType.COMMAND,
                     text: COMMAND_BOARD_LED[the_locale],
 
@@ -698,8 +639,8 @@ class Scratch3CpxOneGPIO {
         }
     }
 
-    bool_touch_pad
-    (args) {
+    bool_touch_pad(args) {
+
         if (!connected) {
             if (!connection_pending) {
                 this.connect();
@@ -712,11 +653,48 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.bool_touchpad.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            let touchpad = parseInt(args['TOUCHPAD'], 10);
+            let value = false ;
+
+            console.log('pad', touchpad);
+            console.log('state', args['TOUCH_STATE']);
+            switch (touchpad) {
+                case 1:
+                    value =  data_store['touch1'];
+                    break;
+                case 2:
+                    value =  data_store['touch2'];
+                    break;
+                case 3:
+                    value =  data_store['touch3'];
+                    break;
+                case 4:
+                    value =  data_store['touch4'];
+                    break;
+                case 5:
+                    value =  data_store['touch5'];
+                    break;
+                case 6:
+                    value =  data_store['touch6'];
+                    break;
+                case 7:
+                    value =  data_store['touch7'];
+                    break;
+                default:
+                    console.log('bool_touch_pad unexpected pad value', touchpad)
+                    break;
+            }
+            if (args['TOUCH_STATE'] === this.getAllTouchPadStates()[0]){
+                return Boolean(value);
+            }
+            else{
+                return Boolean(value ^ 1);
+            }
         }
     }
 
-    reporter_ab_switch(args) {
+
+    reporter_light_temp(args) {
         if (!connected) {
             if (!connection_pending) {
                 this.connect();
@@ -726,81 +704,19 @@ class Scratch3CpxOneGPIO {
         }
 
         if (!connected) {
-            let callbackEntry = [this.reporter_ab_switch.bind(this), args];
+            let callbackEntry = [this.reporter_light_temp.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
-        }
-    }
-
-    reporter_slide_switch(args) {
-        if (!connected) {
-            if (!connection_pending) {
-                this.connect();
-                connection_pending = true;
+            // test for light
+            if (args['SENSOR'] === this.getAllLightTemperature()[0]) {
+                return data_store['light'];
+            } else {
+                return data_store['temperature']
             }
-
-        }
-
-        if (!connected) {
-            let callbackEntry = [this.reporter_slide_switch.bind(this), args];
-            wait_open.push(callbackEntry);
-        } else {
-            //To be completed
-        }
-    }
-    reporter_light_switch(args) {
-        if (!connected) {
-            if (!connection_pending) {
-                this.connect();
-                connection_pending = true;
-            }
-
-        }
-
-        if (!connected) {
-            let callbackEntry = [this.reporter_light_switch.bind(this), args];
-            wait_open.push(callbackEntry);
-        } else {
-            //To be completed
         }
     }
 
-    reporter_tilt(args) {
-        if (!connected) {
-            if (!connection_pending) {
-                this.connect();
-                connection_pending = true;
-            }
-
-        }
-
-        if (!connected) {
-            let callbackEntry = [this.reporter_tilt.bind(this), args];
-            wait_open.push(callbackEntry);
-        } else {
-            //To be completed
-        }
-    }
-
-    report_touchpad(args) {
-        if (!connected) {
-            if (!connection_pending) {
-                this.connect();
-                connection_pending = true;
-            }
-
-        }
-
-        if (!connected) {
-            let callbackEntry = [this.report_touchpad.bind(this), args];
-            wait_open.push(callbackEntry);
-        } else {
-            //To be completed
-        }
-    }
-
-    pixel_write(args) {
+    command_pixel_write(args) {
         if (!connected) {
             if (!connection_pending) {
                 this.connect();
@@ -830,6 +746,7 @@ class Scratch3CpxOneGPIO {
             window.socket.send(msg);
         }
     }
+
     command_tone(args) {
         if (!connected) {
             if (!connection_pending) {
@@ -871,10 +788,9 @@ class Scratch3CpxOneGPIO {
             wait_open.push(callbackEntry);
         } else {
             let state = args['LED_STATE'];
-            if(state === 'on') {
+            if (state === 'on') {
                 value = 1;
-            }
-            else{
+            } else {
                 value = 0;
             }
             msg = {"command": 'board_led', 'value': value};
@@ -886,14 +802,14 @@ class Scratch3CpxOneGPIO {
 
     // end of block handlers
 
-    _setLocale () {
+    _setLocale() {
         let now_locale = '';
-        switch (formatMessage.setup().locale){
+        switch (formatMessage.setup().locale) {
             case 'en':
-                now_locale='en';
+                now_locale = 'en';
                 break;
             default:
-                now_locale='en';
+                now_locale = 'en';
                 break;
         }
         return now_locale;
@@ -911,13 +827,8 @@ class Scratch3CpxOneGPIO {
         }
 
 
-
         // websocket event handlers
         window.socketx.onopen = function () {
-
-            digital_inputs.fill(0);
-
-            analog_inputs.fill(0);
             // connection complete
             connected = true;
             connect_attempt = true;
