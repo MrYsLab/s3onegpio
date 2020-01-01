@@ -103,6 +103,10 @@ const COMMAND_TONE = {
     'en': 'Tone[FREQ] Hz [DURATION] ms',
 };
 
+const COMMAND_BOARD_LED = {
+    'en': 'Board LED [LED_STATE]'
+};
+
 const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
 };

@@ -152,6 +152,10 @@ const COMMAND_TONE = {
     'en': 'Tone[FREQ] Hz [DURATION] ms',
 };
 
+const COMMAND_BOARD_LED = {
+    'en': 'Board LED [LED_STATE]'
+};
+
 const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
 };
@@ -430,7 +434,7 @@ class Scratch3CpxOneGPIO {
                     }
                 },
                 {
-                    opcode: 'tone_on',
+                    opcode: 'command_tone',
                     blockType: BlockType.COMMAND,
                     text: COMMAND_TONE[the_locale],
 
@@ -451,6 +455,19 @@ class Scratch3CpxOneGPIO {
                             type: ArgumentType.NUMBER,
                             defaultValue: '128',
                         },
+                    }
+                },
+                {
+                    opcode: 'command_board_led_',
+                    blockType: BlockType.COMMAND,
+                    text: COMMAND_BOARD_LED[the_locale],
+
+                    arguments: {
+                        LED_STATE: {
+                            type: ArgumentType.STRING,
+                            defaultValue: MENU_BOARD_LED[the_locale][0],
+                            menu: 'boardLedStates'
+                        }
                     }
                 },
 
@@ -796,10 +813,24 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.command_pixel_write.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            let pixel = args[NEOPIXEL];
+            pixel = parseInt(pixel, 10);
+
+            let red = args[RED];
+            red = parseInt(red, 10);
+
+            let green = args[GREEN];
+            green = parseInt(green, 10);
+
+            let blue = args[BLUE];
+            blue = parseInt(blue, 10);
+
+            msg = {"command": 'pixel', 'red': red, 'green': green, 'blue': blue};
+            msg = JSON.stringify(msg);
+            window.socket.send(msg);
         }
     }
-    tone_on(args) {
+    command_tone(args) {
         if (!connected) {
             if (!connection_pending) {
                 this.connect();
@@ -811,8 +842,6 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.tone_on.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            let pin = args['PIN'];
-            pin = parseInt(pin, 10);
             let freq = args['FREQ'];
             freq = parseInt(freq, 10);
             let duration = args['DURATION'];
@@ -822,20 +851,38 @@ class Scratch3CpxOneGPIO {
                 duration = 5000;
             }
 
-
-            if (pin_modes[pin] !== TONE) {
-                pin_modes[pin] = TONE;
-                msg = {"command": "set_mode_tone", "pin": pin};
-                msg = JSON.stringify(msg);
-                window.socket.send(msg);
-            }
-            msg = {"command": "play_tone", "pin": pin, 'freq': freq, 'duration': duration};
+            msg = {"command": 'play_tone', 'freq': freq, 'duration': duration};
             msg = JSON.stringify(msg);
             window.socket.send(msg);
 
         }
     }
 
+    command_board_led(args) {
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
+            }
+        }
+
+        if (!connected) {
+            let callbackEntry = [this.command_board_led.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let state = args['LED_STATE'];
+            if(state === 'on') {
+                value = 1;
+            }
+            else{
+                value = 0;
+            }
+            msg = {"command": 'board_led', 'value': value};
+            msg = JSON.stringify(msg);
+            window.socket.send(msg);
+
+        }
+    }
 
     // end of block handlers
 
@@ -900,25 +947,10 @@ class Scratch3CpxOneGPIO {
         // reporter messages from the board
         window.socketx.onmessage = function (message) {
             msg = JSON.parse(message.data);
-            let report_type = msg["report"];
-            let pin = null;
-            let value = null;
+            let report_type = msg[report];
 
-            // types - digital, analog, sonar
-            if (report_type === 'digital_input') {
-                pin = msg['pin'];
-                pin = parseInt(pin, 10);
-                value = msg['value'];
-                digital_inputs[pin] = value;
-            } else if (report_type === 'analog_input') {
-                pin = msg['pin'];
-                pin = parseInt(pin, 10);
-                value = msg['value'];
-                analog_inputs[pin] = value;
-            } else if (report_type === 'sonar_data') {
-                value = msg['value'];
-                digital_inputs[sonar_report_pin] = value;
-            }
+            // set the incoming value in the data store
+            data_store[report_type] = msg['value'];
         };
     }
 }
