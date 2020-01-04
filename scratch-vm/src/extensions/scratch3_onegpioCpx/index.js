@@ -68,7 +68,7 @@ const MENU_TOUCH_PAD_STATES = {
 };
 
 const MENU_TILT_POSITION = {
-    'en': ['flat', 'up', 'down', 'left', 'right'],
+    'en': ['flat', 'up', 'down', 'left', 'right',],
 };
 
 const MENU_BOARD_LED = {
@@ -145,9 +145,9 @@ const FormWSClosed = {
 };
 
 let data_store = {
-    'a': false, 'b': false, 'light': 0, 'temperature': 0,
-    'slide': 'right', 'tilted': 'flat',
-    'touch1': 1, 'touch2': 0, 'touch3': 0, 'touch4': 0,
+    'a': 0, 'b': 0, 'light': 0, 'temp': 0.0,
+    'slide': 'right', 'sound': 0, 'tilted': [0,0],
+    'touch1': 0, 'touch2': 0, 'touch3': 0, 'touch4': 0,
     'touch5': 0, 'touch6': 0, 'touch7': 0
 };
 
@@ -415,15 +415,7 @@ class Scratch3CpxOneGPIO {
 
             ],
             menus: {
-                neopixels: {
-                    items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
-                },
-                touchpads: {
-                    items: ['1', '2', '3', '4', '5', '6', '7',]
-                },
-                compare: {
-                    items: ['>', '<']
-                },
+
                 pushButtons: 'getAllPushButtons',
                 lightTemperature: 'getAllLightTemperature',
                 pushButtonStates: 'getAllPushButtonStates',
@@ -431,6 +423,17 @@ class Scratch3CpxOneGPIO {
                 touchPadStates: 'getAllTouchPadStates',
                 tiltPositions: 'getAllTiltPostions',
                 boardLedStates: 'getAllBoardLedStates',
+                neopixels:
+                    {
+                        items: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+
+                    },
+                touchpads: {
+                    items: ['1', '2', '3', '4', '5', '6', '7',]
+                },
+                compare: {
+                    items: ['>', '<']
+                },
             }
         };
     }
@@ -635,7 +638,32 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.bool_tilted.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            // get the current position
+            let current_position = data_store['tilted'];
+            let sensor_text = args['TILT_POSITION'];
+            // get its index in the list of menu items
+            let item_index = this.getAllTiltPostions().indexOf(sensor_text);
+            item_index = parseInt(item_index, 10);
+            // get index for the block position
+            // ['flat', 'up', 'down', 'left', 'right',],
+            if (item_index === 0) { // flat
+                return data_store['tilted'][0] === 0 &&
+                    data_store['tilted'][1] === 0;
+            }
+            else if (item_index === 1) { //up
+                return data_store['tilted'][0] === 1;
+            }
+            else if (item_index === 2) { //down
+                return data_store['tilted'][0] === 2;
+
+            }
+            else if (item_index === 3) { //left
+                return data_store['tilted'][1] === 3;
+            }
+            else if (item_index === 4) { //left
+                return data_store['tilted'][1] === 4;
+
+            }
         }
     }
 
@@ -654,40 +682,39 @@ class Scratch3CpxOneGPIO {
             wait_open.push(callbackEntry);
         } else {
             let touchpad = parseInt(args['TOUCHPAD'], 10);
-            let value = false ;
+            let value = false;
 
-            console.log('pad', touchpad);
-            console.log('state', args['TOUCH_STATE']);
+            // console.log('pad', touchpad);
+            // console.log('state', args['TOUCH_STATE']);
             switch (touchpad) {
                 case 1:
-                    value =  data_store['touch1'];
+                    value = data_store['touch1'];
                     break;
                 case 2:
-                    value =  data_store['touch2'];
+                    value = data_store['touch2'];
                     break;
                 case 3:
-                    value =  data_store['touch3'];
+                    value = data_store['touch3'];
                     break;
                 case 4:
-                    value =  data_store['touch4'];
+                    value = data_store['touch4'];
                     break;
                 case 5:
-                    value =  data_store['touch5'];
+                    value = data_store['touch5'];
                     break;
                 case 6:
-                    value =  data_store['touch6'];
+                    value = data_store['touch6'];
                     break;
                 case 7:
-                    value =  data_store['touch7'];
+                    value = data_store['touch7'];
                     break;
                 default:
-                    console.log('bool_touch_pad unexpected pad value', touchpad)
+                    console.log('bool_touch_pad unexpected pad value', touchpad);
                     break;
             }
-            if (args['TOUCH_STATE'] === this.getAllTouchPadStates()[0]){
+            if (args['TOUCH_STATE'] === this.getAllTouchPadStates()[0]) {
                 return Boolean(value);
-            }
-            else{
+            } else {
                 return Boolean(value ^ 1);
             }
         }
@@ -711,7 +738,7 @@ class Scratch3CpxOneGPIO {
             if (args['SENSOR'] === this.getAllLightTemperature()[0]) {
                 return data_store['light'];
             } else {
-                return data_store['temperature']
+                return data_store['temp']
             }
         }
     }
@@ -729,21 +756,21 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.command_pixel_write.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            let pixel = args[NEOPIXEL];
+            let pixel = args['NEOPIXEL'];
             pixel = parseInt(pixel, 10);
 
-            let red = args[RED];
+            let red = args['RED'];
             red = parseInt(red, 10);
 
-            let green = args[GREEN];
+            let green = args['GREEN'];
             green = parseInt(green, 10);
 
-            let blue = args[BLUE];
+            let blue = args['BLUE'];
             blue = parseInt(blue, 10);
 
-            msg = {"command": 'pixel', 'red': red, 'green': green, 'blue': blue};
+            msg = {"command": 'pixel', 'pixel': pixel, 'red': red, 'green': green, 'blue': blue};
             msg = JSON.stringify(msg);
-            window.socket.send(msg);
+            window.socketx.send(msg);
         }
     }
 
@@ -768,9 +795,9 @@ class Scratch3CpxOneGPIO {
                 duration = 5000;
             }
 
-            msg = {"command": 'play_tone', 'freq': freq, 'duration': duration};
+            msg = {"command": 'play_tone', 'pin': 99, 'freq': freq, 'duration': duration};
             msg = JSON.stringify(msg);
-            window.socket.send(msg);
+            window.socketx.send(msg);
 
         }
     }
@@ -793,9 +820,9 @@ class Scratch3CpxOneGPIO {
             } else {
                 value = 0;
             }
-            msg = {"command": 'board_led', 'value': value};
+            msg = {"command": 'digital_write', 'pin': 13, 'value': value};
             msg = JSON.stringify(msg);
-            window.socket.send(msg);
+            window.socketx.send(msg);
 
         }
     }
@@ -858,7 +885,7 @@ class Scratch3CpxOneGPIO {
         // reporter messages from the board
         window.socketx.onmessage = function (message) {
             msg = JSON.parse(message.data);
-            let report_type = msg[report];
+            let report_type = msg['report'];
 
             // set the incoming value in the data store
             data_store[report_type] = msg['value'];
