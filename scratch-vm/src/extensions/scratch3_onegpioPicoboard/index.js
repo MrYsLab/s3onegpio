@@ -36,10 +36,6 @@ let msg = null;
 // flag to indicate if the user connected to a board
 let connected = false;
 
-// arrays to hold input values
-let digital_inputs = new Array(32);
-let analog_inputs = new Array(8);
-
 // flag to indicate if a websocket connect was
 // ever attempted.
 let connect_attempt = false;
@@ -83,13 +79,16 @@ let theNonButtonSensorMap =
     //
     {0: 7, 1: 5, 2: 6, 3: 4, 4: 2, 5: 1, 6: 0};
 
+// flag to indicate alert already generated
+let alerted = false;
+
 // General Alert
 const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
     'zh-tw': "硬體連線中斷",
     'zh-cn': "硬件联机中断",
     'pt-br': "A Conexão do WebSocket está Fechada",
-    'pt': "A Conexão do WebSocket está Fechada",		
+    'pt': "A Conexão do WebSocket está Fechada",
 };
 
 const MENU_NON_BUTTON_SENSORS = {
@@ -105,15 +104,15 @@ const MENU_ALL_SENSORS = {
     'zh-tw': ["滑桿", "光線", "聲音", "按鈕", "A", "B", "C", "D"],
     'zh-cn': ["滑杆", "光线", "声音", "按钮", "A", "B", "C", "D"],
     'pt-br': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],
-    'pt': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],	
+    'pt': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],
 };
 
 const MENU_COMPARISONS = {
     'en': ['>', '<'],
     'zh-tw': ['>', '<'],
     'zh-cn': ['>', '<'],
-    'pt-br': ['>', '<'],	
-    'pt': ['>', '<'],	
+    'pt-br': ['>', '<'],
+    'pt': ['>', '<'],
 };
 
 const MENU_BUTTON_STATES = {
@@ -121,7 +120,7 @@ const MENU_BUTTON_STATES = {
     'zh-tw': ["被按下", "被放開"],
     'zh-cn': ["被按下", "被放开"],
     'pt-br': ["pressionado", "liberado"],
-    'pt': ["pressionado", "liberado"],	
+    'pt': ["pressionado", "liberado"],
 };
 
 const FormBetween = {
@@ -137,7 +136,7 @@ const FormComparison = {
     'zh-tw': '當 [SENSOR] 的偵測值 [COMP] [VALUE]',
     'zh-cn': '当 [SENSOR] 的侦测值 [COMP] [VALUE]',
     'pt-br': 'Quando [SENSOR] for [COMP] que [VALUE]',
-    'pt': 'Quando [SENSOR] for [COMP] que [VALUE]',	
+    'pt': 'Quando [SENSOR] for [COMP] que [VALUE]',
 };
 
 const FormButton = {
@@ -145,7 +144,7 @@ const FormButton = {
     'zh-tw': '當按鈕 [STATE]',
     'zh-cn': '当按钮 [STATE]',
     'pt-br': 'Quando o botão estiver [STATE].',
-    'pt': 'Quando o botão estiver [STATE].',	
+    'pt': 'Quando o botão estiver [STATE].',
 };
 
 const FormIsButtonPressed = {
@@ -161,8 +160,8 @@ const FormIsSensorComparison = {
     'en': 'Is [SENSOR] [COMP] [VALUE] ?',
     'zh-tw': '[SENSOR] 的偵測值 [COMP] [VALUE] ？',
     'zh-cn': '[SENSOR] 的侦测值 [COMP] [VALUE] ？',
-    'pt-br': '[SENSOR] está [COMP] [VALUE] ?',	
-    'pt': '[SENSOR] está [COMP] [VALUE] ?',	
+    'pt-br': '[SENSOR] está [COMP] [VALUE] ?',
+    'pt': '[SENSOR] está [COMP] [VALUE] ?',
 };
 
 const FormCurrentSensorValue = {
@@ -384,8 +383,6 @@ class Scratch3PicoboardOneGPIO {
             let value = lastDataSample[map_key];
             let low = parseInt(args['LOW'], 10);
             let high = parseInt(args['HIGH'], 10);
-            // console.log(value, low, high);
-
             return value >= low && value <= high;
         }
     }
@@ -412,7 +409,6 @@ class Scratch3PicoboardOneGPIO {
             let value = lastDataSample[map_key];
             let comp_type = args['COMP'];
             let comp_value = parseInt(args['VALUE'], 10);
-            // console.log(value, comp_type, comp_value);
             if (comp_type === '<') {
                 return value < comp_value;
             } else {
@@ -569,7 +565,7 @@ class Scratch3PicoboardOneGPIO {
                 break;
             case 'pt':
                 now_locale = 'pt';
-                break;				
+                break;
             default:
                 now_locale = 'en';
                 break;
@@ -591,10 +587,6 @@ class Scratch3PicoboardOneGPIO {
 
         // websocket event handlers
         window.socket.onopen = function () {
-
-            digital_inputs.fill(0);
-
-            analog_inputs.fill(0);
             // connection complete
             connected = true;
             connect_attempt = true;
@@ -613,7 +605,9 @@ class Scratch3PicoboardOneGPIO {
         };
 
         window.socket.onclose = function () {
-            alert(FormWSClosed[the_locale]);
+            if (alerted === false) {
+                alerted = true;
+                alert(FormWSClosed[the_locale]);}
             connected = false;
         };
 

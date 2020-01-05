@@ -44,6 +44,9 @@ const ANALOG_INPUT = 7;
 // Modes are listed above - initialize to invalid mode of -1
 let pin_modes = new Array(30).fill(-1);
 
+// has an websocket message already been received
+let alerted = false;
+
 let connection_pending = false;
 
 // general outgoing websocket message holder
@@ -210,6 +213,7 @@ class Scratch3EspOneGPIO {
 
     getInfo() {
         the_locale = this._setLocale();
+        this.connect();
         swal(FormAlrt[the_locale]);
 
         return {
@@ -657,13 +661,18 @@ class Scratch3EspOneGPIO {
         window.sockete.onopen = function () {
 
             digital_inputs.fill(1);
-
             analog_inputs.fill(0);
             // connection complete
             connected = true;
             connect_attempt = true;
             // the message is built above
-            window.sockete.send(msg);
+            try {
+                //ws.send(msg);
+                window.sockete.send(msg);
+
+            } catch (err) {
+                // ignore this exception
+            }
             for (let index = 0; index < wait_open.length; index++) {
                 let data = wait_open[index];
                 data[0](data[1]);
@@ -671,7 +680,15 @@ class Scratch3EspOneGPIO {
         };
 
         window.sockete.onclose = function () {
-            alert(FormWSClosed[the_locale]);
+            digital_inputs.fill(1);
+            analog_inputs.fill(0);
+            sonar_report_pin = -1;
+            pin_modes.fill(-1);
+
+            if (alerted === false) {
+                alerted = true;
+                alert(FormWSClosed[the_locale]);
+            }
             connected = false;
         };
 
