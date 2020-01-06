@@ -376,12 +376,12 @@ class Scratch3ArduinoOneGPIO {
     // command blocks
 
     digital_write(args) {
+		
         if (!connected) {
             if (!connection_pending) {
                 this.connect();
                 connection_pending = true;
             }
-
         }
 
         if (!connected) {
@@ -635,7 +635,7 @@ class Scratch3ArduinoOneGPIO {
 
         // websocket event handlers
         window.socket.onopen = function () {
-
+			alerted = false; //--> this will set a new alert in case a new connection is established.
             digital_inputs.fill(0);
             analog_inputs.fill(0);
             pin_modes.fill(-1);
@@ -664,6 +664,9 @@ class Scratch3ArduinoOneGPIO {
                 alerted = true;
                 alert(FormWSClosed[the_locale]);}
             connected = false;
+			window.socket = null //--> close completely the current windows socket. A new one will be opened in case of new connection is detected
+			connection_pending = false; //--> let system ready to trigger a new connection in case of a new connection is detected
+			
         };
 
         // reporter messages from the board
