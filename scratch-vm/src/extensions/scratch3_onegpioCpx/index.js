@@ -72,7 +72,7 @@ const MENU_TILT_POSITION = {
 };
 
 const MENU_BOARD_LED = {
-    'en': ['on', 'off']
+    'en': ['on', 'off'],
 };
 
 // HAT BLOCK DESCRIPTORS
@@ -83,10 +83,6 @@ const HAT_BUTTONS = {
 
 const HAT_SLIDE_SWITCH = {
     'en': 'When slide switch is moved [LEFT_RIGHT]',
-};
-
-const HAT_LIGHT_TEMPERATURE = {
-    'en': 'When [SENSOR] is [COMPARISON] [VALUE]',
 };
 
 const HAT_TILTED = {
@@ -146,7 +142,7 @@ const FormWSClosed = {
 
 let data_store = {
     'a': 0, 'b': 0, 'light': 0, 'temp': 0.0,
-    'slide': 'right', 'sound': 0, 'tilted': [0,0],
+    'slide': '0', 'sound': 0, 'tilted': [0, 0],
     'touch1': 0, 'touch2': 0, 'touch3': 0, 'touch4': 0,
     'touch5': 0, 'touch6': 0, 'touch7': 0
 };
@@ -196,27 +192,6 @@ class Scratch3CpxOneGPIO {
                             defaultValue: MENU_SLIDE_SWITCH_POSITION[the_locale][0],
                             menu: 'slidePositions'
                         },
-                    }
-                },
-                {
-                    opcode: 'hat_light_temp_comparison',
-                    blockType: BlockType.HAT,
-                    text: HAT_LIGHT_TEMPERATURE[the_locale],
-                    arguments: {
-                        SENSOR: {
-                            type: ArgumentType.STRING,
-                            defaultValue: MENU_LIGHT_TEMPERATURE[the_locale][0],
-                            menu: 'lightTemperature'
-                        },
-                        COMPARISON: {
-                            type: ArgumentType.STRING,
-                            defaultValue: '>',
-                            menu: 'compare'
-                        },
-                        VALUE: {
-                            type: ArgumentType.NUMBER,
-                            defaultValue: 0,
-                        }
                     }
                 },
                 {
@@ -483,7 +458,25 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.hat_button_pressed.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            if (args['BUTTON'] === this.getAllPushButtons()[0]) {
+                if (args['PRESSED_RELEASED'] === this.getAllPushButtonStates()[0]) {
+                    return data_store['a'] === 1;
+                } else {
+                    if (args['PRESSED_RELEASED'] === this.getAllPushButtonStates()[1]) {
+                        return data_store['a'] === 0;
+                    }
+                }
+            }
+            // for button b
+            if (args['BUTTON'] === this.getAllPushButtons()[1]) {
+                if (args['PRESSED_RELEASED'] === this.getAllPushButtonStates()[0]) {
+                    return data_store['b'] === 1;
+                } else {
+                    if (args['PRESSED_RELEASED'] === this.getAllPushButtonStates()[1]) {
+                        return data_store['b'] === 0;
+                    }
+                }
+            }
         }
     }
 
@@ -500,24 +493,15 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.hat_slide_moved.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
-        }
-    }
+            let item_index = this.getAllSlidePositions().indexOf(args['LEFT_RIGHT']);
+            item_index = parseInt(item_index, 10);
 
-    hat_light_temp_comparison(args) {
-        if (!connected) {
-            if (!connection_pending) {
-                this.connect();
-                connection_pending = true;
+            // testing for pressed
+            if (item_index === 0) {
+                return data_store['slide'] === 1;
+            } else {
+                return data_store['slide'] === 0;
             }
-
-        }
-
-        if (!connected) {
-            let callbackEntry = [this.hat_light_temp_comparison.bind(this), args];
-            wait_open.push(callbackEntry);
-        } else {
-            //To be completed
         }
     }
 
@@ -527,14 +511,31 @@ class Scratch3CpxOneGPIO {
                 this.connect();
                 connection_pending = true;
             }
-
         }
-
         if (!connected) {
             let callbackEntry = [this.hat_tilted.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            let current_position = data_store['tilted'];
+            let sensor_text = args['TILT_POSITION'];
+            // get its index in the list of menu items
+            let item_index = this.getAllTiltPostions().indexOf(sensor_text);
+            item_index = parseInt(item_index, 10);
+            // get index for the block position
+            // ['flat', 'up', 'down', 'left', 'right',],
+            if (item_index === 0 && data_store['tilted'][0] === 0) { // flat
+                return true;
+            } else if (item_index === 1 && data_store['tilted'][0] === 1) { // up
+                return true;
+            } else if (item_index === 2 && data_store['tilted'][0] === 2) { // down
+                return true;
+            } else if (item_index === 3 && data_store['tilted'][1] === 3) { // down
+                return true;
+            } else if (item_index === 4 && data_store['tilted'][1] === 4) { // down
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -545,34 +546,67 @@ class Scratch3CpxOneGPIO {
                 this.connect();
                 connection_pending = true;
             }
-
         }
 
         if (!connected) {
             let callbackEntry = [this.hat_loud_sound.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            return data_store['sound'] > 540;
         }
     }
 
-    hat_touchpad
-    (args) {
+    hat_touchpad(args) {
         if (!connected) {
             if (!connection_pending) {
                 this.connect();
                 connection_pending = true;
             }
-
         }
 
         if (!connected) {
             let callbackEntry = [this.hat_touchpad.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            let touchpad = parseInt(args['TOUCHPAD'], 10);
+            let state = args['TOUCH_STATE'];
+            let index = this.getAllTouchPadStates().indexOf(state);
+            let current_state = 0;
+            switch (touchpad) {
+                case 1:
+                    current_state = data_store['touch1'];
+                    break;
+                case 2:
+                    current_state = data_store['touch2'];
+                    break;
+                case 3:
+                    current_state = data_store['touch3'];
+                    break;
+                case 4:
+                    current_state = data_store['touch4'];
+                    break;
+                case 5:
+                    current_state = data_store['touch5'];
+                    break;
+                case 6:
+                    current_state = data_store['touch6'];
+                    break;
+                case 7:
+                    current_state = data_store['touch7'];
+                    break;
+                default:
+                    break;
+            }
+            if (index === 0 && current_state) { //touched and touched selected
+                return true;
+            } else if (index === 1 && !current_state) { //released and released selected
+                return true;
+            } else {
+                return false;
+            }
         }
     }
+
 
     bool_button_pressed(args) {
         if (!connected) {
@@ -582,12 +616,30 @@ class Scratch3CpxOneGPIO {
             }
 
         }
-
         if (!connected) {
             let callbackEntry = [this.bool_button_pressed.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            // for button a
+            if (args['BUTTON'] === this.getAllPushButtons()[0]) {
+                if (args['PRESSED_RELEASED'] === this.getAllPushButtonStates()[0]) {
+                    return data_store['a'] === 1;
+                } else {
+                    if (args['PRESSED_RELEASED'] === this.getAllPushButtonStates()[1]) {
+                        return data_store['a'] === 0;
+                    }
+                }
+            }
+            // for button b
+            if (args['BUTTON'] === this.getAllPushButtons()[1]) {
+                if (args['PRESSED_RELEASED'] === this.getAllPushButtonStates()[0]) {
+                    return data_store['b'] === 1;
+                } else {
+                    if (args['PRESSED_RELEASED'] === this.getAllPushButtonStates()[1]) {
+                        return data_store['b'] === 0;
+                    }
+                }
+            }
         }
     }
 
@@ -604,9 +656,14 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.bool_slide_moved.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            let switch_position = args['LEFT_RIGHT'];
+            let item_index = this.getAllSlidePositions().indexOf(switch_position);
+            item_index = parseInt(item_index, 10);
+
+            return data_store['slide'] === this.getAllSlidePositions()[item_index];
         }
     }
+
 
     bool_light_temp_comparison(args) {
         if (!connected) {
@@ -621,7 +678,19 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.bool_light_temp_comparison.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
-            //To be completed
+            let current_value = 0;
+            let comp_type = args['COMPARISON'];
+            let comp_value = args['VALUE'];
+            if (args['SENSOR'] === this.getAllLightTemperature()[0]) {
+                current_value = data_store['light'];
+            } else {
+                current_value = data_store['temp']
+            }
+            if (comp_type === '>') {
+                return current_value > comp_value;
+            } else {
+                return current_value < comp_value;
+            }
         }
     }
 
@@ -649,18 +718,14 @@ class Scratch3CpxOneGPIO {
             if (item_index === 0) { // flat
                 return data_store['tilted'][0] === 0 &&
                     data_store['tilted'][1] === 0;
-            }
-            else if (item_index === 1) { //up
+            } else if (item_index === 1) { //up
                 return data_store['tilted'][0] === 1;
-            }
-            else if (item_index === 2) { //down
+            } else if (item_index === 2) { //down
                 return data_store['tilted'][0] === 2;
 
-            }
-            else if (item_index === 3) { //left
+            } else if (item_index === 3) { //left
                 return data_store['tilted'][1] === 3;
-            }
-            else if (item_index === 4) { //left
+            } else if (item_index === 4) { //left
                 return data_store['tilted'][1] === 4;
 
             }
@@ -684,8 +749,6 @@ class Scratch3CpxOneGPIO {
             let touchpad = parseInt(args['TOUCHPAD'], 10);
             let value = false;
 
-            // console.log('pad', touchpad);
-            // console.log('state', args['TOUCH_STATE']);
             switch (touchpad) {
                 case 1:
                     value = data_store['touch1'];
@@ -814,8 +877,12 @@ class Scratch3CpxOneGPIO {
             let callbackEntry = [this.command_board_led.bind(this), args];
             wait_open.push(callbackEntry);
         } else {
+
             let state = args['LED_STATE'];
-            if (state === 'on') {
+            let item_index = this.getAllBoardLedStates().indexOf(state);
+            item_index = parseInt(item_index, 10);
+
+            if (item_index === 0) {
                 value = 1;
             } else {
                 value = 0;
