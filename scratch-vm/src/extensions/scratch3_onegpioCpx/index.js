@@ -142,7 +142,7 @@ const FormWSClosed = {
 
 let data_store = {
     'a': 0, 'b': 0, 'light': 0, 'temp': 0.0,
-    'slide': '0', 'sound': 0, 'tilted': [0, 0],
+    'slide': 1, 'sound': 0, 'tilted': [0, 0],
     'touch1': 0, 'touch2': 0, 'touch3': 0, 'touch4': 0,
     'touch5': 0, 'touch6': 0, 'touch7': 0
 };
@@ -243,18 +243,6 @@ class Scratch3CpxOneGPIO {
                             type: ArgumentType.STRING,
                             defaultValue: MENU_PUSH_BUTTON_STATE[the_locale][0],
                             menu: 'pushButtonStates'
-                        },
-                    }
-                },
-                {
-                    opcode: 'bool_slide_moved',
-                    blockType: BlockType.BOOLEAN,
-                    text: BOOL_SLIDE_SWITCH[the_locale],
-                    arguments: {
-                        LEFT_RIGHT: {
-                            type: ArgumentType.STRING,
-                            defaultValue: MENU_SLIDE_SWITCH_POSITION[the_locale][0],
-                            menu: 'slidePositions'
                         },
                     }
                 },
@@ -642,28 +630,6 @@ class Scratch3CpxOneGPIO {
             }
         }
     }
-
-    bool_slide_moved(args) {
-        if (!connected) {
-            if (!connection_pending) {
-                this.connect();
-                connection_pending = true;
-            }
-
-        }
-
-        if (!connected) {
-            let callbackEntry = [this.bool_slide_moved.bind(this), args];
-            wait_open.push(callbackEntry);
-        } else {
-            let switch_position = args['LEFT_RIGHT'];
-            let item_index = this.getAllSlidePositions().indexOf(switch_position);
-            item_index = parseInt(item_index, 10);
-
-            return data_store['slide'] === this.getAllSlidePositions()[item_index];
-        }
-    }
-
 
     bool_light_temp_comparison(args) {
         if (!connected) {
