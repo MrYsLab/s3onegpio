@@ -169,7 +169,7 @@ const BOOL_SLIDE_SWITCH = {
     'zh-tw': '開關朝向 [LEFT_RIGHT]',
     'zh-cn': '开关朝向 [LEFT_RIGHT]',
     'pt': 'slide switch on the [LEFT_RIGHT]',    
-    'pt-br': 'slide switch on the [LEFT_RIGHT]',    
+    'pt-br': 'slide switch on the [LEFT_RIGHT] ',    
 };
 
 const BOOL_LIGHT_TEMP = {
