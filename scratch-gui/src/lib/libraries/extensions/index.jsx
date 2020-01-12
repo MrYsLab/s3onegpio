@@ -58,6 +58,10 @@ import onegpioEspInsetIconURL from './onegpioEsp/onegpioEsp-small.png';
 import onegpioPicoboardImage from './onegpioPicoboard/onegpioPicoboard.jpg';
 import onegpioPicoboardInsetIconURL from './onegpioPicoboard/onegpioPicoboard-small.png';
 
+import onegpioCpxImage from './onegpioCpx/onegpioCpx.jpg';
+import onegpioCpxInsetIconURL from './onegpioCpx/onegpioCpx-small.png';
+
+
 
 export default [
     {
@@ -385,6 +389,21 @@ export default [
         iconURL: onegpioPicoboardImage,
         insetIconURL: onegpioPicoboardInsetIconURL,
         description: 'OneGPIOPicoboard',
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        helpLink: 'https://mryslab.github.io/s3-extend/'
+
+    }
+,
+    {
+        name: 'OneGpio Playground Express',
+        extensionId: 'onegpioCpx',
+        collaborator: "Mr. Y's Lab",
+        iconURL: onegpioCpxImage,
+        insetIconURL: onegpioCpxInsetIconURL,
+        description: 'OneGPIOCpx',
         featured: true,
         disabled: false,
         internetConnectionRequired: true,

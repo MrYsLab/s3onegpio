@@ -1,0 +1,169 @@
+const MENU_LIGHT_TEMPERATURE = {
+    'en': ['light', 'temperature'],
+    'zh-tw':['光線', '溫度'],
+    'zh-cn':['光线', '温度'],
+};
+
+const MENU_PUSH_BUTTONS = {
+    'en': ['A', 'B'],
+    'zh-tw': ['A', 'B'],
+    'zh-cn': ['A', 'B'],
+};
+
+const MENU_PUSH_BUTTON_STATE = {
+    'en': ['pressed', 'released'],
+    'zh-tw': ['被按下', '被放開'],
+    'zh-cn': ['被按下', '被放开'],
+};
+
+const MENU_SLIDE_SWITCH_POSITION = {
+    'en': ['left', 'right'],
+    'zh-tw': ['左', '右'],
+    'zh-cn': ['左', '右'],
+
+};
+
+const MENU_TOUCH_PAD_STATES = {
+    'en': ['touched', 'released'],
+    'zh-tw': ['被按壓', '被放開'],
+    'zh-cn': ['被按压', '被放开'],
+};
+
+const MENU_TILT_POSITION = {
+    'en': ['flat', 'up', 'down', 'left', 'right'],
+    'zh-tw': ['放平', '朝上', '朝下', '朝左', '朝右'],
+    'zh-cn': ['放平', '朝上', '朝下', '朝左', '朝右'],
+
+};
+
+const MENU_BOARD_LED = {
+    'en': ['on', 'off'],
+    'zh-tw': ['亮', '暗'],
+    'zh-cn': ['亮', '暗'],
+};
+
+// HAT BLOCK DESCRIPTORS
+
+const HAT_BUTTONS = {
+    'en': 'When [BUTTON] is [PRESSED_RELEASED]',
+    'zh-tw': '當 [BUTTON] [PRESSED_RELEASED]',
+    'zh-cn': '当 [BUTTON] [PRESSED_RELEASED]',
+};
+
+
+const HAT_SLIDE_SWITCH = {
+    'en': 'When slide switch is moved [LEFT_RIGHT]',
+    'zh-tw': '當開關朝向 [LEFT_RIGHT]',
+    'zh-cn': '当开关朝向 [LEFT_RIGHT]',
+};
+
+const HAT_LIGHT_TEMPERATURE = {
+    'en': 'When [SENSOR] [COMPARISON] [VALUE]',
+    'zh-tw': '當 [SENSOR] [COMPARISON] [VALUE]',
+    'zh-cn': '当 [SENSOR] [COMPARISON] [VALUE]',
+};
+
+const HAT_TILTED = {
+    'en': 'When CPX position is [TILT_POSITION]',
+    'zh-tw': '當燈板 [TILT_POSITION]',
+    'zh-cn': '当灯板 [TILT_POSITION]',
+};
+
+const HAT_LOUD_SOUND = {
+    'en': 'When a loud sound is detected',
+    'zh-tw': '當偵測到聲音',
+    'zh-cn': '当侦测到声音',
+};
+
+const HAT_TOUCHPAD = {
+    'en': 'When touchpad [TOUCHPAD] is [TOUCH_STATE]',
+    'zh-tw': '當連接腳位 [TOUCHPAD] [TOUCH_STATE]',
+    'zh-cn': '当连接脚位 [TOUCHPAD] [TOUCH_STATE]',
+};
+
+// boolean blocks
+
+const BOOL_AB_SWITCH = {
+    'en': '[BUTTON] [PRESSED_RELEASED]',
+    'zh-tw': '[BUTTON] [PRESSED_RELEASED]',
+    'zh-cn': '[BUTTON] [PRESSED_RELEASED]',
+};
+
+const BOOL_SLIDE_SWITCH = {
+    'en': 'slide switch on the [LEFT_RIGHT]',
+    'zh-tw': '開關朝向 [LEFT_RIGHT]',
+    'zh-cn': '开关朝向 [LEFT_RIGHT]',
+};
+
+const BOOL_LIGHT_TEMP = {
+    'en': '[SENSOR] is [COMPARISON] [VALUE]',
+    'zh-tw': '[SENSOR] [COMPARISON] [VALUE]',
+    'zh-cn': '[SENSOR] [COMPARISON] [VALUE]',
+};
+
+const BOOL_TILTED = {
+    'en': 'CPX position is [TILT_POSITION]',
+    'zh-tw': '燈板 [TILT_POSITION]',
+    'zh-cn': '灯板 [TILT_POSITION]',
+};
+
+const BOOL_TOUCH_PAD = {
+    'en': 'touchpad [TOUCHPAD] is [TOUCH_STATE]',
+    'zh-tw': '連接腳位 [TOUCHPAD] [TOUCH_STATE]',
+    'zh-cn': '连接脚位 [TOUCHPAD] [TOUCH_STATE]',
+};
+
+const REPORTER_AB_SWITCH = {
+    'en': 'Button [BUTTON] ',
+    'zh-tw': '按鈕 [BUTTON] ',
+    'zh-cn': '按钮 [BUTTON] ',
+};
+
+const REPORTER_SLIDE_SWITCH = {
+    'en': 'Slide switch',
+    'zh-tw': '開關',
+    'zh-cn': '开关',
+};
+
+const REPORTER_LIGHT_TEMP = {
+    'en': '[SENSOR]',
+    'zh-tw': '[SENSOR]',
+    'zh-cn': '[SENSOR]',
+};
+
+const REPORTER_TILT = {
+    'en': 'CPX position is [TILT_POSITION]',
+    'zh-tw': '燈板 [TILT_POSITION]',
+    'zh-cn': '灯板 [TILT_POSITION]',
+};
+
+const REPORTER_TOUCHPAD = {
+    'en': 'touchpad [TOUCHPAD]',
+    'zh-tw': '連接腳位 [TOUCHPAD]',
+    'zh-cn': '连接脚位 [TOUCHPAD]',
+};
+
+// command blocks
+const COMMAND_SET_PIXEL = {
+    'en': 'Pixel [NEOPIXEL] R [RED] G [GREEN] B [BLUE]',
+    'zh-tw': '全彩LED [NEOPIXEL] 紅 [RED] 綠 [GREEN] 藍 [BLUE]',
+    'zh-cn': '全彩LED [NEOPIXEL] 红 [RED] 绿 [GREEN] 蓝 [BLUE]',
+};
+
+const COMMAND_TONE = {
+    'en': 'Tone [FREQ] Hz [DURATION] ms',
+    'zh-tw': '播放音調 [FREQ] 赫茲 [DURATION] 毫秒',
+    'zh-cn': '播放音调 [FREQ] 赫兹 [DURATION] 毫秒',
+};
+
+const COMMAND_BOARD_LED = {
+    'en': 'Board LED [LED_STATE]',
+    'zh-tw': 'D13 LED [LED_STATE]',
+    'zh-cn': 'D13 LED [LED_STATE]',
+};
+
+const FormWSClosed = {
+    'en': "WebSocket Connection Is Closed.",
+    'zh-tw': "硬體連線中斷",
+    'zh-cn': "硬件联机中断",
+};
