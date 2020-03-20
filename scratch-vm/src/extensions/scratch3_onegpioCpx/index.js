@@ -53,6 +53,7 @@ const MENU_LIGHT_TEMPERATURE = {
     'zh-cn':['光线', '温度'],
     'pt': ['luminosidade', 'temperatura'],
     'pt-br': ['luminosidade', 'temperatura'],
+    'fr': ['lumière', 'température'],
 };
 
 const MENU_PUSH_BUTTONS = {
@@ -61,6 +62,7 @@ const MENU_PUSH_BUTTONS = {
     'zh-cn': ['A', 'B'],
     'pt': ['A', 'B'],
     'pt-br': ['A', 'B'],
+    'fr': ['A', 'B'],
 };
 
 const MENU_PUSH_BUTTON_STATE = {
@@ -69,6 +71,7 @@ const MENU_PUSH_BUTTON_STATE = {
     'zh-cn': ['被按下', '被放开'],
     'pt': ['pressionado', 'liberado'],
     'pt-br': ['pressionado', 'liberado'],
+    'fr': ['appuyé', 'relaché'],
 };
 
 const MENU_SLIDE_SWITCH_POSITION = {
@@ -77,6 +80,8 @@ const MENU_SLIDE_SWITCH_POSITION = {
     'zh-cn': ['左', '右'],
     'pt': ['esquerda', 'direita'],
     'pt-br': ['esquerda', 'direita'],
+    'fr': ['gauche', 'droite'],
+
 };
 
 const MENU_TOUCH_PAD_STATES = {
@@ -85,6 +90,7 @@ const MENU_TOUCH_PAD_STATES = {
     'zh-cn': ['被按压', '被放开'],
     'pt': ['tocado', 'liberado'],
     'pt-br': ['tocado', 'liberado'],
+    'fr': ['touché', 'relaché'],
 };
 
 const MENU_TILT_POSITION = {
@@ -93,6 +99,7 @@ const MENU_TILT_POSITION = {
     'zh-cn': ['放平', '朝上', '朝下', '朝左', '朝右'],
     'pt': ['plana', 'para cima', 'para baixo', 'para direita', 'para esquerda'],
     'pt-br': ['plana', 'para cima', 'para baixo', 'para direita', 'para esquerda'],
+    'fr': ['horizontale', 'en haut', 'en bas', 'à gauche', 'à droite'],
 };
 
 const MENU_BOARD_LED = {
@@ -101,6 +108,7 @@ const MENU_BOARD_LED = {
     'zh-cn': ['亮', '暗'],
     'pt': ['ligado', 'desligado'],
     'pt-br': ['ligado', 'desligado'],
+    'fr': ['allumée', 'éteinte'],
 };
 
 // HAT BLOCK DESCRIPTORS
@@ -111,6 +119,7 @@ const HAT_BUTTONS = {
     'zh-cn': '当 [BUTTON] [PRESSED_RELEASED]',
     'pt': 'Quando o botão [BUTTON] estiver [PRESSED_RELEASED]',
     'pt-br': 'Quando o botão [BUTTON] estiver [PRESSED_RELEASED]',
+    'fr': 'si [BUTTON] est [PRESSED_RELEASED]',
 };
 
 
@@ -120,6 +129,7 @@ const HAT_SLIDE_SWITCH = {
     'zh-cn': '当开关朝向 [LEFT_RIGHT]',
     'pt': 'Quando o botão switch mover para [LEFT_RIGHT]',
     'pt-br': 'Quando o botão switch mover para [LEFT_RIGHT]',
+    'fr': "Si l'interrupteur à glissière est déplacé à [LEFT_RIGHT]",
 };
 
 const HAT_LIGHT_TEMPERATURE = {
@@ -128,6 +138,7 @@ const HAT_LIGHT_TEMPERATURE = {
     'zh-cn': '当 [SENSOR] [COMPARISON] [VALUE]',
     'pt': 'Quando [SENSOR] [COMPARISON] [VALUE]',
     'pt-br': 'Quando [SENSOR] [COMPARISON] [VALUE]',
+    'fr': 'si [SENSOR] [COMPARISON] [VALUE]',
 };
 
 const HAT_TILTED = {
@@ -136,6 +147,7 @@ const HAT_TILTED = {
     'zh-cn': '当灯板 [TILT_POSITION]',
     'pt': 'Quando a CPX estiver [TILT_POSITION]',
     'pt-br': 'Quando a CPX estiver na posição [TILT_POSITION]',
+    'fr': 'Si la carte CPX est [TILT_POSITION]',
 };
 
 const HAT_LOUD_SOUND = {
@@ -144,6 +156,7 @@ const HAT_LOUD_SOUND = {
     'zh-cn': '当侦测到声音',
     'pt': 'Quando um som alto for detectado',
     'pt-br': 'Quando um som alto for detectado',
+    'fr': 'Si un son fort est détecté',
 };
 
 const HAT_TOUCHPAD = {
@@ -152,6 +165,7 @@ const HAT_TOUCHPAD = {
     'zh-cn': '当连接脚位 [TOUCHPAD] [TOUCH_STATE]',
     'pt': 'Quando o touchpad [TOUCHPAD] for [TOUCH_STATE]',
     'pt-br': 'Quando o touchpad [TOUCHPAD] for [TOUCH_STATE]',
+    'fr': 'Si le touchpad [TOUCHPAD] est [TOUCH_STATE]',
 };
 
 // boolean blocks
@@ -162,6 +176,8 @@ const BOOL_AB_SWITCH = {
     'zh-cn': '[BUTTON] [PRESSED_RELEASED]',
     'pt': '[BUTTON] [PRESSED_RELEASED]',
     'pt-br': '[BUTTON] [PRESSED_RELEASED]',
+    'fr': '[BUTTON] [PRESSED_RELEASED]',
+
 };
 
 const BOOL_SLIDE_SWITCH = {
@@ -170,6 +186,7 @@ const BOOL_SLIDE_SWITCH = {
     'zh-cn': '开关朝向 [LEFT_RIGHT]',
     'pt': 'slide switch on the [LEFT_RIGHT]',
     'pt-br': 'slide switch on the [LEFT_RIGHT]',
+    'fr': 'interrupteur à glissière à [LEFT_RIGHT]',
 };
 
 const BOOL_LIGHT_TEMP = {
@@ -178,6 +195,7 @@ const BOOL_LIGHT_TEMP = {
     'zh-cn': '[SENSOR] [COMPARISON] [VALUE]',
     'pt': '[SENSOR] for [COMPARISON] [VALUE]',
     'pt-br': '[SENSOR] for [COMPARISON] [VALUE]',
+    'fr': '[SENSOR] est [COMPARISON] [VALUE]',
 };
 
 const BOOL_TILTED = {
@@ -186,6 +204,7 @@ const BOOL_TILTED = {
     'zh-cn': '灯板 [TILT_POSITION]',
     'pt': 'posição da CPX for [TILT_POSITION]',
     'pt-br': 'posição da CPX for [TILT_POSITION]',
+    'fr': 'La carte CPX est [TILT_POSITION]',
 };
 
 const BOOL_TOUCH_PAD = {
@@ -194,6 +213,7 @@ const BOOL_TOUCH_PAD = {
     'zh-cn': '连接脚位 [TOUCHPAD] [TOUCH_STATE]',
     'pt': 'touchpad [TOUCHPAD] for [TOUCH_STATE]',
     'pt-br': 'touchpad [TOUCHPAD] for [TOUCH_STATE]',
+    'fr': 'le touchpad [TOUCHPAD] est [TOUCH_STATE]',
 };
 
 const REPORTER_AB_SWITCH = {
@@ -202,6 +222,7 @@ const REPORTER_AB_SWITCH = {
     'zh-cn': '按钮 [BUTTON]',
     'pt': 'Botão [BUTTON]',
     'pt-br': 'Botão [BUTTON]',
+    'fr': 'Bouton [BUTTON]',
 };
 
 const REPORTER_SLIDE_SWITCH = {
@@ -210,6 +231,8 @@ const REPORTER_SLIDE_SWITCH = {
     'zh-cn': '开关',
     'pt': 'botão switch',
     'pt-br': 'botão switch',
+    'fr': 'Interrupteur à glissière',
+
 };
 
 const REPORTER_LIGHT_TEMP = {
@@ -218,6 +241,7 @@ const REPORTER_LIGHT_TEMP = {
     'zh-cn': '[SENSOR]',
     'pt': '[SENSOR]',
     'pt-br': '[SENSOR]',
+    'fr': '[SENSOR]',
 };
 
 const REPORTER_TILT = {
@@ -226,6 +250,7 @@ const REPORTER_TILT = {
     'zh-cn': '灯板 [TILT_POSITION]',
     'pt': 'posição da CPX [TILT_POSITION]',
     'pt-br': 'posição da CPX [TILT_POSITION]',
+    'fr': 'La carte CPX est [TILT_POSITION]',
 };
 
 const REPORTER_TOUCHPAD = {
@@ -234,6 +259,7 @@ const REPORTER_TOUCHPAD = {
     'zh-cn': '连接脚位 [TOUCHPAD]',
     'pt': 'touchpad [TOUCHPAD]',
     'pt-br': 'touchpad [TOUCHPAD]',
+    'fr': 'le touchpad [TOUCHPAD]',
 };
 
 // command blocks
@@ -243,6 +269,7 @@ const COMMAND_SET_PIXEL = {
     'zh-cn': '全彩LED [NEOPIXEL] 红 [RED] 绿 [GREEN] 蓝 [BLUE]',
     'pt': 'Pixel [NEOPIXEL] R [RED] G [GREEN] B [BLUE]',
     'pt-br': 'Pixel [NEOPIXEL] R [RED] G [GREEN] B [BLUE]',
+    'fr': 'Pixel [NEOPIXEL] R [RED] V [GREEN] B [BLUE]',
 };
 
 const COMMAND_TONE = {
@@ -251,7 +278,7 @@ const COMMAND_TONE = {
     'zh-cn': '播放音调 [FREQ] 赫兹 [DURATION] 毫秒',
     'pt': ' Criar com com [FREQ] Hz  e [DURATION] ms',
     'pt-br': ' Criar com com [FREQ] Hz  e [DURATION] ms',
-
+    'fr': 'Son [FREQ] Hz [DURATION] ms',
 };
 
 const COMMAND_BOARD_LED = {
@@ -260,6 +287,7 @@ const COMMAND_BOARD_LED = {
     'zh-cn': 'D13 LED [LED_STATE]',
     'pt': 'Definir Led da placa como [LED_STATE]',
     'pt-br': 'Definir Led da placa como [LED_STATE]',
+    'fr': 'LED D13 [LED_STATE]',
 };
 
 const FormWSClosed = {
@@ -268,6 +296,7 @@ const FormWSClosed = {
     'zh-cn': "硬件联机中断",
     'pt': "A Conexão do WebSocket está fechada.",
     'pt-br': "A Conexão do WebSocket está fechada.",
+    'fr': "La connexion au WebSocket est fermée.",
 };
 
 let data_store = {
@@ -1007,6 +1036,9 @@ class Scratch3CpxOneGPIO {
             case 'pt-br':
             case 'pt':
                 now_locale='pt-br';
+                break;
+            case 'fr':
+                now_locale='fr';
                 break;
             default:
                 now_locale = 'en';
