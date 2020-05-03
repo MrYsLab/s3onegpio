@@ -435,7 +435,7 @@ class Scratch3RpiOneGPIO {
         } else {
             let pin = args['PIN'];
             // maximum value for RPi and Arduino
-            let the_max = 1023;
+            let the_max = 255;
             pin = parseInt(pin, 10);
 
             let value = args['VALUE'];
