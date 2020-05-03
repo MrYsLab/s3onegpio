@@ -90,6 +90,7 @@ const FormWSClosed = {
     'pt-br': "A Conexão do WebSocket está Fechada",
     'pt': "A Conexão do WebSocket está Fechada",
     'fr': "Connexion WebSocket Fermée.",
+    'pl': "Połączenie WebSocket jest zamknięte.",
 };
 
 const MENU_NON_BUTTON_SENSORS = {
@@ -99,6 +100,7 @@ const MENU_NON_BUTTON_SENSORS = {
     'pt-br': ["Controle deslizante", "Luz", "Som", "A", "B", "C", "D"],
     'pt': ["Controle deslizante", "Luz", "Som", "A", "B", "C", "D"],
     'fr': ["Glissière", "Lumière", "Son", "A", "B", "C", "D"],
+    'pl': ["Suwak", "Światło", "Dźwięk", "A", "B", "C", "D"],
 };
 
 const MENU_ALL_SENSORS = {
@@ -108,6 +110,7 @@ const MENU_ALL_SENSORS = {
     'pt-br': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],
     'pt': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],
     'fr': ["Glissière", "Lumière", "Son", "Bouton", "A", "B", "C", "D"],
+    'pl': ["Suwak", "Światło", "Dźwięk", "Przycisk", "A", "B", "C", "D"],
 };
 
 const MENU_COMPARISONS = {
@@ -117,6 +120,7 @@ const MENU_COMPARISONS = {
     'pt-br': ['>', '<'],
     'pt': ['>', '<'],
     'fr': ['>', '<'],
+    'pl': ['>', '<'],
 };
 
 const MENU_BUTTON_STATES = {
@@ -126,6 +130,7 @@ const MENU_BUTTON_STATES = {
     'pt-br': ["pressionado", "liberado"],
     'pt': ["pressionado", "liberado"],
     'fr': ["appuyé", "relaché"],
+    'pl': ["wciśnięty", "zwolniony"],
 };
 
 const FormBetween = {
@@ -135,6 +140,7 @@ const FormBetween = {
     'pt-br': 'Quando [SENSOR] estiver entre [LOW] e [HIGH]',
     'pt': 'Quando [SENSOR] estiver entre [LOW] e [HIGH]',
     'fr': 'Si la valeur de [SENSOR] est entre [LOW] et [HIGH]',
+    'pl': 'Kiedy wartość [SENSOR] jest pomiędzy [LOW] i [HIGH]',
 };
 
 const FormComparison = {
@@ -144,6 +150,7 @@ const FormComparison = {
     'pt-br': 'Quando [SENSOR] for [COMP] que [VALUE]',
     'pt': 'Quando [SENSOR] for [COMP] que [VALUE]',
     'fr': 'si [SENSOR] [COMP] [VALUE].',
+    'pl': 'Kiedy [SENSOR] [COMP] [VALUE].',
 };
 
 const FormButton = {
@@ -153,6 +160,7 @@ const FormButton = {
     'pt-br': 'Quando o botão estiver [STATE].',
     'pt': 'Quando o botão estiver [STATE].',
     'fr': 'Si Bouton [STATE].',
+    'pl': 'Kiedy przycisk jest [STATE].',
 };
 
 const FormIsButtonPressed = {
@@ -162,9 +170,8 @@ const FormIsButtonPressed = {
     'pt-br': 'O botão está pressionado?',
     'pt': 'O botão está pressionado?',
     'fr': 'Bouton appuyé ?',
-
+    'pl': 'Czy przycisk jest wciśnięty?',
 };
-
 
 const FormIsSensorComparison = {
     'en': 'Is [SENSOR] [COMP] [VALUE] ?',
@@ -173,6 +180,7 @@ const FormIsSensorComparison = {
     'pt-br': '[SENSOR] está [COMP] [VALUE] ?',
     'pt': '[SENSOR] está [COMP] [VALUE] ?',
     'fr': 'Est-ce que [SENSOR] [COMP] [VALUE] ?',
+    'pl': 'Czy [SENSOR] [COMP] [VALUE] ?',
 };
 
 const FormCurrentSensorValue = {
@@ -182,6 +190,7 @@ const FormCurrentSensorValue = {
     'pt': 'Ler valor atual: [SENSOR]',
     'pt-br': 'Ler valor atual: [SENSOR]',
     'fr': 'valeur actuelle de [SENSOR].',
+    'pl': 'Aktualna wartość [SENSOR].',
 };
 
 const FormRangeConverter = {
@@ -191,8 +200,8 @@ const FormRangeConverter = {
     'pt-br': 'Converte valor: [SENSOR] para que fique entre [RANGE1] e [RANGE2]',
     'pt': 'Converte valor: [SENSOR] para que fique entre [RANGE1] e [RANGE2]',
     'fr': 'Convertir la valeur de [SENSOR] dans la plage [RANGE1] à [RANGE2]',
+    'pl': 'Przelicz wartość [SENSOR] do zakresu od [RANGE1] do [RANGE2]',
 };
-
 
 class Scratch3PicoboardOneGPIO {
     constructor(runtime) {
@@ -581,6 +590,9 @@ class Scratch3PicoboardOneGPIO {
                 break;
             case 'fr':
                 now_locale = 'fr';
+                break;
+            case 'pl':
+                now_locale = 'pl';
                 break;
             default:
                 now_locale = 'en';
