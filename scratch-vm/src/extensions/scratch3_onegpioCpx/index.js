@@ -967,6 +967,7 @@ class Scratch3CpxOneGPIO {
         } else {
             let pixel = args['NEOPIXEL'];
             pixel = parseInt(pixel, 10);
+            pixel -= 1;
 
             let red = args['RED'];
             red = parseInt(red, 10);
