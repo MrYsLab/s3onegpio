@@ -61,7 +61,8 @@ import onegpioPicoboardInsetIconURL from './onegpioPicoboard/onegpioPicoboard-sm
 import onegpioCpxImage from './onegpioCpx/onegpioCpx.jpg';
 import onegpioCpxInsetIconURL from './onegpioCpx/onegpioCpx-small.png';
 
-
+import onegpioRoboHATImage from './onegpioRoboHAT/onegpioRoboHAT.png';
+import onegpioRoboHATInsetIconURL from './onegpioRoboHAT/onegpioRoboHAT-small.png';
 
 export default [
     {
@@ -404,6 +405,21 @@ export default [
         iconURL: onegpioCpxImage,
         insetIconURL: onegpioCpxInsetIconURL,
         description: 'OneGPIOCpx',
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        helpLink: 'https://mryslab.github.io/s3-extend/'
+
+    }
+,
+    {
+        name: 'OneGpio RoboHAT MM1',
+        extensionId: 'onegpioRoboHAT',
+        collaborator: "Mr. Y's Lab",
+        iconURL: onegpioRoboHATImage,
+        insetIconURL: onegpioRoboHATInsetIconURL,
+        description: 'OneGPIORoboHAT',
         featured: true,
         disabled: false,
         internetConnectionRequired: true,
