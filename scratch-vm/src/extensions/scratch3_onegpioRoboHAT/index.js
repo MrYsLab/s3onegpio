@@ -338,7 +338,7 @@ class Scratch3RoboHatOneGPIO {
                     arguments: {
                         PIN: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: '3',
+                            defaultValue: 'Servo1',
                             menu: 'pwm_pins'
                         },
                         VALUE: {
@@ -414,8 +414,6 @@ class Scratch3RoboHatOneGPIO {
             menus: {
                 digital_pins: {
                     acceptReporters: true,
-                    //items: ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-                    //        '13', '14', '15', '16', '17']
                     items: ['Servo1', 'Servo2', 'Servo3', 'Servo4',
                            'Servo5', 'Servo6', 'Servo7', 'Servo8',
                            'NeoPixel', 'LED', 'RCC1', 'RCC2', 'RCC3',
@@ -424,7 +422,10 @@ class Scratch3RoboHatOneGPIO {
                 },
                 pwm_pins: {
                     acceptReporters: true,
-                    items: ['2', '3', '6', '7','8', '9']
+                    items: ['Servo1', 'Servo2',
+                        'Servo5', 'Servo6', 'Servo7', 'Servo8',
+                ]
+
                 },
                 analog_pins: {
                     acceptReporters: true,
@@ -497,7 +498,9 @@ class Scratch3RoboHatOneGPIO {
         } else {
             let pin = args['PIN'];
             let the_max = 255;
-            pin = parseInt(pin, 10);
+            // pin = parseInt(pin, 10);
+            pin = RoboHatPins[pin];
+
 
             let value = args['VALUE'];
             value = parseInt(value, 10);
