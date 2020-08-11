@@ -1,9 +1,9 @@
 /*
-This is the Scratch 3 extension to remotely control an
-Arduino Uno, ESP-8666, or Raspberry Pi
+This is the Scratch 3 extension to remotely control
+a RoboHAT MM1
 
 
- Copyright (c) 2019 Alan Yorinks All rights reserved.
+ Copyright (c) 2020 Alan Yorinks All rights reserved.
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -277,6 +277,23 @@ const FormAlrt = {
     },
 };
 
+const RoboHatPins = {
+    "Servo1": 2,
+    "Servo2": 3,
+    "Servo3": 4,
+    "Servo4": 5,
+    "Servo5": 6,
+    "Servo6": 7,
+    "Servo7": 8,
+    "Servo8": 9,
+    "NeoPixel": 11,
+    "LED": 13,
+    "RCC1": 14,
+    "RCC2": 15,
+    "RCC3": 16,
+    "RCC4": 17
+}
+
 
 class Scratch3RoboHatOneGPIO {
     constructor(runtime) {
@@ -304,7 +321,7 @@ class Scratch3RoboHatOneGPIO {
                     arguments: {
                         PIN: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: '2',
+                            defaultValue: 'Servo1',
                             menu: "digital_pins"
                         },
                         ON_OFF: {
@@ -397,8 +414,13 @@ class Scratch3RoboHatOneGPIO {
             menus: {
                 digital_pins: {
                     acceptReporters: true,
-                    items: ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
-                            '13', '14', '15', '16', '17']
+                    //items: ['2', '3', '4', '5', '6', '7', '8', '9', '10', '11',
+                    //        '13', '14', '15', '16', '17']
+                    items: ['Servo1', 'Servo2', 'Servo3', 'Servo4',
+                           'Servo5', 'Servo6', 'Servo7', 'Servo8',
+                           'NeoPixel', 'LED', 'RCC1', 'RCC2', 'RCC3',
+                           'RCC4'
+                    ]
                 },
                 pwm_pins: {
                     acceptReporters: true,
@@ -443,7 +465,8 @@ class Scratch3RoboHatOneGPIO {
             wait_open.push(callbackEntry);
         } else {
             let pin = args['PIN'];
-            pin = parseInt(pin, 10);
+            //pin = parseInt(pin, 10);
+            pin = RoboHatPins[pin];
 
             if (pin_modes[pin] !== DIGITAL_OUTPUT) {
                 pin_modes[pin] = DIGITAL_OUTPUT;
@@ -473,7 +496,6 @@ class Scratch3RoboHatOneGPIO {
             wait_open.push(callbackEntry);
         } else {
             let pin = args['PIN'];
-            // maximum value for RPi and Arduino
             let the_max = 255;
             pin = parseInt(pin, 10);
 
@@ -649,8 +671,8 @@ class Scratch3RoboHatOneGPIO {
             return;
         } else {
             connect_attempt = true;
-            window.socket = new WebSocket("ws://127.0.0.1:9000");
-            msg = JSON.stringify({"id": "to_arduino_gateway"});
+            window.socket = new WebSocket("ws://127.0.0.1:9005");
+            msg = JSON.stringify({"id": "to_robohat_gateway"});
         }
 
 
