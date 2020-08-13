@@ -19,3 +19,5 @@
 ## Picoboard Blocks
 ![](./images/pico_blocks.png)
 
+## RoboHAT MMI Blocks
+![](./images/robohat_blocks.png)
