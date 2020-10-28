@@ -75,8 +75,8 @@ let ws_ip_address = '127.0.0.1';
 
 // common
 const FormDigitalWrite = {
-    'pt-br': 'Definir Pino Digital[PIN]como[ON_OFF]',
-    'pt': 'Definir Pino Digital[PIN]como[ON_OFF]',
+    'pt-br': 'Escrever Pino Digital[PIN]como[ON_OFF]',
+    'pt': 'Escrever Pino Digital[PIN]como[ON_OFF]',
     'en': 'Write Digital Pin [PIN] [ON_OFF]',
     'fr': 'Mettre la pin numérique[PIN]à[ON_OFF]',
     'zh-tw': '腳位[PIN]數位輸出[ON_OFF]',
@@ -85,8 +85,8 @@ const FormDigitalWrite = {
 };
 
 const FormPwmWrite = {
-    'pt-br': 'Definir Pino PWM[PIN]com[VALUE]%',
-    'pt': 'Definir Pino PWM[PIN]com[VALUE]%',
+    'pt-br': 'Escrever Pino PWM[PIN]com[VALUE]%',
+    'pt': 'Escrever Pino PWM[PIN]com[VALUE]%',
     'en': 'Write PWM Pin [PIN] [VALUE]%',
     'fr': 'Mettre la pin PWM[PIN]à[VALUE]%',
     'zh-tw': '腳位[PIN]類比輸出[VALUE]%',
@@ -95,8 +95,8 @@ const FormPwmWrite = {
 };
 
 const FormTone = {
-    'pt-br': 'Definir Buzzer no Pino[PIN]com[FREQ]Hz e[DURATION]ms',
-    'pt': 'Definir Buzzer no Pino[PIN]com[FREQ]Hz  e[DURATION]ms',
+    'pt-br': 'Soar no Pino[PIN]com[FREQ]Hz e[DURATION]ms',
+    'pt': 'Soar no Pino[PIN]com[FREQ]Hz  e[DURATION]ms',
     'en': 'Tone Pin [PIN] [FREQ] Hz [DURATION] ms',
     'fr': 'Définir le buzzer sur la pin[PIN]à[FREQ]Hz pendant[DURATION] ms',
     'zh-tw': '腳位[PIN]播放音調，頻率為[FREQ]時間為[DURATION]',

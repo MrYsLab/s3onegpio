@@ -92,8 +92,8 @@ let ws_ip_address = '127.0.0.1';
 
 // common
 const FormDigitalWrite = {
-    'pt-br': 'Definir Pino Digital[PIN]como[ON_OFF]',
-    'pt': 'Definir Pino Digital[PIN]como[ON_OFF]',
+    'pt-br': 'Escrever Pino Digital[PIN]como[ON_OFF]',
+    'pt': 'Escrever Pino Digital[PIN]como[ON_OFF]',
     'en': 'Write Digital Pin [PIN] [ON_OFF]',
     'fr': 'Mettre la pin numérique[PIN]à[ON_OFF]',
     'zh-tw': '腳位[PIN]數位輸出[ON_OFF]',
@@ -112,8 +112,8 @@ const FormIPBlockR = {
 };
 
 const FormPwmWrite = {
-    'pt-br': 'Definir Pino PWM[PIN]com[VALUE]%',
-    'pt': 'Definir Pino PWM[PIN]com[VALUE]%',
+    'pt-br': 'Escrever Pino PWM[PIN]com[VALUE]%',
+    'pt': 'Escrever Pino PWM[PIN]com[VALUE]%',
     'en': 'Write PWM Pin [PIN] [VALUE]%',
     'fr': 'Mettre la pin PWM[PIN]à[VALUE]%',
     'zh-tw': '腳位[PIN]類比輸出[VALUE]%',
