@@ -54,6 +54,7 @@ const MENU_LIGHT_TEMPERATURE = {
     'pt-br': ['luminosidade', 'temperatura'],
     'fr': ['lumière', 'température'],
     'pl': ['światło', 'temperatura'],
+    'ja': ['光量', '温度'],
 };
 
 const MENU_PUSH_BUTTONS = {
@@ -64,6 +65,7 @@ const MENU_PUSH_BUTTONS = {
     'pt-br': ['A', 'B'],
     'fr': ['A', 'B'],
     'pl': ['A', 'B'],
+    'ja': ['A', 'B'],
 };
 
 const MENU_PUSH_BUTTON_STATE = {
@@ -74,6 +76,7 @@ const MENU_PUSH_BUTTON_STATE = {
     'pt-br': ['pressionado', 'liberado'],
     'fr': ['appuyé', 'relaché'],
     'pl': ["wciśnięty", "zwolniony"],
+    'ja': ["押下", "解放"],
 };
 
 const MENU_SLIDE_SWITCH_POSITION = {
@@ -84,6 +87,7 @@ const MENU_SLIDE_SWITCH_POSITION = {
     'pt-br': ['esquerda', 'direita'],
     'fr': ['gauche', 'droite'],
     'pl': ['lewo', 'prawo'],
+    'ja': ['左へ', '右へ'],
 };
 
 const MENU_TOUCH_PAD_STATES = {
@@ -94,6 +98,7 @@ const MENU_TOUCH_PAD_STATES = {
     'pt-br': ['tocado', 'liberado'],
     'fr': ['touché', 'relaché'],
     'pl': ["dotknięty", "zwolniony"],
+    'ja': ["接触", "解放"],
 };
 
 const MENU_TILT_POSITION = {
@@ -104,6 +109,7 @@ const MENU_TILT_POSITION = {
     'pt-br': ['plana', 'para cima', 'para baixo', 'para direita', 'para esquerda'],
     'fr': ['horizontale', 'en haut', 'en bas', 'à gauche', 'à droite'],
     'pl': ['płasko', 'w górę', 'w dół', 'w lewo', 'w prawo'],
+    'ja': ['水平', '上向', '下向', '左向', '右向'],
 };
 
 const MENU_BOARD_LED = {
@@ -114,6 +120,7 @@ const MENU_BOARD_LED = {
     'pt-br': ['ligado', 'desligado'],
     'fr': ['allumée', 'éteinte'],
     'pl': ['włącz', 'wyłącz'],
+    'ja': ['点灯', '滅灯'],
 };
 
 // HAT BLOCK DESCRIPTORS
@@ -125,6 +132,7 @@ const HAT_BUTTONS = {
     'pt-br': 'Quando o botão [BUTTON] estiver [PRESSED_RELEASED]',
     'fr': 'si [BUTTON] est [PRESSED_RELEASED]',
     'pl': 'Kiedy [BUTTON] jest [PRESSED_RELEASED]',
+    'ja': '[BUTTON] が [PRESSED_RELEASED] のとき',
 };
 
 const HAT_SLIDE_SWITCH = {
@@ -135,6 +143,7 @@ const HAT_SLIDE_SWITCH = {
     'pt-br': 'Quando o botão switch mover para [LEFT_RIGHT]',
     'fr': "Si l'interrupteur à glissière est déplacé à [LEFT_RIGHT]",
     'pl': "kiedy suwak jest przesunięty w [LEFT_RIGHT]",
+    'ja': "つまみスイッチが [LEFT_RIGHT] 動かされたとき",
 };
 
 const HAT_LIGHT_TEMPERATURE = {
@@ -145,6 +154,7 @@ const HAT_LIGHT_TEMPERATURE = {
     'pt-br': 'Quando [SENSOR] [COMPARISON] [VALUE]',
     'fr': 'si [SENSOR] [COMPARISON] [VALUE]',
     'pl': 'Kiedy [SENSOR] [COMPARISON] [VALUE]',
+    'ja': '[SENSOR] が [COMPARISON] [VALUE] のとき',
 };
 
 const HAT_TILTED = {
@@ -154,7 +164,8 @@ const HAT_TILTED = {
     'pt': 'Quando a CPX estiver [TILT_POSITION]',
     'pt-br': 'Quando a CPX estiver na posição [TILT_POSITION]',
     'fr': 'Si la carte CPX est [TILT_POSITION]',
-    'pl': 'Kiedy pozycja CPX jest  [TILT_POSITION]',
+    'pl': 'Kiedy pozycja CPX jest [TILT_POSITION]',
+    'ja': 'CPX の姿勢が [TILT_POSITION] のとき',
 };
 
 const HAT_LOUD_SOUND = {
@@ -165,6 +176,7 @@ const HAT_LOUD_SOUND = {
     'pt-br': 'Quando um som alto for detectado',
     'fr': 'Si un son fort est détecté',
     'pl': 'Kiedy wykryto głośny dźwięk',
+    'ja': '大音量が検出されたとき',
 };
 
 const HAT_TOUCHPAD = {
@@ -175,6 +187,7 @@ const HAT_TOUCHPAD = {
     'pt-br': 'Quando o touchpad [TOUCHPAD] for [TOUCH_STATE]',
     'fr': 'Si le touchpad [TOUCHPAD] est [TOUCH_STATE]',
     'pl': 'Kiedy panel dotykowy [TOUCHPAD] jest [TOUCH_STATE]',
+    'ja': 'タッチパッド [TOUCHPAD] が [TOUCH_STATE] のとき',
 };
 
 // boolean blocks
@@ -186,6 +199,7 @@ const BOOL_AB_SWITCH = {
     'pt-br': '[BUTTON] [PRESSED_RELEASED]',
     'fr': '[BUTTON] [PRESSED_RELEASED]',
     'pl': '[BUTTON] [PRESSED_RELEASED]',
+    'ja': '[BUTTON] が [PRESSED_RELEASED]',
 };
 
 const BOOL_SLIDE_SWITCH = {
@@ -196,6 +210,7 @@ const BOOL_SLIDE_SWITCH = {
     'pt-br': 'slide switch on the [LEFT_RIGHT]',
     'fr': 'interrupteur à glissière à [LEFT_RIGHT]',
     'pl': 'suwak na [LEFT_RIGHT]',
+    'ja': '[LEFT_RIGHT] のつまみスイッチ',
 };
 
 const BOOL_LIGHT_TEMP = {
@@ -206,6 +221,7 @@ const BOOL_LIGHT_TEMP = {
     'pt-br': '[SENSOR] for [COMPARISON] [VALUE]',
     'fr': '[SENSOR] est [COMPARISON] [VALUE]',
     'pl': '[SENSOR] jest [COMPARISON] [VALUE]',
+    'ja': '[SENSOR] が [COMPARISON] [VALUE]',
 };
 
 const BOOL_TILTED = {
@@ -216,6 +232,7 @@ const BOOL_TILTED = {
     'pt-br': 'posição da CPX for [TILT_POSITION]',
     'fr': 'La carte CPX est [TILT_POSITION]',
     'pl': 'pozycja CPX jest [TILT_POSITION]',
+    'ja': 'CPX の姿勢が [TILT_POSITION]',
 };
 
 const BOOL_TOUCH_PAD = {
@@ -226,6 +243,7 @@ const BOOL_TOUCH_PAD = {
     'pt-br': 'touchpad [TOUCHPAD] for [TOUCH_STATE]',
     'fr': 'le touchpad [TOUCHPAD] est [TOUCH_STATE]',
     'pl': 'panel dotykowy [TOUCHPAD] jest [TOUCH_STATE]',
+    'ja': 'タッチパッド [TOUCHPAD] が [TOUCH_STATE]',
 };
 
 const REPORTER_AB_SWITCH = {
@@ -236,6 +254,7 @@ const REPORTER_AB_SWITCH = {
     'pt-br': 'Botão [BUTTON]',
     'fr': 'Bouton [BUTTON]',
     'pl': 'Przycisk [BUTTON]',
+    'ja': 'ボタン [BUTTON]',
 };
 
 const REPORTER_SLIDE_SWITCH = {
@@ -246,6 +265,7 @@ const REPORTER_SLIDE_SWITCH = {
     'pt-br': 'botão switch',
     'fr': 'Interrupteur à glissière',
     'pl': 'Suwak',
+    'ja': 'つまみスイッチ',
 
 };
 
@@ -257,6 +277,7 @@ const REPORTER_LIGHT_TEMP = {
     'pt-br': '[SENSOR]',
     'fr': '[SENSOR]',
     'pl': '[SENSOR]',
+    'ja': '[SENSOR]',
 };
 
 const REPORTER_TILT = {
@@ -267,6 +288,7 @@ const REPORTER_TILT = {
     'pt-br': 'posição da CPX [TILT_POSITION]',
     'fr': 'La carte CPX est [TILT_POSITION]',
     'pl': 'pozycja CPX jest [TILT_POSITION]',
+    'ja': 'CPX の姿勢が [TILT_POSITION]',
 };
 
 const REPORTER_TOUCHPAD = {
@@ -277,6 +299,7 @@ const REPORTER_TOUCHPAD = {
     'pt-br': 'touchpad [TOUCHPAD]',
     'fr': 'le touchpad [TOUCHPAD]',
     'pl': 'płytka dotykowa [TOUCHPAD]',
+    'ja': 'タッチパッド [TOUCHPAD]',
 };
 
 // command blocks
@@ -288,16 +311,18 @@ const COMMAND_SET_PIXEL = {
     'pt-br': 'Pixel [NEOPIXEL] R [RED] G [GREEN] B [BLUE]',
     'fr': 'Pixel [NEOPIXEL] R [RED] V [GREEN] B [BLUE]',
     'pl': 'Pixel [NEOPIXEL] R [RED] G [GREEN] B [BLUE]',
+    'ja': 'カラー LED [NEOPIXEL] を R [RED] G [GREEN] B [BLUE] に',
 };
 
 const COMMAND_TONE = {
     'en': 'Tone [FREQ] Hz [DURATION] ms',
     'zh-tw': '播放音調 [FREQ] 赫茲 [DURATION] 毫秒',
     'zh-cn': '播放音调 [FREQ] 赫兹 [DURATION] 毫秒',
-    'pt': ' Criar com com [FREQ] Hz  e [DURATION] ms',
-    'pt-br': ' Criar com com [FREQ] Hz  e [DURATION] ms',
+    'pt': ' Criar com com [FREQ] Hz e [DURATION] ms',
+    'pt-br': ' Criar com com [FREQ] Hz e [DURATION] ms',
     'fr': 'Son [FREQ] Hz [DURATION] ms',
     'pl': 'Dźwięk [FREQ] Hz [DURATION] ms',
+    'ja': '音調を [FREQ] Hz [DURATION] ms に',
 };
 
 const COMMAND_BOARD_LED = {
@@ -308,6 +333,7 @@ const COMMAND_BOARD_LED = {
     'pt-br': 'Definir Led da placa como [LED_STATE]',
     'fr': 'LED D13 [LED_STATE]',
     'pl': 'Dioda LED płytki [LED_STATE]',
+    'ja': 'ボード LED を [LED_STATE] に',
 };
 
 const FormWSClosed = {
@@ -318,6 +344,7 @@ const FormWSClosed = {
     'pt-br': "A Conexão do WebSocket está fechada.",
     'fr': "La connexion au WebSocket est fermée.",
     'pl': "Połączenie WebSocket jest zamknięte.",
+    'ja': "ウェブソケット接続が切断されています",
 };
 
 let data_store = {
@@ -1064,6 +1091,9 @@ class Scratch3CpxOneGPIO {
                 break;
             case 'pl':
                 now_locale='pl';
+                break;
+            case 'ja':
+                now_locale='ja';
                 break;
             default:
                 now_locale = 'en';

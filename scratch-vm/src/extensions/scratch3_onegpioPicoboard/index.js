@@ -91,6 +91,7 @@ const FormWSClosed = {
     'pt': "A Conexão do WebSocket está Fechada",
     'fr': "Connexion WebSocket Fermée.",
     'pl': "Połączenie WebSocket jest zamknięte.",
+    'ja': "ウェブソケット接続が切断されています",
 };
 
 const MENU_NON_BUTTON_SENSORS = {
@@ -101,6 +102,7 @@ const MENU_NON_BUTTON_SENSORS = {
     'pt': ["Controle deslizante", "Luz", "Som", "A", "B", "C", "D"],
     'fr': ["Glissière", "Lumière", "Son", "A", "B", "C", "D"],
     'pl': ["Suwak", "Światło", "Dźwięk", "A", "B", "C", "D"],
+    'ja': ["つまみ位置", "光量", "音量", "A", "B", "C", "D"],
 };
 
 const MENU_ALL_SENSORS = {
@@ -111,6 +113,7 @@ const MENU_ALL_SENSORS = {
     'pt': ["Controle deslizante", "Luz", "Som", "Botão", "A", "B", "C", "D"],
     'fr': ["Glissière", "Lumière", "Son", "Bouton", "A", "B", "C", "D"],
     'pl': ["Suwak", "Światło", "Dźwięk", "Przycisk", "A", "B", "C", "D"],
+    'ja': ["つまみ位置", "光量", "音量", "ボタン状態", "A", "B", "C", "D"],
 };
 
 const MENU_COMPARISONS = {
@@ -121,6 +124,7 @@ const MENU_COMPARISONS = {
     'pt': ['>', '<'],
     'fr': ['>', '<'],
     'pl': ['>', '<'],
+    'ja': ['>', '<'],
 };
 
 const MENU_BUTTON_STATES = {
@@ -131,6 +135,7 @@ const MENU_BUTTON_STATES = {
     'pt': ["pressionado", "liberado"],
     'fr': ["appuyé", "relaché"],
     'pl': ["wciśnięty", "zwolniony"],
+    'ja': ["押下", "解放"],
 };
 
 const FormBetween = {
@@ -141,6 +146,7 @@ const FormBetween = {
     'pt': 'Quando [SENSOR] estiver entre [LOW] e [HIGH]',
     'fr': 'Si la valeur de [SENSOR] est entre [LOW] et [HIGH]',
     'pl': 'Kiedy wartość [SENSOR] jest pomiędzy [LOW] i [HIGH]',
+    'ja': '[SENSOR] が [LOW] と [HIGH] の間のとき',
 };
 
 const FormComparison = {
@@ -151,6 +157,7 @@ const FormComparison = {
     'pt': 'Quando [SENSOR] for [COMP] que [VALUE]',
     'fr': 'si [SENSOR] [COMP] [VALUE].',
     'pl': 'Kiedy [SENSOR] [COMP] [VALUE].',
+    'ja': '[SENSOR] が [COMP] [VALUE] のとき',
 };
 
 const FormButton = {
@@ -161,6 +168,7 @@ const FormButton = {
     'pt': 'Quando o botão estiver [STATE].',
     'fr': 'Si Bouton [STATE].',
     'pl': 'Kiedy przycisk jest [STATE].',
+    'ja': 'ボタン状態が [STATE] のとき',
 };
 
 const FormIsButtonPressed = {
@@ -171,6 +179,7 @@ const FormIsButtonPressed = {
     'pt': 'O botão está pressionado?',
     'fr': 'Bouton appuyé ?',
     'pl': 'Czy przycisk jest wciśnięty?',
+    'ja': 'ボタン状態が押下か?',
 };
 
 const FormIsSensorComparison = {
@@ -181,6 +190,7 @@ const FormIsSensorComparison = {
     'pt': '[SENSOR] está [COMP] [VALUE] ?',
     'fr': 'Est-ce que [SENSOR] [COMP] [VALUE] ?',
     'pl': 'Czy [SENSOR] [COMP] [VALUE] ?',
+    'ja': '[SENSOR] が [COMP] [VALUE] か?',
 };
 
 const FormCurrentSensorValue = {
@@ -191,6 +201,7 @@ const FormCurrentSensorValue = {
     'pt-br': 'Ler valor atual: [SENSOR]',
     'fr': 'valeur actuelle de [SENSOR].',
     'pl': 'Aktualna wartość [SENSOR].',
+    'ja': '[SENSOR] の現在値',
 };
 
 const FormRangeConverter = {
@@ -201,6 +212,7 @@ const FormRangeConverter = {
     'pt': 'Converte valor: [SENSOR] para que fique entre [RANGE1] e [RANGE2]',
     'fr': 'Convertir la valeur de [SENSOR] dans la plage [RANGE1] à [RANGE2]',
     'pl': 'Przelicz wartość [SENSOR] do zakresu od [RANGE1] do [RANGE2]',
+    'ja': '[SENSOR] の値を [RANGE1] から [RANGE2] までの範囲に変更',
 };
 
 class Scratch3PicoboardOneGPIO {
@@ -593,6 +605,9 @@ class Scratch3PicoboardOneGPIO {
                 break;
             case 'pl':
                 now_locale = 'pl';
+                break;
+            case 'ja':
+                now_locale = 'ja';
                 break;
             default:
                 now_locale = 'en';

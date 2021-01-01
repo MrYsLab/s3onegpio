@@ -99,6 +99,7 @@ const FormDigitalWrite = {
     'zh-tw': '腳位[PIN]數位輸出[ON_OFF]',
     'zh-cn': '脚位[PIN]数位输出[ON_OFF]',
     'pl': 'Ustaw cyfrowy Pin [PIN] na [ON_OFF]',
+    'ja': 'デジタル・ピン [PIN] に [ON_OFF] を出力',
 };
 
 const FormIPBlockR = {
@@ -109,6 +110,7 @@ const FormIPBlockR = {
     'zh-tw': '遠端 IP 位址[IP_ADDR]',
     'zh-cn': '远程 IP 地址[IP_ADDR]',
     'pl': 'Adres IP Rasberry Pi [IP_ADDR]',
+    'ja': 'Robo HAT の IP アドレスを [IP_ADDR] に',
 };
 
 const FormPwmWrite = {
@@ -119,8 +121,8 @@ const FormPwmWrite = {
     'zh-tw': '腳位[PIN]類比輸出[VALUE]%',
     'zh-cn': '脚位[PIN]类比输出[VALUE]%',
     'pl': 'Ustaw PWM Pin [PIN] na [VALUE]%',
+    'ja': 'PWM ピン [PIN] に [VALUE]% を出力',
 };
-
 
 const FormServo = {
     'pt-br': 'Mover Servo Motor no[PIN]para[ANGLE]°',
@@ -130,6 +132,7 @@ const FormServo = {
     'zh-tw': '伺服馬達腳位[PIN]轉動角度到[ANGLE]度',
     'zh-cn': '伺服马达脚位[PIN]转动角度到[ANGLE]度',
     'pl': 'Ustaw silnik servo na Pinie [PIN] na [ANGLE]°',
+    'ja': 'サーボ・ピン [PIN] に [ANGLE] 度を出力',
 };
 
 const FormAnalogRead = {
@@ -140,6 +143,7 @@ const FormAnalogRead = {
     'zh-tw': '讀取類比腳位[PIN]',
     'zh-cn': '读取类比脚位[PIN]',
     'pl': 'Odczytaj analogowy Pin [PIN]',
+    'ja': 'アナログ・ピン [PIN] から入力',
 };
 
 const FormDigitalRead = {
@@ -150,6 +154,7 @@ const FormDigitalRead = {
     'zh-tw': '讀取數位腳位[PIN]',
     'zh-cn': '读取数位脚位[PIN]',
     'pl': 'Odczytaj cyfrowy Pin [PIN]',
+    'ja': 'デジタル・ピン [PIN] から入力',
 };
 
 const FormMPURead = {
@@ -160,6 +165,7 @@ const FormMPURead = {
     'zh-tw': '讀取 MPU [MODE]',
     'zh-cn': '讀取 MPU [MODE]',
     'pl': 'Odczytaj MPU [MODE]',
+    'ja': 'MPU の [MODE] から入力',
 };
 
 const FormINARead = {
@@ -170,8 +176,8 @@ const FormINARead = {
     'zh-tw': '讀取 INA [MODE]',
     'zh-cn': '讀取 INA [MODE]',
     'pl': 'Odczytaj INA [MODE]',
+    'ja': 'INA の [MODE] から入力',
 };
-
 
 const FormAxRead = {
     'pt-br': 'Read Accelerometer X Axis',
@@ -181,6 +187,7 @@ const FormAxRead = {
     'zh-tw': 'Read Accelerometer X Axis',
     'zh-cn': 'Read Accelerometer X Axis',
     'pl': 'Read Accelerometer X Axis',
+    'ja': '加速度計の X 軸から入力',
 };
 
 const FormAyRead = {
@@ -191,6 +198,7 @@ const FormAyRead = {
     'zh-tw': 'Read Accelerometer Y Axis',
     'zh-cn': 'Read Accelerometer Y Axis',
     'pl': 'Read Accelerometer Y Axis',
+    'ja': '加速度計の Y 軸から入力',
 };
 const FormAzRead = {
     'pt-br': 'Read Accelerometer Z Axis',
@@ -200,6 +208,7 @@ const FormAzRead = {
     'zh-tw': 'Read Accelerometer Z Axis',
     'zh-cn': 'Read Accelerometer Z Axis',
     'pl': 'Read Accelerometer Z Axis',
+    'ja': '加速度計の Z 軸から入力',
 };
 
 const FormGxRead = {
@@ -210,6 +219,7 @@ const FormGxRead = {
     'zh-tw': 'Read Gyroscope X Axis',
     'zh-cn': 'Read Gyroscope X Axis',
     'pl': 'Read Gyroscope X Axis',
+    'ja': '方位計の X 軸から入力',
 };
 
 const FormGyRead = {
@@ -220,6 +230,7 @@ const FormGyRead = {
     'zh-tw': 'Read Gyroscope Y Axis',
     'zh-cn': 'Read Gyroscope Y Axis',
     'pl': 'Read Gyroscope Y Axis',
+    'ja': '方位計の Y 軸から入力',
 };
 const FormGzRead = {
     'pt-br': 'Read Gyroscope Z Axis',
@@ -229,19 +240,19 @@ const FormGzRead = {
     'zh-tw': 'Read Gyroscope Z Axis',
     'zh-cn': 'Read Gyroscope Z Axis',
     'pl': 'Read Gyroscope Z Axis',
+    'ja': '方位計の Z 軸から入力',
 };
-
 
 const FormSonarRead = {
     'pt-br': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
     'pt': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
-    'en': 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]',
+    'en': 'Read SONAR T [TRIGGER_PIN] E [ECHO_PIN]',
     'fr': 'Distance de lecture : Sonar T [TRIGGER_PIN] E [ECHO_PIN]',
     'zh-tw': 'HCSR超音波感測器，Echo在腳位[ECHO_PIN]Trig在腳位[TRIGGER_PIN]',
     'zh-cn': 'HCSR超音波感测器，Echo在脚位[ECHO_PIN]Trig在脚位[TRIGGER_PIN]',
-    'pl': 'Odczytaj odległość: Sonar T [TRIGGER_PIN]  E [ECHO_PIN]',
+    'pl': 'Odczytaj odległość: Sonar T [TRIGGER_PIN] E [ECHO_PIN]',
+    'ja': '超音波測距器からトリガ・ピン [TRIGGER_PIN] とエコー・ピン [ECHO_PIN] で入力',
 };
-
 
 // General Alert
 const FormWSClosed = {
@@ -252,6 +263,7 @@ const FormWSClosed = {
     'zh-tw': "網路連線中斷",
     'zh-cn': "网絡连线中断",
     'pl': "Połączenie WebSocket jest zamknięte.",
+    'ja': "ウェブソケット接続が切断されています",
 };
 
 const RoboHatPins = {
@@ -757,6 +769,9 @@ class Scratch3RoboHatOneGPIO {
                 break;
             case 'pl':
                 now_locale= 'pl';
+                break;
+            case 'ja':
+                now_locale= 'ja';
                 break;
             default:
                 now_locale='en';
