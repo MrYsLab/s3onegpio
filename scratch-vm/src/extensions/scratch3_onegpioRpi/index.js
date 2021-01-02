@@ -75,13 +75,14 @@ let ws_ip_address = '127.0.0.1';
 
 // common
 const FormDigitalWrite = {
-    'pt-br': 'Escrever Pino Digital[PIN]como[ON_OFF]',
+    'pt-br': 'Escrever Pino Digital [PIN]como[ON_OFF]',
     'pt': 'Escrever Pino Digital[PIN]como[ON_OFF]',
     'en': 'Write Digital Pin [PIN] [ON_OFF]',
     'fr': 'Mettre la pin numérique[PIN]à[ON_OFF]',
     'zh-tw': '腳位[PIN]數位輸出[ON_OFF]',
     'zh-cn': '脚位[PIN]数位输出[ON_OFF]',
     'pl': 'Ustaw cyfrowy Pin [PIN] na [ON_OFF]',
+    'ja': 'デジタル・ピン [PIN] に [ON_OFF] を出力',
 };
 
 const FormPwmWrite = {
@@ -92,16 +93,18 @@ const FormPwmWrite = {
     'zh-tw': '腳位[PIN]類比輸出[VALUE]%',
     'zh-cn': '脚位[PIN]类比输出[VALUE]%',
     'pl': 'Ustaw PWM Pin [PIN] na [VALUE]%',
+    'ja': 'PWM ピン [PIN] に [VALUE]% を出力',
 };
 
 const FormTone = {
     'pt-br': 'Soar no Pino[PIN]com[FREQ]Hz e[DURATION]ms',
-    'pt': 'Soar no Pino[PIN]com[FREQ]Hz  e[DURATION]ms',
+    'pt': 'Soar no Pino[PIN]com[FREQ]Hz e[DURATION]ms',
     'en': 'Tone Pin [PIN] [FREQ] Hz [DURATION] ms',
     'fr': 'Définir le buzzer sur la pin[PIN]à[FREQ]Hz pendant[DURATION] ms',
     'zh-tw': '腳位[PIN]播放音調，頻率為[FREQ]時間為[DURATION]',
     'zh-cn': '脚位[PIN]播放音调，频率为[FREQ]时间为[DURATION]',
-    'pl': 'Ustaw brzęczyk na Pinie [PIN] na [FREQ] Hz i [DURATION] ms%',
+    'pl': 'Ustaw brzęczyk na Pinie [PIN] na [FREQ] Hz i [DURATION] ms',
+    'ja': '音調ピン [PIN] を [FREQ] Hz [DURATION] ms に',
 };
 
 const FormServo = {
@@ -112,6 +115,7 @@ const FormServo = {
     'zh-tw': '伺服馬達腳位[PIN]轉動角度到[ANGLE]度',
     'zh-cn': '伺服马达脚位[PIN]转动角度到[ANGLE]度',
     'pl': 'Ustaw silnik servo na Pinie [PIN] na [ANGLE]°',
+    'ja': 'サーボ・ピン [PIN] に [ANGLE] 度を出力',
 };
 
 const FormAnalogRead = {
@@ -122,6 +126,7 @@ const FormAnalogRead = {
     'zh-tw': '讀取類比腳位[PIN]',
     'zh-cn': '读取类比脚位[PIN]',
     'pl': 'Odczytaj analogowy Pin [PIN]',
+    'ja': 'アナログ・ピン [PIN] から入力',
 };
 
 const FormDigitalRead = {
@@ -132,16 +137,18 @@ const FormDigitalRead = {
     'zh-tw': '讀取數位腳位[PIN]',
     'zh-cn': '读取数位脚位[PIN]',
     'pl': 'Odczytaj cyfrowy Pin [PIN]',
+    'ja': 'デジタル・ピン [PIN] から入力',
 };
 
 const FormSonarRead = {
     'pt-br': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
     'pt': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
-    'en': 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]',
+    'en': 'Read SONAR T [TRIGGER_PIN] E [ECHO_PIN]',
     'fr': 'Distance de lecture : Sonar T [TRIGGER_PIN] E [ECHO_PIN]',
     'zh-tw': 'HCSR超音波感測器，Echo在腳位[ECHO_PIN]Trig在腳位[TRIGGER_PIN]',
     'zh-cn': 'HCSR超音波感测器，Echo在脚位[ECHO_PIN]Trig在脚位[TRIGGER_PIN]',
-    'pl': 'Odczytaj odległość: Sonar T [TRIGGER_PIN]  E [ECHO_PIN]',
+    'pl': 'Odczytaj odległość: Sonar T [TRIGGER_PIN] E [ECHO_PIN]',
+    'ja': '超音波測距器からトリガ [TRIGGER_PIN] とエコー [ECHO_PIN] で入力',
 };
 
 // ESP-8266 specific
@@ -154,6 +161,7 @@ const FormIPBlockE = {
     'zh-tw': 'ESP-8266 IP 位址[IP_ADDR]',
     'zh-cn': 'ESP-8266 IP 地址[IP_ADDR]',
     'pl': 'Adres IP ESP-8266 [IP_ADDR]',
+    'ja': 'ESP-8266 の IP アドレスを [IP_ADDR] に',
 };
 
 // Raspbery Pi Specific
@@ -165,6 +173,7 @@ const FormIPBlockR = {
     'zh-tw': '遠端 IP 位址[IP_ADDR]',
     'zh-cn': '远程 IP 地址[IP_ADDR]',
     'pl': 'Adres IP Rasberry Pi [IP_ADDR]',
+    'ja': 'ラズパイの IP アドレスを [IP_ADDR] に',
 };
 
 // General Alert
@@ -176,6 +185,7 @@ const FormWSClosed = {
     'zh-tw': "網路連線中斷",
     'zh-cn': "网絡连线中断",
     'pl': "Połączenie WebSocket jest zamknięte.",
+    'ja': "ウェブソケット接続が切断されています",
 };
 
 // ESP-8266 Alert
@@ -203,16 +213,21 @@ const FormAlrt = {
     'zh-tw': {
         title: "提醒",
         text: "請於 IP 位址積木中輸入 ESP-8266 的 IP 位址",
-        icon: "資訊",
+        icon: "info",
     },
     'zh-cn': {
         title: "提醒",
         text: "请于 IP 位址积木中输入 ESP-8266 的 IP 地址",
-        icon: "资讯",
+        icon: "info",
     },
     'pl': {
         title: "Przypomnienie",
         text: "Wprowadź adres IP ESP-8266 do bloku adresu IP",
+        icon: "info",
+    },
+    'ja': {
+        title: "注意",
+        text: "ESP-8266 の IP アドレスを IP アドレス・ブロックに記入して下さい",
         icon: "info",
     },
 };
@@ -617,6 +632,9 @@ class Scratch3RpiOneGPIO {
                 break;
             case 'pl':
                 now_locale='pl';
+                break;
+            case 'ja':
+                now_locale='ja';
                 break;
             default:
                 now_locale='en';
