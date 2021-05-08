@@ -64,6 +64,9 @@ import onegpioCpxInsetIconURL from './onegpioCpx/onegpioCpx-small.png';
 import onegpioRoboHATImage from './onegpioRoboHAT/onegpioRoboHAT.png';
 import onegpioRoboHATInsetIconURL from './onegpioRoboHAT/onegpioRoboHAT-small.png';
 
+import onegpioRpiPicoImage from './onegpioRpiPico/onegpioRpiPico.png';
+import onegpioRpiPicoInsetIconURL from './onegpioRpiPico/onegpioRpiPico-small.png';
+
 export default [
     {
         name: (
@@ -420,6 +423,21 @@ export default [
         iconURL: onegpioRoboHATImage,
         insetIconURL: onegpioRoboHATInsetIconURL,
         description: 'OneGPIORoboHAT',
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        helpLink: 'https://mryslab.github.io/s3-extend/'
+
+    }
+,
+    {
+        name: 'OneGpio Raspberry Pi Pico',
+        extensionId: 'onegpioRpiPico',
+        collaborator: "Mr. Y's Lab",
+        iconURL: onegpioRpiPicoImage,
+        insetIconURL: onegpioRpiPicoInsetIconURL,
+        description: 'onegpioRpiPico',
         featured: true,
         disabled: false,
         internetConnectionRequired: true,
