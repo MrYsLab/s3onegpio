@@ -81,6 +81,7 @@ const FormDigitalWrite = {
     'zh-cn': '脚位[PIN]数位输出[ON_OFF]',
     'pl': 'Ustaw cyfrowy Pin [PIN] na [ON_OFF]',
     'de': 'Setze digitalen Pin [PIN] [ON_OFF]',
+    'ja': 'デジタル・ピン [PIN] に [ON_OFF] を出力',
 };
 
 const FormPwmWrite = {
@@ -92,6 +93,19 @@ const FormPwmWrite = {
     'zh-cn': '脚位[PIN]类比输出[VALUE]%',
     'pl': 'Ustaw PWM Pin [PIN] na [VALUE]%',
     'de': 'Setze PWM-Pin [PIN] [VALUE]%',
+    'ja': 'PWM ピン [PIN] に [VALUE]% を出力',
+};
+
+const FormTone = {
+    'pt-br': 'Soar no Pino[PIN]com[FREQ]Hz e[DURATION]ms',
+    'pt': 'Soar no Pino[PIN]com[FREQ]Hz  e[DURATION]ms',
+    'en': 'Tone Pin [PIN] [FREQ] Hz [DURATION] ms',
+    'fr': 'Définir le buzzer sur la pin[PIN]à[FREQ]Hz pendant[DURATION] ms',
+    'zh-tw': '腳位[PIN]播放音調，頻率為[FREQ]時間為[DURATION]',
+    'zh-cn': '脚位[PIN]播放音调，频率为[FREQ]时间为[DURATION]',
+    'pl': 'Ustaw brzęczyk na Pinie [PIN] na [FREQ] Hz i [DURATION] ms%',
+    'de': 'Spiele Ton am Pin [PIN] [FREQ] Hz [DURATION] ms',
+    'ja': '音調ピン [PIN] を [FREQ] Hz [DURATION] ms に',
 };
 
 const FormServo = {
@@ -103,6 +117,7 @@ const FormServo = {
     'zh-cn': '伺服马达脚位[PIN]转动角度到[ANGLE]度',
     'pl': 'Ustaw silnik servo na Pinie [PIN] na [ANGLE]°',
     'de': 'Setze Servo-Pin [PIN] [ANGLE]°',
+    'ja': 'サーボ・ピン [PIN] に [ANGLE] 度を出力',
 };
 
 const FormAnalogRead = {
@@ -114,17 +129,19 @@ const FormAnalogRead = {
     'zh-cn': '读取类比脚位[PIN]',
     'pl': 'Odczytaj analogowy Pin [PIN]',
     'de': 'Lies analogen Pin [PIN]',
+    'ja': 'アナログ・ピン [PIN] から入力',
 };
 
 const FormDigitalRead = {
-    'pt-br': 'Ler Pino Digital [PIN] [PULL]',
-    'pt': 'Ler Pino Digital [PIN][PULL]',
-    'en': 'Read Digital Pin [PIN][PULL]',
-    'fr': 'Lecture numérique [PIN][PULL]',
-    'zh-tw': '讀取數位腳位[PIN][PULL]',
-    'zh-cn': '读取数位脚位[PIN][PULL]',
-    'pl': 'Odczytaj cyfrowy Pin [PIN][PULL]',
-    'de': 'Lies digitalen Pin [PIN][PULL]',
+    'pt-br': 'Ler Pino Digital [PIN]',
+    'pt': 'Ler Pino Digital [PIN]',
+    'en': 'Read Digital Pin [PIN]',
+    'fr': 'Lecture numérique [PIN]',
+    'zh-tw': '讀取數位腳位[PIN]',
+    'zh-cn': '读取数位脚位[PIN]',
+    'pl': 'Odczytaj cyfrowy Pin [PIN]',
+    'de': 'Lies digitalen Pin [PIN]',
+    'ja': 'デジタル・ピン [PIN] から入力',
 };
 
 const FormSonarRead = {
@@ -136,6 +153,7 @@ const FormSonarRead = {
     'zh-cn': 'HCSR超音波感测器，Echo在脚位[ECHO_PIN]Trig在脚位[TRIGGER_PIN]',
     'pl': 'Odczytaj odległość: Sonar T [TRIGGER_PIN]  E [ECHO_PIN]',
     'de': 'Lies Sonar T [TRIGGER_PIN]  E [ECHO_PIN]',
+    'ja': '超音波測距器からトリガ [TRIGGER_PIN] とエコー [ECHO_PIN] で入力',
 };
 
 // ESP-8266 specific
@@ -149,6 +167,7 @@ const FormIPBlockE = {
     'zh-cn': 'ESP-8266 IP 地址[IP_ADDR]',
     'pl': 'Adres IP ESP-8266 [IP_ADDR]',
     'de': 'ESP-8266 IP-Adresse [IP_ADDR]',
+    'ja': 'ESP-8266 の IP アドレスを [IP_ADDR] に',
 };
 
 // Raspbery Pi Specific
@@ -161,6 +180,7 @@ const FormIPBlockR = {
     'zh-cn': '远程 IP 地址[IP_ADDR]',
     'pl': 'Adres IP Rasberry Pi [IP_ADDR]',
     'de': 'IP-Adresse des RPi [IP_ADDR]',
+    'ja': 'ラズパイの IP アドレスを [IP_ADDR] に',
 };
 
 // General Alert
@@ -173,6 +193,7 @@ const FormWSClosed = {
     'zh-cn': "网絡连线中断",
     'pl': "Połączenie WebSocket jest zamknięte.",
     'de': "WebSocket-Verbindung geschlossen.",
+    'ja': "ウェブソケット接続が切断されています",
 };
 
 // ESP-8266 Alert
@@ -217,8 +238,12 @@ const FormAlrt = {
         text: "Trage die IP-Adresse des ESP-8266 im Blcok IP-Adresse ein",
         icon: "info",
     },
+    'ja': {
+        title: "注意",
+        text: "ESP-8266 の IP アドレスを IP アドレス・ブロックに記入して下さい",
+        icon: "info",
+    },
 };
-
 
 class Scratch3RpiPicoOneGPIO {
     constructor(runtime) {
