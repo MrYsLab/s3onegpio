@@ -97,7 +97,7 @@ const FormDigitalWrite = {
     'en': 'Write Digital Pin [PIN] [ON_OFF]',
     'fr': 'Mettre la pin numérique[PIN]à[ON_OFF]',
     'zh-tw': '腳位[PIN]數位輸出[ON_OFF]',
-    'zh-cn': '脚位[PIN]数位输出[ON_OFF]',
+    'zh-cn': '引脚[PIN]数字输出[ON_OFF]',
     'pl': 'Ustaw cyfrowy Pin [PIN] na [ON_OFF]',
     'ja': 'デジタル・ピン [PIN] に [ON_OFF] を出力',
 };
@@ -119,7 +119,7 @@ const FormPwmWrite = {
     'en': 'Write PWM Pin [PIN] [VALUE]%',
     'fr': 'Mettre la pin PWM[PIN]à[VALUE]%',
     'zh-tw': '腳位[PIN]類比輸出[VALUE]%',
-    'zh-cn': '脚位[PIN]类比输出[VALUE]%',
+    'zh-cn': '引脚[PIN]模拟输出[VALUE]%',
     'pl': 'Ustaw PWM Pin [PIN] na [VALUE]%',
     'ja': 'PWM ピン [PIN] に [VALUE]% を出力',
 };
@@ -130,7 +130,7 @@ const FormServo = {
     'en': 'Write Servo Pin [PIN] [ANGLE] Deg.',
     'fr': 'Mettre le servo[PIN]à[ANGLE] Deg.',
     'zh-tw': '伺服馬達腳位[PIN]轉動角度到[ANGLE]度',
-    'zh-cn': '伺服马达脚位[PIN]转动角度到[ANGLE]度',
+    'zh-cn': '伺服电机引脚[PIN]转动角度到[ANGLE]度',
     'pl': 'Ustaw silnik servo na Pinie [PIN] na [ANGLE]°',
     'ja': 'サーボ・ピン [PIN] に [ANGLE] 度を出力',
 };
@@ -141,7 +141,7 @@ const FormAnalogRead = {
     'en': 'Read Analog Pin [PIN]',
     'fr': 'Lecture analogique [PIN]',
     'zh-tw': '讀取類比腳位[PIN]',
-    'zh-cn': '读取类比脚位[PIN]',
+    'zh-cn': '读取模拟引脚[PIN]',
     'pl': 'Odczytaj analogowy Pin [PIN]',
     'ja': 'アナログ・ピン [PIN] から入力',
 };
@@ -152,7 +152,7 @@ const FormDigitalRead = {
     'en': 'Read Digital Pin [PIN]',
     'fr': 'Lecture numérique [PIN]',
     'zh-tw': '讀取數位腳位[PIN]',
-    'zh-cn': '读取数位脚位[PIN]',
+    'zh-cn': '读取数字引脚[PIN]',
     'pl': 'Odczytaj cyfrowy Pin [PIN]',
     'ja': 'デジタル・ピン [PIN] から入力',
 };
@@ -163,7 +163,7 @@ const FormMPURead = {
     'en': 'Read MPU [MODE]',
     'fr': 'Lecture MPU [MODE]',
     'zh-tw': '讀取 MPU [MODE]',
-    'zh-cn': '讀取 MPU [MODE]',
+    'zh-cn': '读取 MPU [MODE]',
     'pl': 'Odczytaj MPU [MODE]',
     'ja': 'MPU の [MODE] から入力',
 };
@@ -174,7 +174,7 @@ const FormINARead = {
     'en': 'Read INA [MODE]',
     'fr': 'Lecture INA [MODE]',
     'zh-tw': '讀取 INA [MODE]',
-    'zh-cn': '讀取 INA [MODE]',
+    'zh-cn': '读取 INA [MODE]',
     'pl': 'Odczytaj INA [MODE]',
     'ja': 'INA の [MODE] から入力',
 };
@@ -184,8 +184,8 @@ const FormAxRead = {
     'pt': 'Read Accelerometer X Axis',
     'en': 'Read Accelerometer X Axis',
     'fr': 'Read Accelerometer X Axis',
-    'zh-tw': 'Read Accelerometer X Axis',
-    'zh-cn': 'Read Accelerometer X Axis',
+    'zh-tw': '讀取加速度計 X 軸',
+    'zh-cn': '读取加速度计 X 轴',
     'pl': 'Read Accelerometer X Axis',
     'ja': '加速度計の X 軸から入力',
 };
@@ -195,8 +195,8 @@ const FormAyRead = {
     'pt': 'Read Accelerometer Y Axis',
     'en': 'Read Accelerometer Y Axis',
     'fr': 'Read Accelerometer Y Axis',
-    'zh-tw': 'Read Accelerometer Y Axis',
-    'zh-cn': 'Read Accelerometer Y Axis',
+    'zh-tw': '讀取加速度計 Y 軸',
+    'zh-cn': '读取加速度计 Y 轴',
     'pl': 'Read Accelerometer Y Axis',
     'ja': '加速度計の Y 軸から入力',
 };
@@ -205,8 +205,8 @@ const FormAzRead = {
     'pt': 'Read Accelerometer Z Axis',
     'en': 'Read Accelerometer Z Axis',
     'fr': 'Read Accelerometer Z Axis',
-    'zh-tw': 'Read Accelerometer Z Axis',
-    'zh-cn': 'Read Accelerometer Z Axis',
+    'zh-tw': '讀取加速度計 Z 軸',
+    'zh-cn': '读取加速度计 Z 轴',
     'pl': 'Read Accelerometer Z Axis',
     'ja': '加速度計の Z 軸から入力',
 };
@@ -216,8 +216,8 @@ const FormGxRead = {
     'pt': 'Read Gyroscope X Axis',
     'en': 'Read Gyroscope X Axis',
     'fr': 'Read Gyroscope X Axis',
-    'zh-tw': 'Read Gyroscope X Axis',
-    'zh-cn': 'Read Gyroscope X Axis',
+    'zh-tw': '讀取陀螺儀 X 軸',
+    'zh-cn': '读取陀螺仪 X 轴',
     'pl': 'Read Gyroscope X Axis',
     'ja': '方位計の X 軸から入力',
 };
@@ -227,8 +227,8 @@ const FormGyRead = {
     'pt': 'Read Gyroscope Y Axis',
     'en': 'Read Gyroscope Y Axis',
     'fr': 'Read Gyroscope Y Axis',
-    'zh-tw': 'Read Gyroscope Y Axis',
-    'zh-cn': 'Read Gyroscope Y Axis',
+    'zh-tw': '讀取陀螺儀 Y 軸',
+    'zh-cn': '读取陀螺仪 Y 轴',
     'pl': 'Read Gyroscope Y Axis',
     'ja': '方位計の Y 軸から入力',
 };
@@ -237,8 +237,8 @@ const FormGzRead = {
     'pt': 'Read Gyroscope Z Axis',
     'en': 'Read Gyroscope Z Axis',
     'fr': 'Read Gyroscope Z Axis',
-    'zh-tw': 'Read Gyroscope Z Axis',
-    'zh-cn': 'Read Gyroscope Z Axis',
+    'zh-tw': '讀取陀螺儀 Z 軸',
+    'zh-cn': '读取陀螺仪 Z 轴',
     'pl': 'Read Gyroscope Z Axis',
     'ja': '方位計の Z 軸から入力',
 };
@@ -248,8 +248,8 @@ const FormSonarRead = {
     'pt': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
     'en': 'Read SONAR T [TRIGGER_PIN] E [ECHO_PIN]',
     'fr': 'Distance de lecture : Sonar T [TRIGGER_PIN] E [ECHO_PIN]',
-    'zh-tw': 'HCSR超音波感測器，Echo在腳位[ECHO_PIN]Trig在腳位[TRIGGER_PIN]',
-    'zh-cn': 'HCSR超音波感测器，Echo在脚位[ECHO_PIN]Trig在脚位[TRIGGER_PIN]',
+    'zh-tw': 'HCSR超音波感測器，Echo在腳位[ECHO_PIN] Trig在腳位[TRIGGER_PIN]',
+    'zh-cn': 'HCSR超声波传感器，Echo在引脚[ECHO_PIN] Trig在引脚[TRIGGER_PIN]',
     'pl': 'Odczytaj odległość: Sonar T [TRIGGER_PIN] E [ECHO_PIN]',
     'ja': '超音波測距器からトリガ・ピン [TRIGGER_PIN] とエコー・ピン [ECHO_PIN] で入力',
 };
@@ -261,7 +261,7 @@ const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
     'fr': "La connexion WebSocket est fermée.",
     'zh-tw': "網路連線中斷",
-    'zh-cn': "网絡连线中断",
+    'zh-cn': "网络连接中断",
     'pl': "Połączenie WebSocket jest zamknięte.",
     'ja': "ウェブソケット接続が切断されています",
 };

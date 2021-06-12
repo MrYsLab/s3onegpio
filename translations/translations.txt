@@ -5,7 +5,7 @@ const FormDigitalWrite = {
     'en': 'Write Digital Pin [PIN] [ON_OFF]',
     'fr': 'Mettre la pin numérique[PIN]à[ON_OFF]',
     'zh-tw': '腳位[PIN]數位輸出[ON_OFF]',
-    'zh-cn': '脚位[PIN]数位输出[ON_OFF]',
+    'zh-cn': '引脚[PIN]数字输出[ON_OFF]',
     'pl': 'Ustaw cyfrowy Pin [PIN] na [ON_OFF]',
 };
 
@@ -15,7 +15,7 @@ const FormPwmWrite = {
     'en': 'Write PWM Pin [PIN] [VALUE]%',
     'fr': 'Mettre la pin PWM[PIN]à[VALUE]%',
     'zh-tw': '腳位[PIN]類比輸出[VALUE]%',
-    'zh-cn': '脚位[PIN]类比输出[VALUE]%',
+    'zh-cn': '引脚[PIN]模拟输出[VALUE]%',
     'pl': 'Ustaw PWM Pin [PIN] na [VALUE]%',
 };
 
@@ -24,8 +24,8 @@ const FormTone = {
     'pt': 'Soar no Pino[PIN]com[FREQ]Hz  e[DURATION]ms',
     'en': 'Tone Pin [PIN] [FREQ] Hz [DURATION] ms',
     'fr': 'Définir le buzzer sur la pin[PIN]à[FREQ]Hz pendant[DURATION] ms',
-    'zh-tw': '腳位[PIN]播放音調，頻率為[FREQ]時間為[DURATION]',
-    'zh-cn': '脚位[PIN]播放音调，频率为[FREQ]时间为[DURATION]',
+    'zh-tw': '腳位[PIN]播放音調，頻率為[FREQ]赫茲 時間為[DURATION]毫秒 ',
+    'zh-cn': '引脚[PIN]播放音调，频率为[FREQ]赫兹 时间为[DURATION]毫秒',
     'pl': 'Ustaw brzęczyk na Pinie [PIN] na [FREQ] Hz i [DURATION] ms%',
 };
 
@@ -35,7 +35,7 @@ const FormServo = {
     'en': 'Write Servo Pin [PIN] [ANGLE] Deg.',
     'fr': 'Mettre le servo[PIN]à[ANGLE] Deg.',
     'zh-tw': '伺服馬達腳位[PIN]轉動角度到[ANGLE]度',
-    'zh-cn': '伺服马达脚位[PIN]转动角度到[ANGLE]度',
+    'zh-cn': '伺服电机引脚[PIN]转动角度到[ANGLE]度',
     'pl': 'Ustaw silnik servo na Pinie [PIN] na [ANGLE]°',
 };
 
@@ -45,7 +45,7 @@ const FormAnalogRead = {
     'en': 'Read Analog Pin [PIN]',
     'fr': 'Lecture analogique [PIN]',
     'zh-tw': '讀取類比腳位[PIN]',
-    'zh-cn': '读取类比脚位[PIN]',
+    'zh-cn': '读取模拟引脚[PIN]',
     'pl': 'Odczytaj analogowy Pin [PIN]',
 };
 
@@ -55,7 +55,7 @@ const FormDigitalRead = {
     'en': 'Read Digital Pin [PIN]',
     'fr': 'Lecture numérique [PIN]',
     'zh-tw': '讀取數位腳位[PIN]',
-    'zh-cn': '读取数位脚位[PIN]',
+    'zh-cn': '读取数字引脚[PIN]',
     'pl': 'Odczytaj cyfrowy Pin [PIN]',
 };
 
@@ -64,8 +64,8 @@ const FormSonarRead = {
     'pt': 'Ler Distância: Sonar em T[TRIGGER_PIN] E[ECHO_PIN]',
     'en': 'Read SONAR  T [TRIGGER_PIN]  E [ECHO_PIN]',
     'fr': 'Distance de lecture : Sonar T [TRIGGER_PIN] E [ECHO_PIN]',
-    'zh-tw': 'HCSR超音波感測器，Echo在腳位[ECHO_PIN]Trig在腳位[TRIGGER_PIN]',
-    'zh-cn': 'HCSR超音波感测器，Echo在脚位[ECHO_PIN]Trig在脚位[TRIGGER_PIN]',
+    'zh-tw': 'HCSR超音波感測器，Echo在腳位[ECHO_PIN] Trig在腳位[TRIGGER_PIN]',
+    'zh-cn': 'HCSR超声波传感器，Echo在引脚[ECHO_PIN] Trig在引脚[TRIGGER_PIN]',
     'pl': 'Odczytaj odległość: Sonar T [TRIGGER_PIN]  E [ECHO_PIN]',
 };
 
@@ -99,7 +99,7 @@ const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
     'fr': "La connexion WebSocket est fermée.",
     'zh-tw': "網路連線中斷",
-    'zh-cn': "网絡连线中断",
+    'zh-cn': "网络连接中断",
     'pl': "Połączenie WebSocket jest zamknięte.",
 };
 
@@ -132,8 +132,8 @@ const FormAlrt = {
     },
     'zh-cn': {
         title: "提醒",
-        text: "请于 IP 位址积木中输入 ESP-8266 的 IP 地址",
-        icon: "资讯",
+        text: "请于 IP 地址积木中输入 ESP-8266 的 IP 地址",
+        icon: "信息",
     },
     'pl': {
         title: "Przypomnienie",

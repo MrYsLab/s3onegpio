@@ -171,7 +171,7 @@ const HAT_TILTED = {
 const HAT_LOUD_SOUND = {
     'en': 'When a loud sound is detected',
     'zh-tw': '當偵測到聲音',
-    'zh-cn': '当侦测到声音',
+    'zh-cn': '当检测到声音',
     'pt': 'Quando um som alto for detectado',
     'pt-br': 'Quando um som alto for detectado',
     'fr': 'Si un son fort est détecté',
@@ -182,7 +182,7 @@ const HAT_LOUD_SOUND = {
 const HAT_TOUCHPAD = {
     'en': 'When touchpad [TOUCHPAD] is [TOUCH_STATE]',
     'zh-tw': '當連接腳位 [TOUCHPAD] [TOUCH_STATE]',
-    'zh-cn': '当连接脚位 [TOUCHPAD] [TOUCH_STATE]',
+    'zh-cn': '当连接引脚 [TOUCHPAD] [TOUCH_STATE]',
     'pt': 'Quando o touchpad [TOUCHPAD] for [TOUCH_STATE]',
     'pt-br': 'Quando o touchpad [TOUCHPAD] for [TOUCH_STATE]',
     'fr': 'Si le touchpad [TOUCHPAD] est [TOUCH_STATE]',
@@ -238,7 +238,7 @@ const BOOL_TILTED = {
 const BOOL_TOUCH_PAD = {
     'en': 'touchpad [TOUCHPAD] is [TOUCH_STATE]',
     'zh-tw': '連接腳位 [TOUCHPAD] [TOUCH_STATE]',
-    'zh-cn': '连接脚位 [TOUCHPAD] [TOUCH_STATE]',
+    'zh-cn': '连接引脚 [TOUCHPAD] [TOUCH_STATE]',
     'pt': 'touchpad [TOUCHPAD] for [TOUCH_STATE]',
     'pt-br': 'touchpad [TOUCHPAD] for [TOUCH_STATE]',
     'fr': 'le touchpad [TOUCHPAD] est [TOUCH_STATE]',
@@ -294,7 +294,7 @@ const REPORTER_TILT = {
 const REPORTER_TOUCHPAD = {
     'en': 'touchpad [TOUCHPAD]',
     'zh-tw': '連接腳位 [TOUCHPAD]',
-    'zh-cn': '连接脚位 [TOUCHPAD]',
+    'zh-cn': '连接引脚 [TOUCHPAD]',
     'pt': 'touchpad [TOUCHPAD]',
     'pt-br': 'touchpad [TOUCHPAD]',
     'fr': 'le touchpad [TOUCHPAD]',
@@ -339,7 +339,7 @@ const COMMAND_BOARD_LED = {
 const FormWSClosed = {
     'en': "WebSocket Connection Is Closed.",
     'zh-tw': "硬體連線中斷",
-    'zh-cn': "硬件联机中断",
+    'zh-cn': "硬件连接中断",
     'pt': "A Conexão do WebSocket está fechada.",
     'pt-br': "A Conexão do WebSocket está fechada.",
     'fr': "La connexion au WebSocket est fermée.",
