@@ -222,12 +222,12 @@ const FormAlrt = {
     'zh-tw': {
         title: "提醒",
         text: "請於 IP 位址積木中輸入 ESP-8266 的 IP 位址",
-        icon: "資訊",
+        icon: "info",
     },
     'zh-cn': {
         title: "提醒",
         text: "请于 IP地址积木中输入 ESP-8266 的 IP 地址",
-        icon: "信息",
+        icon: "info",
     },
     'pl': {
         title: "Przypomnienie",
