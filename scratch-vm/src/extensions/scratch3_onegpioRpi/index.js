@@ -425,9 +425,7 @@ class Scratch3RpiOneGPIO {
                     connection_pending = true;
                 }
             }
-
         }
-
     }
 
     digital_write(args) {

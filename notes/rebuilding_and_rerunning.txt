@@ -7,4 +7,4 @@
 7. cd to scratch-gui
 8. yarn link scratch-vm
 9. yarn --force install
-10 yarn start (to test)s
+10 yarn start (to test)

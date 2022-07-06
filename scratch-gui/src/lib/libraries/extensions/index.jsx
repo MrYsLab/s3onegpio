@@ -67,8 +67,8 @@ import onegpioRoboHATInsetIconURL from './onegpioRoboHAT/onegpioRoboHAT-small.pn
 import onegpioRpiPicoImage from './onegpioRpiPico/onegpioRpiPico.png';
 import onegpioRpiPicoInsetIconURL from './onegpioRpiPico/onegpioRpiPico-small.png';
 
-import onegpioPupperImage from './onegpioRpiPico/onegpioRpiPico.png';
-import onegpioPupperInsetIconURL from './onegpioRpiPico/onegpioRpiPico-small.png';
+import onegpioPupperImage from './onegpioPupper/onegpioPupper.png';
+import onegpioPupperInsetIconURL from './onegpioPupper/onegpioPupper-small.png';
 
 
 export default [
