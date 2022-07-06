@@ -67,6 +67,10 @@ import onegpioRoboHATInsetIconURL from './onegpioRoboHAT/onegpioRoboHAT-small.pn
 import onegpioRpiPicoImage from './onegpioRpiPico/onegpioRpiPico.png';
 import onegpioRpiPicoInsetIconURL from './onegpioRpiPico/onegpioRpiPico-small.png';
 
+import onegpioPupperImage from './onegpioRpiPico/onegpioRpiPico.png';
+import onegpioPupperInsetIconURL from './onegpioRpiPico/onegpioRpiPico-small.png';
+
+
 export default [
     {
         name: (
@@ -445,4 +449,20 @@ export default [
         helpLink: 'https://mryslab.github.io/s3-extend/'
 
     }
+,
+    {
+        name: 'OneGpio Pupper',
+        extensionId: 'onegpioPupper',
+        collaborator: "Mr. Y's Lab",
+        iconURL: onegpioPupperImage,
+        insetIconURL: onegpioPupperInsetIconURL,
+        description: 'OneGPIOPupper',
+        featured: true,
+        disabled: false,
+        internetConnectionRequired: true,
+        bluetoothRequired: false,
+        helpLink: 'https://mryslab.github.io/s3-extend/'
+
+    }
+
 ];

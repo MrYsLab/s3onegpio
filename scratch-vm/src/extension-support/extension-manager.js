@@ -25,12 +25,14 @@ const builtinExtensions = {
     boost: () => require('../extensions/scratch3_boost'),
     gdxfor: () => require('../extensions/scratch3_gdx_for'),
     onegpioArduino: () => require('../extensions/scratch3_onegpioArduino'),
-    onegpioRpi: () => require('../extensions/scratch3_onegpioRpi'),
+    onegpioRpi: () => require('../extensions/scratch3_onegpioPupper'),
     onegpioEsp: () => require('../extensions/scratch3_onegpioEsp'),
     onegpioPicoboard: () => require('../extensions/scratch3_onegpioPicoboard'),
     onegpioCpx: () => require('../extensions/scratch3_onegpioCpx'),
     onegpioRoboHAT: () => require('../extensions/scratch3_onegpioRoboHAT'),
     onegpioRpiPico: () => require('../extensions/scratch3_onegpioRpiPico'),
+    onegpioPupper: () => require('../extensions/scratch3_onegpioPupper'),
+
 
 
 
