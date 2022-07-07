@@ -65,39 +65,39 @@ const FormDigitalWrite = {
 };
 
 const FormActivateMode = {
-    'pt-br': '[ACTIVATE_MODE] Mode',
-    'pt': '[ACTIVATE_MODE] Mode',
-    'en': '[ACTIVATE_MODE] Mode',
-    'fr': '[ACTIVATE_MODE] Mode',
-    'zh-tw': '[ACTIVATE_MODE] Mode',
-    'zh-cn': '[ACTIVATE_MODE] Mode',
-    'pl': '[ACTIVATE_MODE] Mode',
-    'de': '[ACTIVATE_MODE] Mode',
-    'ja': '[ACTIVATE_MODE] Mode',
+    'pt-br': '[ACTIVATE_MODE]',
+    'pt': '[ACTIVATE_MODE]',
+    'en': '[ACTIVATE_MODE]',
+    'fr': '[ACTIVATE_MODE]',
+    'zh-tw': '[ACTIVATE_MODE]',
+    'zh-cn': '[ACTIVATE_MODE]',
+    'pl': '[ACTIVATE_MODE]',
+    'de': '[ACTIVATE_MODE]',
+    'ja': '[ACTIVATE_MODE]',
 };
 
 const MENU_ACTIVATIONS = {
-    'pt-br': ["Active", "Inactive"],
-    'pt': ["Active", "Inactive"],
-    'en': ["Active", "Inactive"],
-    'fr': ["Active", "Inactive"],
-    'zh-tw': ["Active", "Inactive"],
-    'zh-cn': ["Active", "Inactive"],
-    'pl': ["Active", "Inactive"],
-    'de': ["Active", "Inactive"],
-    'ja': ["Active", "Inactive"]
+    'pt-br': ["Activate", "Deactivate"],
+    'pt':  ["Activate", "Deactivate"],
+    'en':  ["Activate", "Deactivate"],
+    'fr':  ["Activate", "Deactivate"],
+    'zh-tw':  ["Activate", "Deactivate"],
+    'zh-cn':  ["Activate", "Deactivate"],
+    'pl':  ["Activate", "Deactivate"],
+    'de': ["Activate", "Deactivate"],
+    'ja':  ["Activate", "Deactivate"],
 };
 
 const FormRestTrot = {
-    'pt-br': '[REST_TROT_MODE] Mode',
-    'pt': '[REST_TROT_MODE] Mode',
-    'en': '[REST_TROT_MODE] Mode',
-    'fr': '[REST_TROT_MODE] Mode',
-    'zh-tw': '[REST_TROT_MODE] Mode',
-    'zh-cn': '[REST_TROT_MODE] Mode',
-    'pl': '[REST_TROT_MODE] Mode',
-    'de': '[REST_TROT_MODE] Mode',
-    'ja': '[REST_TROT_MODE] Mode',
+    'pt-br': '[REST_TROT_MODE]',
+    'pt': '[REST_TROT_MODE]',
+    'en': '[REST_TROT_MODE]',
+    'fr': '[REST_TROT_MODE]',
+    'zh-tw': '[REST_TROT_MODE]',
+    'zh-cn': '[REST_TROT_MODE]',
+    'pl': '[REST_TROT_MODE]',
+    'de': '[REST_TROT_MODE]',
+    'ja': '[REST_TROT_MODE]',
 };
 
 const MENU_REST_TROT = {
@@ -112,41 +112,82 @@ const MENU_REST_TROT = {
     'ja': ["Rest", "Trot"],
 };
 
-const FormDirection = {
-    'pt-br': 'Move [DIRECTION]',
-    'pt': 'Move [DIRECTION]',
-    'en': 'Move [DIRECTION]',
-    'fr': 'Move [DIRECTION]',
-    'zh-tw': 'Move [DIRECTION]',
-    'zh-cn': 'Move [DIRECTION]',
-    'pl': 'Move [DIRECTION]',
-    'de': 'Move [DIRECTION]',
-    'ja': 'Move [DIRECTION]',
+const FormBodyPosition = {
+    'pt-br': '[BODY_POSITION]',
+    'pt': '[BODY_POSITION]',
+    'en': '[BODY_POSITION]',
+    'fr': '[BODY_POSITION]',
+    'zh-tw': '[BODY_POSITION]',
+    'zh-cn': '[BODY_POSITION]',
+    'pl': '[BODY_POSITION]',
+    'de': '[BODY_POSITION]',
+    'ja': '[BODY_POSITION]',
 };
 
-const FormHeight = {
-    'pt-br': '[HEIGHT] Body',
-    'pt': '[HEIGHT] Body',
-    'en': '[HEIGHT] Body',
-    'fr': '[HEIGHT] Body',
-    'zh-tw': '[HEIGHT] Body',
-    'zh-cn': '[HEIGHT] Body',
-    'pl': '[HEIGHT] Body',
-    'de': '[HEIGHT] Body',
-    'ja': '[HEIGHT] Body',
+const MENU_BODY_POSITION = {
+    'pt-br': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
+    'pt': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
+    'en': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
+    'fr': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
+    'zh-tw': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
+    'zh-cn': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
+    'pl': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
+    'de': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
+    'ja': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
 };
 
-const FormBodyRoll = {
-    'pt-br': 'Roll Body [ROLL]',
-    'pt': 'Roll Body [ROLL]',
-    'en': 'Roll Body [ROLL]',
-    'fr': 'Roll Body [ROLL]',
-    'zh-tw': 'Roll Body [ROLL]',
-    'zh-cn': 'Roll Body [ROLL]',
-    'pl': 'Roll Body [ROLL]',
-    'de': 'Roll Body [ROLL]',
-    'ja': 'Roll Body [ROLL]',
+const FormMotion = {
+    'pt-br': '[MOTION]',
+    'pt': '[MOTION]',
+    'en': '[MOTION]',
+    'fr': '[MOTION]',
+    'zh-tw': '[MOTION]',
+    'zh-cn': '[MOTION]',
+    'pl': '[MOTION]',
+    'de': '[MOTION]',
+    'ja': '[MOTION]',
 };
+
+const MENU_MOTION = {
+    'pt-br': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
+        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
+        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
+        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'pt': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
+        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
+        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
+        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'en': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
+        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
+        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
+        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'fr': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
+        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
+        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
+        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'zh-tw': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
+        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
+        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
+        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'zh-cn': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
+        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
+        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
+        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'pl': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
+        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
+        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
+        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'de': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
+        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
+        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
+        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'ja': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
+        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
+        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
+        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+
+};
+
 
 const FormPwmWrite = {
     'pt-br': 'Escrever Pino PWM[PIN]com[VALUE]%',
@@ -372,52 +413,41 @@ class Scratch3Pupper {
                     }
                 },
                 {
-                    opcode: 'move',
+                    opcode: 'body_position',
                     blockType: BlockType.COMMAND,
-                    text: FormDirection[the_locale],
+                    text: FormBodyPosition[the_locale],
+
                     arguments: {
-                        DIRECTION: {
-                            type: ArgumentType.STRING,
-                            defaultValue: 'Forward',
-                            menu: "motion"
-                        },
+                        BODY_POSITION: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: MENU_BODY_POSITION[the_locale][0],
+                            menu: "body_positions"
+                        }
                     }
                 },
                 {
-                    opcode: 'height',
+                    opcode: 'motion',
                     blockType: BlockType.COMMAND,
-                    text: FormHeight[the_locale],
+                    text: FormMotion[the_locale],
                     arguments: {
-                        HEIGHT: {
-                            type: ArgumentType.STRING,
-                            defaultValue: 'Raise',
-                            menu: 'body'
+                        MOTION: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: MENU_MOTION[the_locale][0],
+                            menu: "motions"
                         },
                     }
                 },
-
-
-                {
-                    opcode: 'roll',
-                    blockType: BlockType.COMMAND,
-                    text: FormBodyRoll[the_locale],
-                    arguments: {
-                        ROLL: {
-                            type: ArgumentType.STRING,
-                            defaultValue: 'Left',
-                            menu: 'roll'
-                        },
-                    }
-                },
-
 
             ],
             menus: {
                 active_states: 'get_active_states',
                 rest_states: 'get_rest_states',
+                body_positions: 'get_body_positions',
+                motions: 'get_motions'
 
 
             }
+
         };
     }
 
@@ -428,6 +458,15 @@ class Scratch3Pupper {
     get_rest_states(){
         return MENU_REST_TROT[the_locale];
     }
+
+    get_body_positions() {
+        return MENU_BODY_POSITION[the_locale];
+    }
+
+    get_motions(){
+        return MENU_MOTION[the_locale];
+
+        }
 // The block handlers
 
 // command blocks
