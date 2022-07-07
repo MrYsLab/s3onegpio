@@ -28,20 +28,6 @@ require('sweetalert');
 
 // The following are constants used within the extension
 
-// Digital Modes
-const DIGITAL_INPUT = 1;
-const DIGITAL_OUTPUT = 2;
-const PWM = 3;
-const SERVO = 4;
-const TONE = 5;
-const SONAR = 6;
-const ANALOG_INPUT = 7;
-
-// an array to save the current pin mode
-// this is common to all board types since it contains enough
-// entries for all the boards.
-// Modes are listed above - initialize to invalid mode of -1
-let pin_modes = new Array(30).fill(-1);
 
 // has an websocket message already been received
 let alerted = false;
@@ -51,16 +37,8 @@ let connection_pending = false;
 // general outgoing websocket message holder
 let msg = null;
 
-// the pin assigned to the sonar trigger
-// initially set to -1, an illegal value
-let sonar_report_pin = -1;
-
 // flag to indicate if the user connected to a board
 let connected = false;
-
-// arrays to hold input values
-let digital_inputs = new Array(32);
-let analog_inputs = new Array(8);
 
 // flag to indicate if a websocket connect was
 // ever attempted.
@@ -86,16 +64,52 @@ const FormDigitalWrite = {
     'ja': 'デジタル・ピン [PIN] に [ON_OFF] を出力',
 };
 
-const FormMode = {
-    'pt-br': '[MODE] Mode',
-    'pt': '[MODE] Mode',
-    'en': '[MODE] Mode',
-    'fr': '[MODE] Mode',
-    'zh-tw': '[MODE] Mode',
-    'zh-cn': '[MODE] Mode',
-    'pl': '[MODE] Mode',
-    'de': '[MODE] Mode',
-    'ja': '[MODE] Mode',
+const FormActivateMode = {
+    'pt-br': '[ACTIVATE_MODE] Mode',
+    'pt': '[ACTIVATE_MODE] Mode',
+    'en': '[ACTIVATE_MODE] Mode',
+    'fr': '[ACTIVATE_MODE] Mode',
+    'zh-tw': '[ACTIVATE_MODE] Mode',
+    'zh-cn': '[ACTIVATE_MODE] Mode',
+    'pl': '[ACTIVATE_MODE] Mode',
+    'de': '[ACTIVATE_MODE] Mode',
+    'ja': '[ACTIVATE_MODE] Mode',
+};
+
+const MENU_ACTIVATIONS = {
+    'pt-br': ["Active", "Inactive"],
+    'pt': ["Active", "Inactive"],
+    'en': ["Active", "Inactive"],
+    'fr': ["Active", "Inactive"],
+    'zh-tw': ["Active", "Inactive"],
+    'zh-cn': ["Active", "Inactive"],
+    'pl': ["Active", "Inactive"],
+    'de': ["Active", "Inactive"],
+    'ja': ["Active", "Inactive"]
+};
+
+const FormRestTrot = {
+    'pt-br': '[REST_TROT_MODE] Mode',
+    'pt': '[REST_TROT_MODE] Mode',
+    'en': '[REST_TROT_MODE] Mode',
+    'fr': '[REST_TROT_MODE] Mode',
+    'zh-tw': '[REST_TROT_MODE] Mode',
+    'zh-cn': '[REST_TROT_MODE] Mode',
+    'pl': '[REST_TROT_MODE] Mode',
+    'de': '[REST_TROT_MODE] Mode',
+    'ja': '[REST_TROT_MODE] Mode',
+};
+
+const MENU_REST_TROT = {
+    'pt-br': ["Rest", "Trot"],
+    'pt': ["Rest", "Trot"],
+    'en': ["Rest", "Trot"],
+    'fr': ["Rest", "Trot"],
+    'zh-tw': ["Rest", "Trot"],
+    'zh-cn': ["Rest", "Trot"],
+    'pl': ["Rest", "Trot"],
+    'de':["Rest", "Trot"],
+    'ja': ["Rest", "Trot"],
 };
 
 const FormDirection = {
@@ -313,7 +327,7 @@ class Scratch3Pupper {
             color1: '#0C5986',
             color2: '#34B0F7',
             name: 'OneGpio Pupper',
-            blockIconURI: ' data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAABtCAMAAACyYz72AAAAA3NCSVQICAjb4U/gAAAAGXRFWHRTb2Z0d2FyZQBnbm9tZS1zY3JlZW5zaG907wO/PgAAAC10RVh0Q3JlYXRpb24gVGltZQBXZWQgMDYgSnVsIDIwMjIgMDE6NDg6NTkgUE0gRURUZLImtQAAAfhQTFRFAAAAAAABAAACAAEAAAEBAAEDAAEEAAEGAAIIAAILAAUVAAYZAKkzAKk1AKo4AKo7AQAAAQICAakzAgAAAgEAAgUFAhIdAwAAAwcFAxwqBAAABAEABC84BQMBBRwgBTU7BakzBgAABw0IB7FDCAEACAYBCBALCEZDCRILCiUlCz09C6kzDD8/DQEADQoCDaozDqkzDqo4EBEIEBsSEURBEVpMFhkLFhkMFkA4FxsNGREFHblGHigXIE87IW5VIaozIgQAIjUhJAcAJaozJnVXKgUALAUALBEBL8RXMUkrMYFcNGWkOAcAOQkAObA0OlIvO45iQXCfRDgSSJxlSLs8SL9GSMBMSnefTCYETL9GUH2aUqZmUqhoVdhqV31JYiMCYtxqYzkIZ0AMaCgCaMxIbJRTbS4DbcNqbzMEdqJZd8xqeLxmesA8e8Rpfb1mgNpmgsI+ieFqjHwtltprmcZko9prrnYUr9xrr+ZrsXkVsudrtK09tuZruOdruOhruddOuehruqEuvc9BvuRrv7tHv9hzwY0dxMJJxdhQxelrxpkjx+hryK8vzeprzp4kztdI0MA20Opr0bsz0cU50ddW0d5P0d5Y0epr0tA/0uRj0uVf0upr09I/0+Zg0+pr1ORY1OZU1OZX1OZY1Oln1Opo1Opp1Opq1Opr4KB7tQAAAdtJREFUaN7t1llT03AYxeFTbF1KlCioICoC7qLVUmtdAVnEFQGLiAuuVEQQWdxRFAQFAQW1Klo36vs1vUjLwLQJ005Kb865yiS/mecm/0xw8nyShurXSRoaJEmjTJkyZcqUKVOmTJkyZcqUKVOmTJky5STI3+7uUJZdnnlndCMAAMs3l1x5KCLBB6uRekd79v0UUo74I5I45OCLMysUHRkA1rcYyuEkdvlHu0NRosjWPKfTuSsDQFanjjwriV0e263k3yyKlBdfEpGpwWvpsJ2YjC7PSuKQ91Q++lSqI4t8OQ1seWsgh5PY5c/3/GIg/74BrH1iKGtJfKfKQP7VCOQ8N5S1xHT5fTkse0cMZS0xWf76tF7FkotiIIcT8+TpWVw9c51ni6snAbLN0z3Xl8Tm6RYTZetWt3vf/kNVzcMi8u/xGth92rOJCqSU+SMS09+w0AZysahWuxzaCdvZQGSSIHm8GNj+TETk520Vdp/Mm/ynScXCw10f/vZfzwYKes2Q31zwes85lKUHvd66+7qyvDsKYEHmJhXAqlYxQ361QQkv7aq+HHx5TA29ytvaAvMpi3zsqDmwbmXh8Vt9ugn/wyhTpkyZMmXKlClTpkyZMmXKlClTpkw5kfsPg6wSrbwjcGYAAAAASUVORK5CYII=',
+            blockIconURI:  ' data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAABtCAYAAACFvc7EAAAABHNCSVQICAgIfAhkiAAAABl0RVh0U29mdHdhcmUAZ25vbWUtc2NyZWVuc2hvdO8Dvz4AAAAtdEVYdENyZWF0aW9uIFRpbWUAV2VkIDA2IEp1bCAyMDIyIDAxOjQ4OjU5IFBNIEVEVGSyJrUAAAT8SURBVHic7dx/aJR1HMDx93PPbrfNnW6nO/arhdLZWDFjNAU1cP4RyfxDS0UoSQmTBWVYIUER/UIo/6loif4hhZISjApDR0FUri0EyXSoc6nbGvPXanM7d7t77p7+aDe3uCWu3XPbfT4vGOxuz+353N7P8+W5O5jx8NYDtt8XQaWvDO+sCK9sOZPqOVQSZczxRijwhVI9h0oiV6oHUMmnkQXQyAJoZAE0sgAaWQCNLIBGFkAjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCaGQBNLIAGlkAjSyARhZAIwugkQXQyAJoZAE0sgAaWQCNLIBGFkAjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCZDi9w1hkkEMXfueDq0MEAQw36yureMNn3NXvCR9pZOkz7YTsxD83XC48s7MpDvipfqycjU8vIDB73CS07f6C9e/dIAqQWcTOn9eyqSzxHPaVM2yt/oGWYQAX8194gi9f82NOySzJ5eCZHKO7t4ttJ1rZFQ+cRHYsRqgvyMUTlzj89lE2rPiGA7+l5l8+p3oWRyLbVpCGc62sO91N87DNBAf85BkGHm8Wefm3v7w5LlxjTsrIH5d5f/Nxfuyb6p1P41lGOLJcR/qvsLsnyADgycpjS4mbxovXuTRVtQ0Ptfs289ZKc8ydUfrOdbB/5/fsbw4RA6Ld59n3eRXL6+Yk7+ieTrOMcG65NtwsKrmPQ9Xl1Pk8DhxdJnnlC9j+yRKWZI/cZUc529TDwJQvJdN7Fkcim548djxUyWcL5xFw+FLP5S9k0b23n6Z1NUhvzNkZUj2LI39yM3cu65zYUUJRwmOucYxMk8y7u5Cf8bOk/etkq62Tls746WKQG8inIEXPOlWzOP462SmxcIjOX9rY8+pJzsbPHlcONauL8QibJT0ix0I0bNxDw39uZJC/cjHP1rjlzDIi7ZdrAAwT/4olfFhfQal5583TbZb0OJMNg+z8HLyja5+B4TLweHMorShk+ZoK1j7qwzvukDYwTYPR6x7b4tbQxLuIDYQZHHMl7PZMcH5MapbkSpPIHlbVb/rXGxB3fBB587JuL2VWPxfOR+D+zIRbB89co8OKP9SgoGhW4mVwUrMkl4zlegJ5lX5K44e5HeanT8/RaSXYMNzL4b0dDMbfuMjwUVWdRcpeid0l0ZHNBwLUVpijsYLHm3mu7lea2oexAGyL66fa+eipI3x80hp9zz13aQWrAzMlsUPLdf+f3ezqucXoSWLd4kr8eztKS0c7L/eM3DYyqZlfRm22A3/EjLk8+eaDHN14ivZhwLa4/FUT275uwsx047YthsPjP1Bx+e5h+7sVlMyg08ORyKGhfhqv3STxh2sxuvp66YrfNLIoLi2jNjvhxlMud9lS6vfa7HjxNK1/jQS1IToc+edz5jFyAgFe2lPDhoUzqDDpcuH1v7goXvUIBxeX8+3Bsxz7rpvW8wPcuGkRdWUw2+9lfmURy2rLeXxNIf7E12XTmrHm9b32O8+fSvUcKolm1rqjJkUjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCaGQBNLIAGlkAjSyARhZAIwugkQXQyAJoZAE0sgAaWQCNLIBGFkAjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCaGQBNLIAGlkAjSyARhZAIwugkQXQyAL8DWN+esfzSQVfAAAAAElFTkSuQmCC',
             blocks: [
                 {
                     opcode: 'ip_address',
@@ -332,15 +346,28 @@ class Scratch3Pupper {
 
                 },
                 {
-                    opcode: 'mode',
+                    opcode: 'activate_mode',
                     blockType: BlockType.COMMAND,
-                    text: FormMode[the_locale],
+                    text: FormActivateMode[the_locale],
 
                     arguments: {
-                        MODE: {
+                        ACTIVATE_MODE: {
                             type: ArgumentType.STRING,
-                            defaultValue: 'Active',
-                            menu: "mode"
+                            defaultValue: MENU_ACTIVATIONS[the_locale][0],
+                            menu: 'active_states'
+                        }
+                    }
+                },
+                {
+                    opcode: 'rest_trot_mode',
+                    blockType: BlockType.COMMAND,
+                    text: FormRestTrot[the_locale],
+
+                    arguments: {
+                        REST_TROT_MODE: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: MENU_REST_TROT[the_locale][0],
+                            menu: "rest_states"
                         }
                     }
                 },
@@ -386,27 +413,21 @@ class Scratch3Pupper {
 
             ],
             menus: {
-                mode: {
-                    acceptReporters: true,
-                    items: ['Active', 'Inactive', 'Trot', 'Rest']
-                },
-                motion: {
-                    acceptReporters: true,
-                    items: ['Forward', 'Backward']
-                },
-                body: {
-                    acceptReporters: true,
-                    items: ['Raise', 'Lower']
-                },
-                roll: {
-                    acceptReporters: true,
-                    items: ['Left', 'Right']
-                },
+                active_states: 'get_active_states',
+                rest_states: 'get_rest_states',
+
+
             }
         };
     }
 
+    get_active_states() {
+        return MENU_ACTIVATIONS[the_locale];
+    }
 
+    get_rest_states(){
+        return MENU_REST_TROT[the_locale];
+    }
 // The block handlers
 
 // command blocks
