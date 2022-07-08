@@ -112,29 +112,56 @@ const MENU_REST_TROT = {
     'ja': ["Rest", "Trot"],
 };
 
-const FormBodyPosition = {
-    'pt-br': '[BODY_POSITION]',
-    'pt': '[BODY_POSITION]',
-    'en': '[BODY_POSITION]',
-    'fr': '[BODY_POSITION]',
-    'zh-tw': '[BODY_POSITION]',
-    'zh-cn': '[BODY_POSITION]',
-    'pl': '[BODY_POSITION]',
-    'de': '[BODY_POSITION]',
-    'ja': '[BODY_POSITION]',
+const FormRaiseBodyPosition = {
+    'pt-br': '[RAISE_BODY]',
+    'pt': '[RAISE_BODY]',
+    'en': '[RAISE_BODY]',
+    'fr': '[RAISE_BODY]',
+    'zh-tw': '[RAISE_BODY]',
+    'zh-cn': '[RAISE_BODY]',
+    'pl': '[RAISE_BODY]',
+    'de': '[RAISE_BODY]',
+    'ja': '[RAISE_BODY]',
 };
 
-const MENU_BODY_POSITION = {
-    'pt-br': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
-    'pt': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
-    'en': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
-    'fr': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
-    'zh-tw': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
-    'zh-cn': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
-    'pl': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
-    'de': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
-    'ja': ["Raise Body", "Lower Body", "Roll Body Left", "Roll Body Right"],
+const MENU_RAISE_BODY = {
+    'pt-br':  ["Raise Body", "Lower Body"],
+    'pt':   ["Raise Body", "Lower Body"],
+    'en': ["Raise Body", "Lower Body"],
+    'fr':   ["Raise Body", "Lower Body"],
+    'zh-tw':   ["Raise Body", "Lower Body"],
+    'zh-cn':   ["Raise Body", "Lower Body"],
+    'pl':   ["Raise Body", "Lower Body"],
+    'de':   ["Raise Body", "Lower Body"],
+    'ja':   ["Raise Body", "Lower Body"],
 };
+
+
+
+const FormRollBody = {
+    'pt-br': '[ROLL_BODY]',
+    'pt': '[ROLL_BODY]',
+    'en': '[ROLL_BODY]',
+    'fr': '[ROLL_BODY]',
+    'zh-tw': '[ROLL_BODY]',
+    'zh-cn': '[ROLL_BODY]',
+    'pl': '[ROLL_BODY]',
+    'de': '[ROLL_BODY]',
+    'ja': '[ROLL_BODY]'
+};
+
+const MENU_ROLL_BODY = {
+    'pt-br': ["Roll Body Left", "Roll Body Right"],
+    'pt':  ["Roll Body Left", "Roll Body Right"],
+    'en': ["Roll Body Left", "Roll Body Right"],
+    'fr':  ["Roll Body Left", "Roll Body Right"],
+    'zh-tw':  ["Roll Body Left", "Roll Body Right"],
+    'zh-cn':  ["Roll Body Left", "Roll Body Right"],
+    'pl':  ["Roll Body Left", "Roll Body Right"],
+    'de':  ["Roll Body Left", "Roll Body Right"],
+    'ja':  ["Roll Body Left", "Roll Body Right"],
+};
+
 
 const FormMotion = {
     'pt-br': '[MOTION]',
@@ -412,19 +439,36 @@ class Scratch3Pupper {
                         }
                     }
                 },
+
                 {
-                    opcode: 'body_position',
+                    opcode: 'go_raise_body',
                     blockType: BlockType.COMMAND,
-                    text: FormBodyPosition[the_locale],
+                    text: FormRaiseBodyPosition[the_locale],
 
                     arguments: {
-                        BODY_POSITION: {
+                        RAISE_BODY: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: MENU_BODY_POSITION[the_locale][0],
-                            menu: "body_positions"
+                            defaultValue: MENU_RAISE_BODY[the_locale][0],
+                            menu: "raise_body"
                         }
                     }
                 },
+
+                {
+                    opcode: 'go_roll_body',
+                    blockType: BlockType.COMMAND,
+                    text: FormRollBody[the_locale],
+
+                    arguments: {
+                        ROLL_BODY: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: MENU_ROLL_BODY[the_locale][0],
+                            menu: "roll_body"
+                        }
+                    }
+                },
+
+
                 {
                     opcode: 'motion',
                     blockType: BlockType.COMMAND,
@@ -442,8 +486,9 @@ class Scratch3Pupper {
             menus: {
                 active_states: 'get_active_states',
                 rest_states: 'get_rest_states',
-                body_positions: 'get_body_positions',
-                motions: 'get_motions'
+                raise_body: 'get_raise_body',
+                roll_body: 'get_roll_body',
+                motions: 'get_motions',
 
 
             }
@@ -459,8 +504,12 @@ class Scratch3Pupper {
         return MENU_REST_TROT[the_locale];
     }
 
-    get_body_positions() {
-        return MENU_BODY_POSITION[the_locale];
+    get_raise_body() {
+        return MENU_RAISE_BODY[the_locale];
+    }
+
+    get_roll_body(){
+        return MENU_ROLL_BODY[the_locale];
     }
 
     get_motions(){
@@ -550,11 +599,10 @@ connect()
         return;
     } else {
         connect_attempt = true;
-        let url = "ws://" + ws_ip_address + ":9001";
+        let url = "ws://" + ws_ip_address + ":9007";
         console.log(url);
-        //window.socketr = new WebSocket("ws://127.0.0.1:9001");
         window.socketr = new WebSocket(url);
-        msg = JSON.stringify({"id": "to_rpi_gateway"});
+        msg = JSON.stringify({"id": "to_pup_gateway"});
     }
 
 
