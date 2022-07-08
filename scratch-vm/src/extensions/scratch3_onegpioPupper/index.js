@@ -52,17 +52,16 @@ let the_locale = null;
 let ws_ip_address = '127.0.0.1';
 
 
-
 const FormIPBlockP = {
-    'pt-br': 'IP Address [IP_ADDR]',
-    'pt': 'IP Address [IP_ADDR]',
-    'en': 'IP Address [IP_ADDR]',
-    'fr': 'IP Address [IP_ADDR]',
-    'zh-tw': 'IP Address [IP_ADDR]',
-    'zh-cn': 'IP Address [IP_ADDR]',
-    'pl': 'IP Address [IP_ADDR]',
-    'de': 'IP Address [IP_ADDR]',
-    'ja': 'IP Address [IP_ADDR]',
+    'pt-br': '[IP_ADDR]',
+    'pt': '[IP_ADDR]',
+    'en': 'IP Address: [IP_ADDR]',
+    'fr': '[IP_ADDR]',
+    'zh-tw': '[IP_ADDR]',
+    'zh-cn': '[IP_ADDR]',
+    'pl': '[IP_ADDR]',
+    'de': '[IP_ADDR]',
+    'ja': '[IP_ADDR]',
 };
 
 
@@ -200,7 +199,6 @@ const FormTurn = {
     'de': '[TURN]',
     'ja': '[TURN]',
 };
-
 
 
 const MENU_TURN = {
@@ -366,7 +364,6 @@ const FormIPBlockE = {
 */
 
 
-
 // General Alert
 const FormWSClosed = {
     'pt-br': "A Conexão do WebSocket está Fechada",
@@ -449,14 +446,13 @@ class Scratch3Pupper {
                 {
                     opcode: 'ip_address',
                     blockType: BlockType.COMMAND,
-                    //text: 'Write Digital Pin [PIN] [ON_OFF]',
                     text: FormIPBlockP[the_locale],
 
                     arguments: {
                         IP_ADDR: {
                             type: ArgumentType.NUMBER,
                             defaultValue: "Enter Robot's IP Address",
-                            //menu: "digital_pins"
+
                         },
 
                     }
@@ -469,7 +465,7 @@ class Scratch3Pupper {
 
                     arguments: {
                         ACTIVATE_MODE: {
-                            type: ArgumentType.STRING,
+                            type: ArgumentType.NUMBER,
                             defaultValue: MENU_ACTIVATIONS[the_locale][0],
                             menu: 'active_states'
                         }
@@ -490,7 +486,7 @@ class Scratch3Pupper {
                 },
 
                 {
-                    opcode: 'raise_body',
+                    opcode: 'raise_body_mode',
                     blockType: BlockType.COMMAND,
                     text: FormRaiseBodyPosition[the_locale],
 
@@ -504,7 +500,7 @@ class Scratch3Pupper {
                 },
 
                 {
-                    opcode: 'roll_body',
+                    opcode: 'roll_body_mode',
                     blockType: BlockType.COMMAND,
                     text: FormRollBody[the_locale],
 
@@ -519,7 +515,7 @@ class Scratch3Pupper {
 
 
                 {
-                    opcode: 'motion',
+                    opcode: 'motion_mode',
                     blockType: BlockType.COMMAND,
                     text: FormMotion[the_locale],
                     arguments: {
@@ -531,7 +527,7 @@ class Scratch3Pupper {
                     }
                 },
                 {
-                    opcode: 'turn',
+                    opcode: 'turn_mode',
                     blockType: BlockType.COMMAND,
                     text: FormTurn[the_locale],
                     arguments: {
@@ -543,7 +539,7 @@ class Scratch3Pupper {
                     }
                 },
                 {
-                    opcode: 'yaw',
+                    opcode: 'yaw_mode',
                     blockType: BlockType.COMMAND,
                     text: FormYaw[the_locale],
                     arguments: {
@@ -555,7 +551,7 @@ class Scratch3Pupper {
                     }
                 },
                 {
-                    opcode: 'pitch',
+                    opcode: 'pitch_mode',
                     blockType: BlockType.COMMAND,
                     text: FormPitch[the_locale],
                     arguments: {
@@ -621,35 +617,208 @@ class Scratch3Pupper {
 // command blocks
 
     ip_address(args) {
-        if (args['IP_ADDR']) {
-            ws_ip_address = args['IP_ADDR'];
-            if (!connected) {
-                if (!connection_pending) {
-                    this.connect();
-                    connection_pending = true;
-                }
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
             }
-
         }
 
+        if (!connected) {
+            let callbackEntry = [this.ip_address.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let ipaddr = args['IP_ADDR'];
+            console.log( ipaddr);
+            msg = {ipaddr};
+            msg = JSON.stringify(msg);
+            window.socketr.send(msg);
+
+        }
     }
 
-    mode(args) {
 
+    activate_mode(args) {
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
+            }
+        }
+
+        if (!connected) {
+            let callbackEntry = [this.activate_mode.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let activate_text = args['ACTIVATE_MODE'];
+            // get its index in the list of menu items
+            let item_index = this.get_active_states().indexOf(activate_text);
+            console.log(item_index);
+            msg = {"activate_mode": item_index};
+            msg = JSON.stringify(msg);
+            window.socketr.send(msg);
+
+        }
     }
 
-    move(args) {
+    // }
 
+    rest_trot_mode(args) {
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
+            }
+        }
+
+        if (!connected) {
+            let callbackEntry = [this.rest_trot_mode.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let trot_text = args['REST_TROT_MODE'];
+            // get its index in the list of menu items
+            let item_index = this.get_rest_states().indexOf(trot_text);
+            console.log(item_index);
+            msg = {"rest_trot_mode": item_index};
+            msg = JSON.stringify(msg);
+            window.socketr.send(msg);
+
+        }
     }
 
-    height(args) {
+    raise_body_mode(args) {
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
+            }
+        }
 
+        if (!connected) {
+            let callbackEntry = [this.raise_body_mode.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let activate_text = args['RAISE_BODY'];
+            // get its index in the list of menu items
+            let item_index = this.get_raise_body().indexOf(activate_text);
+            console.log(item_index);
+            msg = {"raise_body_mode": item_index};
+            msg = JSON.stringify(msg);
+            window.socketr.send(msg);
+
+        }
     }
 
-    roll(args) {
+    roll_body_mode(args) {
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
+            }
+        }
 
+        if (!connected) {
+            let callbackEntry = [this.roll_body_mode.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let activate_text = args['ROLL_BODY'];
+            // get its index in the list of menu items
+            let item_index = this.get_roll_body().indexOf(activate_text);
+            console.log(item_index);
+            msg = {"roll_body_mode": item_index};
+            msg = JSON.stringify(msg);
+            window.socketr.send(msg);
+
+        }
     }
 
+    motion_mode(args) {
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
+            }
+        }
+
+        if (!connected) {
+            let callbackEntry = [this.motion_mode.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let activate_text = args['MOTION'];
+            // get its index in the list of menu items
+            let item_index = this.get_motions().indexOf(activate_text);
+            console.log(item_index);
+            msg = {"motion_mode": item_index};
+            msg = JSON.stringify(msg);
+            window.socketr.send(msg);
+        }
+    }
+
+    turn_mode(args) {
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
+            }
+        }
+
+        if (!connected) {
+            let callbackEntry = [this.turn_mode.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let activate_text = args['TURN'];
+            // get its index in the list of menu items
+            let item_index = this.get_turns().indexOf(activate_text);
+            console.log(item_index);
+            msg = {"turn_mode": item_index};
+            msg = JSON.stringify(msg);
+            window.socketr.send(msg);
+        }
+    }
+
+    yaw_mode(args) {
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
+            }
+        }
+
+        if (!connected) {
+            let callbackEntry = [this.yaw_mode.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let activate_text = args['YAW'];
+            // get its index in the list of menu items
+            let item_index = this.get_yaw().indexOf(activate_text);
+            console.log(item_index);
+            msg = {"yaw_mode": item_index};
+            msg = JSON.stringify(msg);
+            window.socketr.send(msg);
+        }
+    }
+
+    pitch_mode(args) {
+        if (!connected) {
+            if (!connection_pending) {
+                this.connect();
+                connection_pending = true;
+            }
+        }
+
+        if (!connected) {
+            let callbackEntry = [this.pitch_mode.bind(this), args];
+            wait_open.push(callbackEntry);
+        } else {
+            let activate_text = args['PITCH'];
+            // get its index in the list of menu items
+            let item_index = this.get_pitch().indexOf(activate_text);
+            console.log(item_index);
+            msg = {"pitch_mode": item_index};
+            msg = JSON.stringify(msg);
+            window.socketr.send(msg);
+        }
+    }
 
     _setLocale() {
         let now_locale = '';
@@ -705,8 +874,6 @@ class Scratch3Pupper {
         // websocket event handlers
         window.socketr.onopen = function () {
 
-            digital_inputs.fill(0);
-            analog_inputs.fill(0);
             // connection complete
             connected = true;
             connect_attempt = true;
@@ -733,6 +900,7 @@ class Scratch3Pupper {
         };
 
         // reporter messages from the board
+        /*
         window.socketr.onmessage = function (message) {
             msg = JSON.parse(message.data);
             let report_type = msg["report"];
@@ -755,6 +923,7 @@ class Scratch3Pupper {
                 digital_inputs[sonar_report_pin] = value;
             }
         };
+        */
     }
 
 
