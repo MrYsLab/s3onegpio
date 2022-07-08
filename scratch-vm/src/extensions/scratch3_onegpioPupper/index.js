@@ -51,18 +51,20 @@ let the_locale = null;
 
 let ws_ip_address = '127.0.0.1';
 
-// common
-const FormDigitalWrite = {
-    'pt-br': 'Escrever Pino Digital [PIN]como[ON_OFF]',
-    'pt': 'Escrever Pino Digital[PIN]como[ON_OFF]',
-    'en': 'Write Digital Pin [PIN] [ON_OFF]',
-    'fr': 'Mettre la pin numérique[PIN]à[ON_OFF]',
-    'zh-tw': '腳位[PIN]數位輸出[ON_OFF]',
-    'zh-cn': '引脚[PIN]数字输出[ON_OFF]',
-    'pl': 'Ustaw cyfrowy Pin [PIN] na [ON_OFF]',
-    'de': 'Setze digitalen Pin [PIN] [ON_OFF]',
-    'ja': 'デジタル・ピン [PIN] に [ON_OFF] を出力',
+
+
+const FormIPBlockP = {
+    'pt-br': 'IP Address [IP_ADDR]',
+    'pt': 'IP Address [IP_ADDR]',
+    'en': 'IP Address [IP_ADDR]',
+    'fr': 'IP Address [IP_ADDR]',
+    'zh-tw': 'IP Address [IP_ADDR]',
+    'zh-cn': 'IP Address [IP_ADDR]',
+    'pl': 'IP Address [IP_ADDR]',
+    'de': 'IP Address [IP_ADDR]',
+    'ja': 'IP Address [IP_ADDR]',
 };
+
 
 const FormActivateMode = {
     'pt-br': '[ACTIVATE_MODE]',
@@ -78,14 +80,14 @@ const FormActivateMode = {
 
 const MENU_ACTIVATIONS = {
     'pt-br': ["Activate", "Deactivate"],
-    'pt':  ["Activate", "Deactivate"],
-    'en':  ["Activate", "Deactivate"],
-    'fr':  ["Activate", "Deactivate"],
-    'zh-tw':  ["Activate", "Deactivate"],
-    'zh-cn':  ["Activate", "Deactivate"],
-    'pl':  ["Activate", "Deactivate"],
+    'pt': ["Activate", "Deactivate"],
+    'en': ["Activate", "Deactivate"],
+    'fr': ["Activate", "Deactivate"],
+    'zh-tw': ["Activate", "Deactivate"],
+    'zh-cn': ["Activate", "Deactivate"],
+    'pl': ["Activate", "Deactivate"],
     'de': ["Activate", "Deactivate"],
-    'ja':  ["Activate", "Deactivate"],
+    'ja': ["Activate", "Deactivate"],
 };
 
 const FormRestTrot = {
@@ -108,7 +110,7 @@ const MENU_REST_TROT = {
     'zh-tw': ["Rest", "Trot"],
     'zh-cn': ["Rest", "Trot"],
     'pl': ["Rest", "Trot"],
-    'de':["Rest", "Trot"],
+    'de': ["Rest", "Trot"],
     'ja': ["Rest", "Trot"],
 };
 
@@ -125,17 +127,16 @@ const FormRaiseBodyPosition = {
 };
 
 const MENU_RAISE_BODY = {
-    'pt-br':  ["Raise Body", "Lower Body"],
-    'pt':   ["Raise Body", "Lower Body"],
+    'pt-br': ["Raise Body", "Lower Body"],
+    'pt': ["Raise Body", "Lower Body"],
     'en': ["Raise Body", "Lower Body"],
-    'fr':   ["Raise Body", "Lower Body"],
-    'zh-tw':   ["Raise Body", "Lower Body"],
-    'zh-cn':   ["Raise Body", "Lower Body"],
-    'pl':   ["Raise Body", "Lower Body"],
-    'de':   ["Raise Body", "Lower Body"],
-    'ja':   ["Raise Body", "Lower Body"],
+    'fr': ["Raise Body", "Lower Body"],
+    'zh-tw': ["Raise Body", "Lower Body"],
+    'zh-cn': ["Raise Body", "Lower Body"],
+    'pl': ["Raise Body", "Lower Body"],
+    'de': ["Raise Body", "Lower Body"],
+    'ja': ["Raise Body", "Lower Body"],
 };
-
 
 
 const FormRollBody = {
@@ -152,14 +153,14 @@ const FormRollBody = {
 
 const MENU_ROLL_BODY = {
     'pt-br': ["Roll Body Left", "Roll Body Right"],
-    'pt':  ["Roll Body Left", "Roll Body Right"],
+    'pt': ["Roll Body Left", "Roll Body Right"],
     'en': ["Roll Body Left", "Roll Body Right"],
-    'fr':  ["Roll Body Left", "Roll Body Right"],
-    'zh-tw':  ["Roll Body Left", "Roll Body Right"],
-    'zh-cn':  ["Roll Body Left", "Roll Body Right"],
-    'pl':  ["Roll Body Left", "Roll Body Right"],
-    'de':  ["Roll Body Left", "Roll Body Right"],
-    'ja':  ["Roll Body Left", "Roll Body Right"],
+    'fr': ["Roll Body Left", "Roll Body Right"],
+    'zh-tw': ["Roll Body Left", "Roll Body Right"],
+    'zh-cn': ["Roll Body Left", "Roll Body Right"],
+    'pl': ["Roll Body Left", "Roll Body Right"],
+    'de': ["Roll Body Left", "Roll Body Right"],
+    'ja': ["Roll Body Left", "Roll Body Right"],
 };
 
 
@@ -176,45 +177,106 @@ const FormMotion = {
 };
 
 const MENU_MOTION = {
-    'pt-br': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
-        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
-        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
-        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
-    'pt': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
-        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
-        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
-        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
-    'en': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
-        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
-        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
-        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
-    'fr': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
-        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
-        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
-        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
-    'zh-tw': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
-        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
-        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
-        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
-    'zh-cn': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
-        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
-        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
-        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
-    'pl': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
-        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
-        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
-        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
-    'de': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
-        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
-        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
-        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
-    'ja': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity",
-        "Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity",
-        "Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",
-        "Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
-
+    'pt-br': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity"],
+    'pt': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity"],
+    'en': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity"],
+    'fr': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity"],
+    'zh-tw': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity"],
+    'zh-cn': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity"],
+    'pl': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity"],
+    'de': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity"],
+    'ja': ["Move Forward At High Velocity", "Move Forward At Low Velocity", "Move Reverse At High Velocity", "Move Reverse At Low Velocity"],
 };
 
+
+const FormTurn = {
+    'pt-br': '[TURN]',
+    'pt': '[TURN]',
+    'en': '[TURN]',
+    'fr': '[TURN]',
+    'zh-tw': '[TURN]',
+    'zh-cn': '[TURN]',
+    'pl': '[TURN]',
+    'de': '[TURN]',
+    'ja': '[TURN]',
+};
+
+
+
+const MENU_TURN = {
+    'pt-br': ["Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity"],
+    'pt': ["Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity"],
+    'en': ["Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity"],
+    'fr': ["Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity"],
+    'zh-tw': ["Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity"],
+    'zh-cn': ["Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity"],
+    'pl': ["Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity"],
+    'de': ["Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity"],
+    'ja': ["Move Left At High Velocity", "Move Left At Low Velocity", "Move Right At High Velocity", "Move Right At Low Velocity"],
+};
+
+const FormYaw = {
+    'pt-br': '[YAW]',
+    'pt': '[YAW]',
+    'en': '[YAW]',
+    'fr': '[YAW]',
+    'zh-tw': '[YAW]',
+    'zh-cn': '[YAW]',
+    'pl': '[YAW]',
+    'de': '[YAW]',
+    'ja': '[YAW]',
+};
+
+const MENU_YAW = {
+    'pt-br': ["Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",],
+    'pt': ["Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",],
+    'en': ["Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",],
+    'fr': ["Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",],
+    'zh-tw': ["Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",],
+    'zh-cn': ["Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",],
+    'pl': ["Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",],
+    'de': ["Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",],
+    'ja': ["Yaw Left At Mid Angle", "Yaw Left At The Maximum Angle", "Yaw Right At Mid Angle", "Yaw Right At The Maximum Angle",],
+};
+
+const FormPitch = {
+    'pt-br': '[PITCH]',
+    'pt': '[PITCH]',
+    'en': '[PITCH]',
+    'fr': '[PITCH]',
+    'zh-tw': '[PITCH]',
+    'zh-cn': '[PITCH]',
+    'pl': '[PITCH]',
+    'de': '[PITCH]',
+    'ja': '[PITCH]',
+};
+
+const MENU_PITCH = {
+    'pt-br': ["Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'pt': ["Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'en': ["Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'fr': ["Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'zh-tw': ["Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'zh-cn': ["Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'pl': ["Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'de': ["Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+    'ja': ["Pitch Down At Mid Angle", "Pitch Down At The Maximum Angle", "Pitch Up At Mid Angle", "Pitch Up At The Maximum Angle"],
+};
+
+/*
+
+// common
+const FormDigitalWrite = {
+    'pt-br': 'Escrever Pino Digital [PIN]como[ON_OFF]',
+    'pt': 'Escrever Pino Digital[PIN]como[ON_OFF]',
+    'en': 'Write Digital Pin [PIN] [ON_OFF]',
+    'fr': 'Mettre la pin numérique[PIN]à[ON_OFF]',
+    'zh-tw': '腳位[PIN]數位輸出[ON_OFF]',
+    'zh-cn': '引脚[PIN]数字输出[ON_OFF]',
+    'pl': 'Ustaw cyfrowy Pin [PIN] na [ON_OFF]',
+    'de': 'Setze digitalen Pin [PIN] [ON_OFF]',
+    'ja': 'デジタル・ピン [PIN] に [ON_OFF] を出力',
+};
 
 const FormPwmWrite = {
     'pt-br': 'Escrever Pino PWM[PIN]com[VALUE]%',
@@ -301,20 +363,7 @@ const FormIPBlockE = {
     'de': 'ESP-8266 IP-Adresse [IP_ADDR]',
     'ja': 'ESP-8266 の IP アドレスを [IP_ADDR] に',
 };
-
-// pupper
-// Raspbery Pi Specific
-const FormIPBlockP = {
-    'pt-br': 'Pupper IP Address [IP_ADDR]',
-    'pt': 'Pupper IP Address [IP_ADDR]',
-    'en': 'Pupper IP Address [IP_ADDR]',
-    'fr': 'Pupper IP Address [IP_ADDR]',
-    'zh-tw': 'Pupper IP Address [IP_ADDR]',
-    'zh-cn': 'Pupper IP Address [IP_ADDR]',
-    'pl': 'Pupper IP Address [IP_ADDR]',
-    'de': 'Pupper IP Address [IP_ADDR]',
-    'ja': 'Pupper IP Address [IP_ADDR]',
-};
+*/
 
 
 
@@ -395,7 +444,7 @@ class Scratch3Pupper {
             color1: '#0C5986',
             color2: '#34B0F7',
             name: 'OneGpio Pupper',
-            blockIconURI:  ' data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAABtCAYAAACFvc7EAAAABHNCSVQICAgIfAhkiAAAABl0RVh0U29mdHdhcmUAZ25vbWUtc2NyZWVuc2hvdO8Dvz4AAAAtdEVYdENyZWF0aW9uIFRpbWUAV2VkIDA2IEp1bCAyMDIyIDAxOjQ4OjU5IFBNIEVEVGSyJrUAAAT8SURBVHic7dx/aJR1HMDx93PPbrfNnW6nO/arhdLZWDFjNAU1cP4RyfxDS0UoSQmTBWVYIUER/UIo/6loif4hhZISjApDR0FUri0EyXSoc6nbGvPXanM7d7t77p7+aDe3uCWu3XPbfT4vGOxuz+353N7P8+W5O5jx8NYDtt8XQaWvDO+sCK9sOZPqOVQSZczxRijwhVI9h0oiV6oHUMmnkQXQyAJoZAE0sgAaWQCNLIBGFkAjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCaGQBNLIAGlkAjSyARhZAIwugkQXQyAJoZAE0sgAaWQCNLIBGFkAjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCZDi9w1hkkEMXfueDq0MEAQw36yureMNn3NXvCR9pZOkz7YTsxD83XC48s7MpDvipfqycjU8vIDB73CS07f6C9e/dIAqQWcTOn9eyqSzxHPaVM2yt/oGWYQAX8194gi9f82NOySzJ5eCZHKO7t4ttJ1rZFQ+cRHYsRqgvyMUTlzj89lE2rPiGA7+l5l8+p3oWRyLbVpCGc62sO91N87DNBAf85BkGHm8Wefm3v7w5LlxjTsrIH5d5f/Nxfuyb6p1P41lGOLJcR/qvsLsnyADgycpjS4mbxovXuTRVtQ0Ptfs289ZKc8ydUfrOdbB/5/fsbw4RA6Ld59n3eRXL6+Yk7+ieTrOMcG65NtwsKrmPQ9Xl1Pk8DhxdJnnlC9j+yRKWZI/cZUc529TDwJQvJdN7Fkcim548djxUyWcL5xFw+FLP5S9k0b23n6Z1NUhvzNkZUj2LI39yM3cu65zYUUJRwmOucYxMk8y7u5Cf8bOk/etkq62Tls746WKQG8inIEXPOlWzOP462SmxcIjOX9rY8+pJzsbPHlcONauL8QibJT0ix0I0bNxDw39uZJC/cjHP1rjlzDIi7ZdrAAwT/4olfFhfQal5583TbZb0OJMNg+z8HLyja5+B4TLweHMorShk+ZoK1j7qwzvukDYwTYPR6x7b4tbQxLuIDYQZHHMl7PZMcH5MapbkSpPIHlbVb/rXGxB3fBB587JuL2VWPxfOR+D+zIRbB89co8OKP9SgoGhW4mVwUrMkl4zlegJ5lX5K44e5HeanT8/RaSXYMNzL4b0dDMbfuMjwUVWdRcpeid0l0ZHNBwLUVpijsYLHm3mu7lea2oexAGyL66fa+eipI3x80hp9zz13aQWrAzMlsUPLdf+f3ezqucXoSWLd4kr8eztKS0c7L/eM3DYyqZlfRm22A3/EjLk8+eaDHN14ivZhwLa4/FUT275uwsx047YthsPjP1Bx+e5h+7sVlMyg08ORyKGhfhqv3STxh2sxuvp66YrfNLIoLi2jNjvhxlMud9lS6vfa7HjxNK1/jQS1IToc+edz5jFyAgFe2lPDhoUzqDDpcuH1v7goXvUIBxeX8+3Bsxz7rpvW8wPcuGkRdWUw2+9lfmURy2rLeXxNIf7E12XTmrHm9b32O8+fSvUcKolm1rqjJkUjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCaGQBNLIAGlkAjSyARhZAIwugkQXQyAJoZAE0sgAaWQCNLIBGFkAjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCaGQBNLIAGlkAjSyARhZAIwugkQXQyAL8DWN+esfzSQVfAAAAAElFTkSuQmCC',
+            blockIconURI: ' data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHkAAABtCAYAAACFvc7EAAAABHNCSVQICAgIfAhkiAAAABl0RVh0U29mdHdhcmUAZ25vbWUtc2NyZWVuc2hvdO8Dvz4AAAAtdEVYdENyZWF0aW9uIFRpbWUAV2VkIDA2IEp1bCAyMDIyIDAxOjQ4OjU5IFBNIEVEVGSyJrUAAAT8SURBVHic7dx/aJR1HMDx93PPbrfNnW6nO/arhdLZWDFjNAU1cP4RyfxDS0UoSQmTBWVYIUER/UIo/6loif4hhZISjApDR0FUri0EyXSoc6nbGvPXanM7d7t77p7+aDe3uCWu3XPbfT4vGOxuz+353N7P8+W5O5jx8NYDtt8XQaWvDO+sCK9sOZPqOVQSZczxRijwhVI9h0oiV6oHUMmnkQXQyAJoZAE0sgAaWQCNLIBGFkAjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCaGQBNLIAGlkAjSyARhZAIwugkQXQyAJoZAE0sgAaWQCNLIBGFkAjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCZDi9w1hkkEMXfueDq0MEAQw36yureMNn3NXvCR9pZOkz7YTsxD83XC48s7MpDvipfqycjU8vIDB73CS07f6C9e/dIAqQWcTOn9eyqSzxHPaVM2yt/oGWYQAX8194gi9f82NOySzJ5eCZHKO7t4ttJ1rZFQ+cRHYsRqgvyMUTlzj89lE2rPiGA7+l5l8+p3oWRyLbVpCGc62sO91N87DNBAf85BkGHm8Wefm3v7w5LlxjTsrIH5d5f/Nxfuyb6p1P41lGOLJcR/qvsLsnyADgycpjS4mbxovXuTRVtQ0Ptfs289ZKc8ydUfrOdbB/5/fsbw4RA6Ld59n3eRXL6+Yk7+ieTrOMcG65NtwsKrmPQ9Xl1Pk8DhxdJnnlC9j+yRKWZI/cZUc529TDwJQvJdN7Fkcim548djxUyWcL5xFw+FLP5S9k0b23n6Z1NUhvzNkZUj2LI39yM3cu65zYUUJRwmOucYxMk8y7u5Cf8bOk/etkq62Tls746WKQG8inIEXPOlWzOP462SmxcIjOX9rY8+pJzsbPHlcONauL8QibJT0ix0I0bNxDw39uZJC/cjHP1rjlzDIi7ZdrAAwT/4olfFhfQal5583TbZb0OJMNg+z8HLyja5+B4TLweHMorShk+ZoK1j7qwzvukDYwTYPR6x7b4tbQxLuIDYQZHHMl7PZMcH5MapbkSpPIHlbVb/rXGxB3fBB587JuL2VWPxfOR+D+zIRbB89co8OKP9SgoGhW4mVwUrMkl4zlegJ5lX5K44e5HeanT8/RaSXYMNzL4b0dDMbfuMjwUVWdRcpeid0l0ZHNBwLUVpijsYLHm3mu7lea2oexAGyL66fa+eipI3x80hp9zz13aQWrAzMlsUPLdf+f3ezqucXoSWLd4kr8eztKS0c7L/eM3DYyqZlfRm22A3/EjLk8+eaDHN14ivZhwLa4/FUT275uwsx047YthsPjP1Bx+e5h+7sVlMyg08ORyKGhfhqv3STxh2sxuvp66YrfNLIoLi2jNjvhxlMud9lS6vfa7HjxNK1/jQS1IToc+edz5jFyAgFe2lPDhoUzqDDpcuH1v7goXvUIBxeX8+3Bsxz7rpvW8wPcuGkRdWUw2+9lfmURy2rLeXxNIf7E12XTmrHm9b32O8+fSvUcKolm1rqjJkUjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCaGQBNLIAGlkAjSyARhZAIwugkQXQyAJoZAE0sgAaWQCNLIBGFkAjC6CRBdDIAmhkATSyABpZAI0sgEYWQCMLoJEF0MgCaGQBNLIAGlkAjSyARhZAIwugkQXQyAL8DWN+esfzSQVfAAAAAElFTkSuQmCC',
             blocks: [
                 {
                     opcode: 'ip_address',
@@ -406,7 +455,7 @@ class Scratch3Pupper {
                     arguments: {
                         IP_ADDR: {
                             type: ArgumentType.NUMBER,
-                            defaultValue: '',
+                            defaultValue: "Enter Robot's IP Address",
                             //menu: "digital_pins"
                         },
 
@@ -441,7 +490,7 @@ class Scratch3Pupper {
                 },
 
                 {
-                    opcode: 'go_raise_body',
+                    opcode: 'raise_body',
                     blockType: BlockType.COMMAND,
                     text: FormRaiseBodyPosition[the_locale],
 
@@ -455,7 +504,7 @@ class Scratch3Pupper {
                 },
 
                 {
-                    opcode: 'go_roll_body',
+                    opcode: 'roll_body',
                     blockType: BlockType.COMMAND,
                     text: FormRollBody[the_locale],
 
@@ -481,6 +530,42 @@ class Scratch3Pupper {
                         },
                     }
                 },
+                {
+                    opcode: 'turn',
+                    blockType: BlockType.COMMAND,
+                    text: FormTurn[the_locale],
+                    arguments: {
+                        TURN: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: MENU_TURN[the_locale][0],
+                            menu: "turns"
+                        },
+                    }
+                },
+                {
+                    opcode: 'yaw',
+                    blockType: BlockType.COMMAND,
+                    text: FormYaw[the_locale],
+                    arguments: {
+                        YAW: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: MENU_YAW[the_locale][0],
+                            menu: "yaws"
+                        },
+                    }
+                },
+                {
+                    opcode: 'pitch',
+                    blockType: BlockType.COMMAND,
+                    text: FormPitch[the_locale],
+                    arguments: {
+                        PITCH: {
+                            type: ArgumentType.NUMBER,
+                            defaultValue: MENU_PITCH[the_locale][0],
+                            menu: "pitches"
+                        },
+                    }
+                },
 
             ],
             menus: {
@@ -489,6 +574,9 @@ class Scratch3Pupper {
                 raise_body: 'get_raise_body',
                 roll_body: 'get_roll_body',
                 motions: 'get_motions',
+                turns: 'get_turns',
+                yaws: 'get_yaw',
+                pitches: 'get_pitch'
 
 
             }
@@ -500,7 +588,7 @@ class Scratch3Pupper {
         return MENU_ACTIVATIONS[the_locale];
     }
 
-    get_rest_states(){
+    get_rest_states() {
         return MENU_REST_TROT[the_locale];
     }
 
@@ -508,161 +596,166 @@ class Scratch3Pupper {
         return MENU_RAISE_BODY[the_locale];
     }
 
-    get_roll_body(){
+    get_roll_body() {
         return MENU_ROLL_BODY[the_locale];
     }
 
-    get_motions(){
+    get_motions() {
         return MENU_MOTION[the_locale];
+    }
 
-        }
+    get_turns() {
+        return MENU_TURN[the_locale];
+    }
+
+    get_yaw() {
+        return MENU_YAW[the_locale];
+    }
+
+    get_pitch() {
+        return MENU_PITCH[the_locale];
+    }
+
 // The block handlers
 
 // command blocks
 
-ip_address(args)
-{
-    if (args['IP_ADDR']) {
-        ws_ip_address = args['IP_ADDR'];
-        if (!connected) {
-            if (!connection_pending) {
-                this.connect();
-                connection_pending = true;
+    ip_address(args) {
+        if (args['IP_ADDR']) {
+            ws_ip_address = args['IP_ADDR'];
+            if (!connected) {
+                if (!connection_pending) {
+                    this.connect();
+                    connection_pending = true;
+                }
             }
+
         }
 
     }
 
-}
+    mode(args) {
 
-mode(args)
-{
-
-}
-
-move(args){
-
-}
-
-height(args){
-
-}
-
-roll(args){
-
-}
-
-
-_setLocale()
-{
-    let now_locale = '';
-    switch (formatMessage.setup().locale) {
-        case 'pt-br':
-        case 'pt':
-            now_locale = 'pt-br';
-            break;
-        case 'en':
-            now_locale = 'en';
-            break;
-        case 'fr':
-            now_locale = 'fr';
-            break;
-        case 'zh-tw':
-            now_locale = 'zh-tw';
-            break;
-        case 'zh-cn':
-            now_locale = 'zh-cn';
-            break;
-        case 'pl':
-            now_locale = 'pl';
-            break;
-        case 'ja':
-            now_locale = 'ja';
-            break;
-        case 'de':
-            now_locale = 'de';
-            break;
-        default:
-            now_locale = 'en';
-            break;
     }
-    return now_locale;
-}
+
+    move(args) {
+
+    }
+
+    height(args) {
+
+    }
+
+    roll(args) {
+
+    }
+
+
+    _setLocale() {
+        let now_locale = '';
+        switch (formatMessage.setup().locale) {
+            case 'pt-br':
+            case 'pt':
+                now_locale = 'pt-br';
+                break;
+            case 'en':
+                now_locale = 'en';
+                break;
+            case 'fr':
+                now_locale = 'fr';
+                break;
+            case 'zh-tw':
+                now_locale = 'zh-tw';
+                break;
+            case 'zh-cn':
+                now_locale = 'zh-cn';
+                break;
+            case 'pl':
+                now_locale = 'pl';
+                break;
+            case 'ja':
+                now_locale = 'ja';
+                break;
+            case 'de':
+                now_locale = 'de';
+                break;
+            default:
+                now_locale = 'en';
+                break;
+        }
+        return now_locale;
+    }
 
 // end of block handlers
 
 // helpers
-connect()
-{
-    if (connected) {
-        // ignore additional connection attempts
-        return;
-    } else {
-        connect_attempt = true;
-        let url = "ws://" + ws_ip_address + ":9007";
-        console.log(url);
-        window.socketr = new WebSocket(url);
-        msg = JSON.stringify({"id": "to_pup_gateway"});
+    connect() {
+        if (connected) {
+            // ignore additional connection attempts
+            return;
+        } else {
+            connect_attempt = true;
+            let url = "ws://" + ws_ip_address + ":9007";
+            console.log(url);
+            window.socketr = new WebSocket(url);
+            msg = JSON.stringify({"id": "to_pup_gateway"});
+        }
+
+
+        // websocket event handlers
+        window.socketr.onopen = function () {
+
+            digital_inputs.fill(0);
+            analog_inputs.fill(0);
+            // connection complete
+            connected = true;
+            connect_attempt = true;
+            // the message is built above
+            try {
+                //ws.send(msg);
+                window.socketr.send(msg);
+
+            } catch (err) {
+                // ignore this exception
+            }
+            for (let index = 0; index < wait_open.length; index++) {
+                let data = wait_open[index];
+                data[0](data[1]);
+            }
+        };
+
+        window.socketr.onclose = function () {
+            if (alerted === false) {
+                alerted = true;
+                alert(FormWSClosed[the_locale]);
+            }
+            connected = false;
+        };
+
+        // reporter messages from the board
+        window.socketr.onmessage = function (message) {
+            msg = JSON.parse(message.data);
+            let report_type = msg["report"];
+            let pin = null;
+            let value = null;
+
+            // types - digital, analog, sonar
+            if (report_type === 'digital_input') {
+                pin = msg['pin'];
+                pin = parseInt(pin, 10);
+                value = msg['value'];
+                digital_inputs[pin] = value;
+            } else if (report_type === 'analog_input') {
+                pin = msg['pin'];
+                pin = parseInt(pin, 10);
+                value = msg['value'];
+                analog_inputs[pin] = value;
+            } else if (report_type === 'sonar_data') {
+                value = msg['value'];
+                digital_inputs[sonar_report_pin] = value;
+            }
+        };
     }
-
-
-    // websocket event handlers
-    window.socketr.onopen = function () {
-
-        digital_inputs.fill(0);
-        analog_inputs.fill(0);
-        // connection complete
-        connected = true;
-        connect_attempt = true;
-        // the message is built above
-        try {
-            //ws.send(msg);
-            window.socketr.send(msg);
-
-        } catch (err) {
-            // ignore this exception
-        }
-        for (let index = 0; index < wait_open.length; index++) {
-            let data = wait_open[index];
-            data[0](data[1]);
-        }
-    };
-
-    window.socketr.onclose = function () {
-        digital_inputs.fill(0);
-        analog_inputs.fill(0);
-        pin_modes.fill(-1);
-        if (alerted === false) {
-            alerted = true;
-            alert(FormWSClosed[the_locale]);
-        }
-        connected = false;
-    };
-
-    // reporter messages from the board
-    window.socketr.onmessage = function (message) {
-        msg = JSON.parse(message.data);
-        let report_type = msg["report"];
-        let pin = null;
-        let value = null;
-
-        // types - digital, analog, sonar
-        if (report_type === 'digital_input') {
-            pin = msg['pin'];
-            pin = parseInt(pin, 10);
-            value = msg['value'];
-            digital_inputs[pin] = value;
-        } else if (report_type === 'analog_input') {
-            pin = msg['pin'];
-            pin = parseInt(pin, 10);
-            value = msg['value'];
-            analog_inputs[pin] = value;
-        } else if (report_type === 'sonar_data') {
-            value = msg['value'];
-            digital_inputs[sonar_report_pin] = value;
-        }
-    };
-}
 
 
 }
