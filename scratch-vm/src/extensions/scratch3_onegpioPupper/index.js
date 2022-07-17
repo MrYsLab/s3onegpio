@@ -49,7 +49,7 @@ let wait_open = [];
 
 let the_locale = null;
 
-const ws_ip_address = '127.0.0.1';
+let ws_ip_address = '127.0.0.1';
 
 
 const FormIPBlockP = {
