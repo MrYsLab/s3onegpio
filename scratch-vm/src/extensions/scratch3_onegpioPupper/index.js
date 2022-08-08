@@ -51,7 +51,6 @@ let the_locale = null;
 
 let ws_ip_address = '127.0.0.1';
 
-
 const FormIPBlockP = {
     'pt-br': '[IP_ADDR]',
     'pt': '[IP_ADDR]',
@@ -618,6 +617,7 @@ class Scratch3Pupper {
 
     ip_address(args) {
         if (!connected) {
+            ws_ip_address = args['IP_ADDR'];
             if (!connection_pending) {
                 this.connect();
                 connection_pending = true;
