@@ -37,3 +37,12 @@
 
 ## RoboHAT MMI Blocks
 ![](./images/robohat_blocks.png)
+
+# SPECIAL NOTE FOR BUILDING
+Make sure you are using:
+
+npm 9.6.3
+
+nodejs v19.9.0
+
+yarn 1.22.19
