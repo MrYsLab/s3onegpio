@@ -44,7 +44,7 @@ const ANALOG_INPUT = 7;
 let pin_modes = new Array(30).fill(-1);
 
 // has an websocket message already been received
-let alerted = false;
+let alerted = true;
 
 let connection_pending = false;
 
@@ -272,7 +272,7 @@ class Scratch3RpiOneGPIO {
 
                     arguments: {
                         IP_ADDR: {
-                            type: ArgumentType.NUMBER,
+                            type: ArgumentType.STRING,
                             defaultValue: '',
                             //menu: "digital_pins"
                         },
@@ -480,6 +480,9 @@ class Scratch3RpiOneGPIO {
 
             let value = args['VALUE'];
             value = parseInt(value, 10);
+            if (isNaN(value)) {
+              return;
+            }
 
             // calculate the value based on percentage
             value = the_max * (value / 100);
@@ -675,7 +678,13 @@ class Scratch3RpiOneGPIO {
             window.socketr = new WebSocket(url);
             msg = JSON.stringify({"id": "to_rpi_gateway"});
         }
-
+        window.socketr.onerror=function(event){
+            digital_inputs.fill(0);
+            analog_inputs.fill(0);
+            pin_modes.fill(-1);
+            connected = false;
+            connection_pending = false;
+        }
 
         // websocket event handlers
         window.socketr.onopen = function () {
@@ -685,6 +694,7 @@ class Scratch3RpiOneGPIO {
             // connection complete
             connected = true;
             connect_attempt = true;
+            connection_pending = false;
             // the message is built above
             try {
                 //ws.send(msg);
@@ -707,6 +717,7 @@ class Scratch3RpiOneGPIO {
                 alerted = true;
                 alert(FormWSClosed[the_locale]);}
             connected = false;
+            connection_pending = false;
         };
 
         // reporter messages from the board
