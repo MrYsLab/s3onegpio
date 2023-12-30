@@ -133,15 +133,15 @@ const FormAnalogRead = {
 };
 
 const FormDigitalRead = {
-    'pt-br': 'Ler Pino Digital [PIN]',
-    'pt': 'Ler Pino Digital [PIN]',
-    'en': 'Read Digital Pin [PIN]',
-    'fr': 'Lecture numérique [PIN]',
-    'zh-tw': '讀取數位腳位[PIN]',
-    'zh-cn': '读取数字引脚[PIN]',
-    'pl': 'Odczytaj cyfrowy Pin [PIN]',
-    'de': 'Lies digitalen Pin [PIN]',
-    'ja': 'デジタル・ピン [PIN] から入力',
+    'pt-br': 'Ler Pino Digital [PIN] [PULL]',
+    'pt': 'Ler Pino Digital [PIN] [PULL]',
+    'en': 'Read Digital Pin [PIN] [PULL]',
+    'fr': 'Lecture numérique [PIN] [PULL]',
+    'zh-tw': '讀取數位腳位[PIN] [PULL]',
+    'zh-cn': '读取数字引脚[PIN] [PULL]',
+    'pl': 'Odczytaj cyfrowy Pin [PIN] [PULL]',
+    'de': 'Lies digitalen Pin [PIN] [PULL]',
+    'ja': 'デジタル・ピン [PIN] から入力 [PULL]',
 };
 
 const FormSonarRead = {

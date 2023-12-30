@@ -1,3 +1,6 @@
+nvm use  19.9.0
+export NODE_OPTIONS=--openssl-legacy-provider
+
 1. cd to scratch-gui
 2. yarn unlink scratch-vm
 3. cd to scratch-vm
@@ -7,4 +10,4 @@
 7. cd to scratch-gui
 8. yarn link scratch-vm
 9. yarn --force install
-10 yarn start (to test)s
+10 yarn start (to test)
