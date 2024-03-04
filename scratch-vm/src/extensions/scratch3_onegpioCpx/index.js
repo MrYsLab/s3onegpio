@@ -2,7 +2,7 @@
 This is the Scratch 3 extension to remotely control a
 Circuit Playground Express
 
- Copyright (c) 2020 Alan Yorinks All rights reserved.
+ Copyright (c) 2020-2024 Alan Yorinks All rights reserved.
 
  This program is free software; you can redistribute it and/or
  modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -55,6 +55,7 @@ const MENU_LIGHT_TEMPERATURE = {
     'fr': ['lumière', 'température'],
     'pl': ['światło', 'temperatura'],
     'ja': ['光量', '温度'],
+    'nl': ['licht', 'temperatuur'],
 };
 
 const MENU_PUSH_BUTTONS = {
@@ -66,6 +67,7 @@ const MENU_PUSH_BUTTONS = {
     'fr': ['A', 'B'],
     'pl': ['A', 'B'],
     'ja': ['A', 'B'],
+    'nl': ['A', 'B'],
 };
 
 const MENU_PUSH_BUTTON_STATE = {
@@ -77,6 +79,7 @@ const MENU_PUSH_BUTTON_STATE = {
     'fr': ['appuyé', 'relaché'],
     'pl': ["wciśnięty", "zwolniony"],
     'ja': ["押下", "解放"],
+    'nl': ['ingedrukt', 'losgelaten'],
 };
 
 const MENU_SLIDE_SWITCH_POSITION = {
@@ -88,6 +91,7 @@ const MENU_SLIDE_SWITCH_POSITION = {
     'fr': ['gauche', 'droite'],
     'pl': ['lewo', 'prawo'],
     'ja': ['左へ', '右へ'],
+    'nl': ['links', 'rechts'],
 };
 
 const MENU_TOUCH_PAD_STATES = {
@@ -99,6 +103,7 @@ const MENU_TOUCH_PAD_STATES = {
     'fr': ['touché', 'relaché'],
     'pl': ["dotknięty", "zwolniony"],
     'ja': ["接触", "解放"],
+    'nl': ['aangeraakt', 'losgelaten'],
 };
 
 const MENU_TILT_POSITION = {
@@ -110,6 +115,7 @@ const MENU_TILT_POSITION = {
     'fr': ['horizontale', 'en haut', 'en bas', 'à gauche', 'à droite'],
     'pl': ['płasko', 'w górę', 'w dół', 'w lewo', 'w prawo'],
     'ja': ['水平', '上向', '下向', '左向', '右向'],
+    'nl': ['plat', 'boven', 'beneden', 'links', 'rechts'],
 };
 
 const MENU_BOARD_LED = {
@@ -121,6 +127,7 @@ const MENU_BOARD_LED = {
     'fr': ['allumée', 'éteinte'],
     'pl': ['włącz', 'wyłącz'],
     'ja': ['点灯', '滅灯'],
+    'nl': ['aan', 'uit'],
 };
 
 // HAT BLOCK DESCRIPTORS
@@ -133,6 +140,7 @@ const HAT_BUTTONS = {
     'fr': 'si [BUTTON] est [PRESSED_RELEASED]',
     'pl': 'Kiedy [BUTTON] jest [PRESSED_RELEASED]',
     'ja': '[BUTTON] が [PRESSED_RELEASED] のとき',
+    'nl': 'Als [BUTTON] wordt [PRESSED_RELEASED]',
 };
 
 const HAT_SLIDE_SWITCH = {
@@ -144,6 +152,7 @@ const HAT_SLIDE_SWITCH = {
     'fr': "Si l'interrupteur à glissière est déplacé à [LEFT_RIGHT]",
     'pl': "kiedy suwak jest przesunięty w [LEFT_RIGHT]",
     'ja': "つまみスイッチが [LEFT_RIGHT] 動かされたとき",
+    'nl': 'Als schuif naar [LEFT_RIGHT] is bewogen',
 };
 
 const HAT_LIGHT_TEMPERATURE = {
@@ -155,6 +164,7 @@ const HAT_LIGHT_TEMPERATURE = {
     'fr': 'si [SENSOR] [COMPARISON] [VALUE]',
     'pl': 'Kiedy [SENSOR] [COMPARISON] [VALUE]',
     'ja': '[SENSOR] が [COMPARISON] [VALUE] のとき',
+    'nl': 'Als [SENSOR] [COMPARISON] [VALUE]',
 };
 
 const HAT_TILTED = {
@@ -166,6 +176,7 @@ const HAT_TILTED = {
     'fr': 'Si la carte CPX est [TILT_POSITION]',
     'pl': 'Kiedy pozycja CPX jest [TILT_POSITION]',
     'ja': 'CPX の姿勢が [TILT_POSITION] のとき',
+    'nl': 'Als CPX positie [TILT_POSITION] is',
 };
 
 const HAT_LOUD_SOUND = {
@@ -177,6 +188,7 @@ const HAT_LOUD_SOUND = {
     'fr': 'Si un son fort est détecté',
     'pl': 'Kiedy wykryto głośny dźwięk',
     'ja': '大音量が検出されたとき',
+    'nl': 'Als een hard geluid wordt gedetecteerd',
 };
 
 const HAT_TOUCHPAD = {
@@ -188,6 +200,7 @@ const HAT_TOUCHPAD = {
     'fr': 'Si le touchpad [TOUCHPAD] est [TOUCH_STATE]',
     'pl': 'Kiedy panel dotykowy [TOUCHPAD] jest [TOUCH_STATE]',
     'ja': 'タッチパッド [TOUCHPAD] が [TOUCH_STATE] のとき',
+    'nl': 'Als touchpad [TOUCHPAD] wordt [TOUCH_STATE]',
 };
 
 // boolean blocks
@@ -200,6 +213,7 @@ const BOOL_AB_SWITCH = {
     'fr': '[BUTTON] [PRESSED_RELEASED]',
     'pl': '[BUTTON] [PRESSED_RELEASED]',
     'ja': '[BUTTON] が [PRESSED_RELEASED]',
+    'nl': '[BUTTON] [PRESSED_RELEASED]',
 };
 
 const BOOL_SLIDE_SWITCH = {
@@ -211,6 +225,8 @@ const BOOL_SLIDE_SWITCH = {
     'fr': 'interrupteur à glissière à [LEFT_RIGHT]',
     'pl': 'suwak na [LEFT_RIGHT]',
     'ja': '[LEFT_RIGHT] のつまみスイッチ',
+    'nl': 'schuif staat naar [LEFT_RIGHT]',
+
 };
 
 const BOOL_LIGHT_TEMP = {
@@ -222,6 +238,7 @@ const BOOL_LIGHT_TEMP = {
     'fr': '[SENSOR] est [COMPARISON] [VALUE]',
     'pl': '[SENSOR] jest [COMPARISON] [VALUE]',
     'ja': '[SENSOR] が [COMPARISON] [VALUE]',
+    'nl': '[SENSOR] is [COMPARISON] [VALUE]',
 };
 
 const BOOL_TILTED = {
@@ -233,6 +250,7 @@ const BOOL_TILTED = {
     'fr': 'La carte CPX est [TILT_POSITION]',
     'pl': 'pozycja CPX jest [TILT_POSITION]',
     'ja': 'CPX の姿勢が [TILT_POSITION]',
+    'nl': 'CPX positie staat naar [TILT_POSITION]',
 };
 
 const BOOL_TOUCH_PAD = {
@@ -244,6 +262,7 @@ const BOOL_TOUCH_PAD = {
     'fr': 'le touchpad [TOUCHPAD] est [TOUCH_STATE]',
     'pl': 'panel dotykowy [TOUCHPAD] jest [TOUCH_STATE]',
     'ja': 'タッチパッド [TOUCHPAD] が [TOUCH_STATE]',
+    'nl': 'touchpad [TOUCHPAD] wordt [TOUCH_STATE]',
 };
 
 const REPORTER_AB_SWITCH = {
@@ -255,6 +274,7 @@ const REPORTER_AB_SWITCH = {
     'fr': 'Bouton [BUTTON]',
     'pl': 'Przycisk [BUTTON]',
     'ja': 'ボタン [BUTTON]',
+    'nl': 'Knop [BUTTON]',
 };
 
 const REPORTER_SLIDE_SWITCH = {
@@ -266,6 +286,7 @@ const REPORTER_SLIDE_SWITCH = {
     'fr': 'Interrupteur à glissière',
     'pl': 'Suwak',
     'ja': 'つまみスイッチ',
+    'nl': 'Schuif',
 
 };
 
@@ -278,6 +299,7 @@ const REPORTER_LIGHT_TEMP = {
     'fr': '[SENSOR]',
     'pl': '[SENSOR]',
     'ja': '[SENSOR]',
+    'nl': '[SENSOR]',
 };
 
 const REPORTER_TILT = {
@@ -289,6 +311,7 @@ const REPORTER_TILT = {
     'fr': 'La carte CPX est [TILT_POSITION]',
     'pl': 'pozycja CPX jest [TILT_POSITION]',
     'ja': 'CPX の姿勢が [TILT_POSITION]',
+    'nl': 'CPX positie staat naar [TILT_POSITION]',
 };
 
 const REPORTER_TOUCHPAD = {
@@ -300,6 +323,8 @@ const REPORTER_TOUCHPAD = {
     'fr': 'le touchpad [TOUCHPAD]',
     'pl': 'płytka dotykowa [TOUCHPAD]',
     'ja': 'タッチパッド [TOUCHPAD]',
+    'nl': 'touchpad [TOUCHPAD]',
+
 };
 
 // command blocks
@@ -312,6 +337,7 @@ const COMMAND_SET_PIXEL = {
     'fr': 'Pixel [NEOPIXEL] R [RED] V [GREEN] B [BLUE]',
     'pl': 'Pixel [NEOPIXEL] R [RED] G [GREEN] B [BLUE]',
     'ja': 'カラー LED [NEOPIXEL] を R [RED] G [GREEN] B [BLUE] に',
+    'nl': 'Pixel [NEOPIXEL] R [RED] G [GREEN] B [BLUE]',
 };
 
 const COMMAND_TONE = {
@@ -323,6 +349,8 @@ const COMMAND_TONE = {
     'fr': 'Son [FREQ] Hz [DURATION] ms',
     'pl': 'Dźwięk [FREQ] Hz [DURATION] ms',
     'ja': '音調を [FREQ] Hz [DURATION] ms に',
+    'nl': 'Toon [FREQ] Hz [DURATION] ms',
+
 };
 
 const COMMAND_BOARD_LED = {
@@ -334,6 +362,7 @@ const COMMAND_BOARD_LED = {
     'fr': 'LED D13 [LED_STATE]',
     'pl': 'Dioda LED płytki [LED_STATE]',
     'ja': 'ボード LED を [LED_STATE] に',
+    'nl': 'LED D13 [LED_STATE]',
 };
 
 const FormWSClosed = {
@@ -345,6 +374,7 @@ const FormWSClosed = {
     'fr': "La connexion au WebSocket est fermée.",
     'pl': "Połączenie WebSocket jest zamknięte.",
     'ja': "ウェブソケット接続が切断されています",
+    'nl': "WebSocket connectie is afgesloten.",
 };
 
 let data_store = {
@@ -1094,6 +1124,9 @@ class Scratch3CpxOneGPIO {
                 break;
             case 'ja':
                 now_locale='ja';
+                break;
+            case 'nl':
+                now_locale='nl';
                 break;
             default:
                 now_locale = 'en';
