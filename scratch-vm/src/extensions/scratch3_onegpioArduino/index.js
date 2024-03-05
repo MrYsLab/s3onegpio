@@ -83,6 +83,7 @@ const FormDigitalWrite = {
     'pl': 'Ustaw cyfrowy Pin [PIN] na [ON_OFF]',
     'de': 'Setze digitalen Pin [PIN] [ON_OFF]',
     'ja': 'デジタル・ピン [PIN] に [ON_OFF] を出力',
+    'nl': 'Schrijf Digitale Pin [PIN] [ON_OFF]',
 };
 
 const FormPwmWrite = {
@@ -95,6 +96,7 @@ const FormPwmWrite = {
     'pl': 'Ustaw PWM Pin [PIN] na [VALUE]%',
     'de': 'Setze PWM-Pin [PIN] [VALUE]%',
     'ja': 'PWM ピン [PIN] に [VALUE]% を出力',
+    'nl': 'Schrijf PWM Pin [PIN] [VALUE]%',
 };
 
 const FormTone = {
@@ -107,6 +109,7 @@ const FormTone = {
     'pl': 'Ustaw brzęczyk na Pinie [PIN] na [FREQ] Hz i [DURATION] ms%',
     'de': 'Spiele Ton am Pin [PIN] [FREQ] Hz [DURATION] ms',
     'ja': '音調ピン [PIN] を [FREQ] Hz [DURATION] ms に',
+    'nl': 'Zet toon van pin [PIN] op [FREQ] Hz voor [DURATION] ms',
 };
 
 const FormServo = {
@@ -119,6 +122,7 @@ const FormServo = {
     'pl': 'Ustaw silnik servo na Pinie [PIN] na [ANGLE]°',
     'de': 'Setze Servo-Pin [PIN] [ANGLE]°',
     'ja': 'サーボ・ピン [PIN] に [ANGLE] 度を出力',
+    'nl': 'Schrijf Servo Pin [PIN] [ANGLE]° graden',
 };
 
 const FormAnalogRead = {
@@ -131,6 +135,7 @@ const FormAnalogRead = {
     'pl': 'Odczytaj analogowy Pin [PIN]',
     'de': 'Lies analogen Pin [PIN]',
     'ja': 'アナログ・ピン [PIN] から入力',
+    'nl': 'Lees Analoge Pin [PIN]',
 };
 
 const FormDigitalRead = {
@@ -143,6 +148,7 @@ const FormDigitalRead = {
     'pl': 'Odczytaj cyfrowy Pin [PIN]',
     'de': 'Lies digitalen Pin [PIN]',
     'ja': 'デジタル・ピン [PIN] から入力',
+    'nl': 'Lees Digitale Pin [PIN]',
 };
 
 const FormSonarRead = {
@@ -155,6 +161,7 @@ const FormSonarRead = {
     'pl': 'Odczytaj odległość: Sonar T [TRIGGER_PIN]  E [ECHO_PIN]',
     'de': 'Lies Sonar T [TRIGGER_PIN]  E [ECHO_PIN]',
     'ja': '超音波測距器からトリガ [TRIGGER_PIN] とエコー [ECHO_PIN] で入力',
+    'nl': 'Lees SONAR T [TRIGGER_PIN] E [ECHO_IPN]',
 };
 
 // ESP-8266 specific
@@ -169,6 +176,7 @@ const FormIPBlockE = {
     'pl': 'Adres IP ESP-8266 [IP_ADDR]',
     'de': 'ESP-8266 IP-Adresse [IP_ADDR]',
     'ja': 'ESP-8266 の IP アドレスを [IP_ADDR] に',
+    'nl': 'ESP-8266 IP Adres [IP_ADDR]',
 };
 
 // Raspbery Pi Specific
@@ -182,6 +190,7 @@ const FormIPBlockR = {
     'pl': 'Adres IP Rasberry Pi [IP_ADDR]',
     'de': 'IP-Adresse des RPi [IP_ADDR]',
     'ja': 'ラズパイの IP アドレスを [IP_ADDR] に',
+    'nl': 'Adres IP Rasberry Pi [IP_ADDR]',
 };
 
 // General Alert
@@ -195,6 +204,7 @@ const FormWSClosed = {
     'pl': "Połączenie WebSocket jest zamknięte.",
     'de': "WebSocket-Verbindung geschlossen.",
     'ja': "ウェブソケット接続が切断されています",
+    'nl': 'WebSocket Connectie is gesloten.',
 };
 
 // ESP-8266 Alert
@@ -242,6 +252,11 @@ const FormAlrt = {
     'ja': {
     title: "注意",
         text: "ESP-8266 の IP アドレスを IP アドレス・ブロックに記入して下さい",
+        icon: "info",
+    },
+    'nl': {
+        title: "Attentie",
+        text: "Geef het IP adres van de ESP-8266 in het IP Adres Blok",
         icon: "info",
     },
 };
@@ -669,6 +684,9 @@ class Scratch3ArduinoOneGPIO {
                 break;
             case 'de':
                 now_locale= 'de';
+                break;
+            case 'nl':
+                now_locale= 'nl';
                 break;
             default:
                 now_locale='en';
