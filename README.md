@@ -6,7 +6,7 @@
 
 ## Quick Intallation Intructions:
 
-* For Arduino, Circuit Playground Express, ESP-8266, Robohat-MM1, and Raspberry Pi
+* For Arduino, Circuit Playground Express, ESP32, ESP-8266, Robohat-MM1, and Raspberry Pi
   Pico boards, install the server firmware. See the
   [Preparing Your Micro-Controller](https://mryslab.github.io/s3-extend/) section
   of the User's Guide.
